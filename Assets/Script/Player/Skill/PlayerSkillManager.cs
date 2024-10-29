@@ -9,6 +9,7 @@ public class PlayerSkillManager : MonoBehaviour
     #region Skill
     public DashSkill dash { get; private set; }
     public CloneSkill clone { get; private set; }
+    public ThrowSwordSkill TS { get; private set; }
     #endregion
     private void Awake()
     {
@@ -27,6 +28,7 @@ public class PlayerSkillManager : MonoBehaviour
     {
         dash = GetComponent<DashSkill>();
         clone = GetComponent<CloneSkill>();
+        TS = GetComponent<ThrowSwordSkill>();
     }
 
 
