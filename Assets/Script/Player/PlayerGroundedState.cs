@@ -39,12 +39,16 @@ public PlayerGroundedState(Player _player, PlayerStateMachine _stateMachine, str
             Debug.Log("ground to attack works");
         }
 
-        if(Input.GetKeyDown(KeyCode.Q))
+        if(Input.GetKeyDown(KeyCode.D))
         {
             stateMachine.ChangeState(player.defendState);
             Debug.Log("ground to Defend works");
         }
 
+        if(Input.GetKeyDown(KeyCode.A))
+        { 
+            stateMachine.ChangeState(player.aimSwordState); 
+        }
 
     }
 }
