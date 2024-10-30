@@ -10,6 +10,11 @@ public class ThrowSwordSkill : Skill
     [SerializeField] float swordGravity;
     [SerializeField] GameObject swordPrefab;
     private Vector2 finalDir;
+    private Vector2 aimDirection;
+
+    [Header("Aim dots")]
+
+
 
     public void CreateSword( )
     {
@@ -17,14 +22,21 @@ public class ThrowSwordSkill : Skill
         newSword.GetComponent<TS_Skill_Controller>().SetupSword(launchDir, swordGravity);
     }
 
-    private Vector2 AimDirection()
+    public void AimDirection()
     {
-        Vector2 aimDirection = launchDir;
+        aimDirection = launchDir;
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             aimDirection.y += 5;
+            Debug.Log("Aimdirecet");
         }
 
-        return aimDirection;
     }
+        //finalDir = new Vector2(aimDirection.normalized.x * launchDir.x, aimDirection.normalized.y * launchDir.y);
+
+    private Vector2 DotsPosition(float t)
+    {
+        Vector2 position = (Vector2)player.transform.position + new Vector2
+    }
+
 }

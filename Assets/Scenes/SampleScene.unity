@@ -1066,6 +1066,7 @@ MonoBehaviour:
   - {x: 4, y: 3}
   comboCounter: 0
   isBusy: 0
+  skill: {fileID: 0}
 --- !u!114 &1028362558
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7705,7 +7706,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldownTime: 0
-  launchDir: {x: 10, y: 10}
+  launchDir: {x: 10, y: 0}
   swordGravity: 0
   swordPrefab: {fileID: 9203315307366413, guid: 938f1909b2f947e4cb88e27f02a5b20b, type: 3}
 --- !u!1 &1672241336

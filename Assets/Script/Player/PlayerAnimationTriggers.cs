@@ -42,7 +42,7 @@ public class PlayerAnimationTriggers : MonoBehaviour
 
     private void CreateSword()
     {
-        PlayerSkillManager.instance.TS.CreateSword();
+        player.skill.TS.CreateSword();
     }
 
 }

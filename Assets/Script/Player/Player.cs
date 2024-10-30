@@ -26,7 +26,7 @@ public class Player : Entity
     [Header("Busy info")]
     [SerializeField] public bool isBusy;
 
-    PlayerSkillManager skill;
+    public PlayerSkillManager skill;
 
 
     #region States
