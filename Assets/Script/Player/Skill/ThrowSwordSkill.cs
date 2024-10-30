@@ -10,7 +10,7 @@ public class ThrowSwordSkill : Skill
     [SerializeField] float swordGravity;
     [SerializeField] GameObject swordPrefab;
     private Vector2 finalDir;
-    static Vector2 aimDirection = new Vector2(20, 0);
+    private Vector2 aimDirection = Vector2.right;
 
     [Header("Aim dots")]
     [SerializeField] private int numberOfDots;
@@ -19,25 +19,41 @@ public class ThrowSwordSkill : Skill
     [SerializeField] private Transform dotsParent;
      private GameObject[] dots;
 
-
-        public void CreateSword( )
+    protected override void Start()
+    {
+        base.Start();
+        GenereateDots();
+    }
+    protected override void Update()
+    {
+        if (Input.GetKey(KeyCode.A))
+        {
+            for (int i = 0; i < dots.Length; i++)
+                dots[i].transform.position = DotsPosition(i * spaceBeetwenDots);
+        }
+    }
+    public void CreateSword( )
     {
         launchDir = finalDir * launchDir.magnitude;
         GameObject newSword = Instantiate( swordPrefab, player.transform.position, transform.rotation);
         newSword.GetComponent<TS_Skill_Controller>().SetupSword(launchDir, swordGravity);
+        aimDirection = Vector2.right;
+
+        DotsActive(false);
     }
 
 
-    public void AimDirection()//放在PlayerAimSwordState里实现了
+    public Vector2 AimDirection()//放在PlayerAimSwordState里实现了
     {
 
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            aimDirection.y += 5;
+            aimDirection = Quaternion.Euler(0, 0, 15) * aimDirection;
             Debug.Log("Aimdirecet");
         }
 
-        finalDir = aimDirection.normalized;//new Vector2(aimDirection.normalized.x, aimDirection.normalized.y);
+        finalDir = aimDirection.normalized;
+        return aimDirection;
     }
 
     private void GenereateDots()
@@ -57,6 +73,16 @@ public class ThrowSwordSkill : Skill
             dots[i].SetActive(_isActive);
         }
     }
+
+    private Vector2 DotsPosition(float t)
+    {
+        Vector2 position = (Vector2)player.transform.position + new Vector2(
+            AimDirection().x * launchDir.x,
+            AimDirection().y * launchDir.y) * t + .5f * (Physics2D.gravity * swordGravity) * (t * t);
+
+        return position;
+    }
+
 
     //private Vector2 DotsPosition(float t)
     //{
