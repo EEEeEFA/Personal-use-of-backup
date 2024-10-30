@@ -10,33 +10,41 @@ public class ThrowSwordSkill : Skill
     [SerializeField] float swordGravity;
     [SerializeField] GameObject swordPrefab;
     private Vector2 finalDir;
-    private Vector2 aimDirection;
+    static Vector2 aimDirection = new Vector2(20, 0);
 
     [Header("Aim dots")]
+    [SerializeField] private int numberOfDots;
+    [SerializeField] private float spaceBeetwenDots;
+    [SerializeField] private GameObject dotPrefab; 
+    [SerializeField] private Transform dotsParent;
+     private GameObject[] dots;
 
 
-
-    public void CreateSword( )
+        public void CreateSword( )
     {
+        launchDir = finalDir * launchDir.magnitude;
         GameObject newSword = Instantiate( swordPrefab, player.transform.position, transform.rotation);
         newSword.GetComponent<TS_Skill_Controller>().SetupSword(launchDir, swordGravity);
     }
 
-    public void AimDirection()
+
+    public void AimDirection()//放在PlayerAimSwordState里实现了
     {
-        aimDirection = launchDir;
+
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             aimDirection.y += 5;
             Debug.Log("Aimdirecet");
         }
 
+        finalDir = aimDirection.normalized;//new Vector2(aimDirection.normalized.x, aimDirection.normalized.y);
     }
-        //finalDir = new Vector2(aimDirection.normalized.x * launchDir.x, aimDirection.normalized.y * launchDir.y);
 
-    private Vector2 DotsPosition(float t)
-    {
-        Vector2 position = (Vector2)player.transform.position + new Vector2
-    }
+
+
+    //private Vector2 DotsPosition(float t)
+    //{
+    //    Vector2 position = (Vector2)player.transform.position + new Vector2
+    //}
 
 }
