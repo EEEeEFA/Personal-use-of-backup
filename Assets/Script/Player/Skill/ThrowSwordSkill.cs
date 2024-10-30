@@ -40,7 +40,23 @@ public class ThrowSwordSkill : Skill
         finalDir = aimDirection.normalized;//new Vector2(aimDirection.normalized.x, aimDirection.normalized.y);
     }
 
+    private void GenereateDots()
+    {   
+        dots = new GameObject[numberOfDots];
+        for(int i = 0; i < numberOfDots; i++)
+        {
+            dots[i] = Instantiate(dotPrefab, player.transform.position, Quaternion.identity, dotsParent);
+            dots[i].SetActive(false);
+        }
+    }
 
+    public void DotsActive(bool _isActive)
+    {
+        for(int i = 0;i <dots.Length; i++)
+        {
+            dots[i].SetActive(_isActive);
+        }
+    }
 
     //private Vector2 DotsPosition(float t)
     //{
