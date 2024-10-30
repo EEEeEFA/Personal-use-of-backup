@@ -32,9 +32,9 @@ public class ThrowSwordSkill : Skill
                 dots[i].transform.position = DotsPosition(i * spaceBeetwenDots);
         }
     }
-    public void CreateSword( )
+    public void CreateSword( )//实例化prefabs,并且把小参数传给 TS_SKILL_CONTROLLER设置prefabs
     {
-        launchDir = finalDir * launchDir.magnitude;
+        launchDir = AimDirection() * launchDir.magnitude;
         GameObject newSword = Instantiate( swordPrefab, player.transform.position, transform.rotation);
         newSword.GetComponent<TS_Skill_Controller>().SetupSword(launchDir, swordGravity);
         aimDirection = Vector2.right;
@@ -43,18 +43,6 @@ public class ThrowSwordSkill : Skill
     }
 
 
-    public Vector2 AimDirection()//放在PlayerAimSwordState里实现了
-    {
-
-        if (Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            aimDirection = Quaternion.Euler(0, 0, 15) * aimDirection;
-            Debug.Log("Aimdirecet");
-        }
-
-        finalDir = aimDirection.normalized;
-        return aimDirection;
-    }
 
     private void GenereateDots()
     {   
@@ -66,7 +54,7 @@ public class ThrowSwordSkill : Skill
         }
     }
 
-    public void DotsActive(bool _isActive)
+    public void DotsActive(bool _isActive)//点可视化开关，状态机aim里打开，CreateSword里面关闭
     {
         for(int i = 0;i <dots.Length; i++)
         {
@@ -74,19 +62,24 @@ public class ThrowSwordSkill : Skill
         }
     }
 
-    private Vector2 DotsPosition(float t)
+    public Vector2 AimDirection()//丢剑的方向，按↑旋转
     {
-        Vector2 position = (Vector2)player.transform.position + new Vector2(
-            AimDirection().x * launchDir.x,
-            AimDirection().y * launchDir.y) * t + .5f * (Physics2D.gravity * swordGravity) * (t * t);
+        bool enterChance = false;
+        if (Input.GetKeyDown(KeyCode.UpArrow) && !enterChance)
+        {
+            aimDirection = Quaternion.Euler(0, 0, -5) * aimDirection;
+            Debug.Log("Aimdirecet");
+            enterChance = true;
+            
+        }
+
+        return aimDirection;
+    }
+    private Vector2 DotsPosition(float t)//在本脚本的Update里实现
+    {
+        Vector2 position = (Vector2)player.transform.position + (AimDirection() * launchDir.magnitude) * t; //+ .5f * (Physics2D.gravity * swordGravity) * (t * t);
 
         return position;
     }
-
-
-    //private Vector2 DotsPosition(float t)
-    //{
-    //    Vector2 position = (Vector2)player.transform.position + new Vector2
-    //}
 
 }
