@@ -9,6 +9,7 @@ public class ThrowSwordSkill : Skill
     [SerializeField] Vector2 launchDir;
     [SerializeField] float swordGravity;
     [SerializeField] GameObject swordPrefab;
+    [SerializeField] float returnSpeed;
     private Vector2 finalDir;
     private Vector2 aimDirection = Vector2.right;
 
@@ -36,8 +37,10 @@ public class ThrowSwordSkill : Skill
     {
         launchDir = AimDirection() * launchDir.magnitude;
         GameObject newSword = Instantiate( swordPrefab, player.transform.position, transform.rotation);
-        newSword.GetComponent<TS_Skill_Controller>().SetupSword(launchDir, swordGravity);
+        newSword.GetComponent<TS_Skill_Controller>().SetupSword(launchDir, swordGravity, player, returnSpeed);
         aimDirection = Vector2.right;
+
+        player.AssignSword(newSword);
 
         DotsActive(false);
     }
@@ -74,6 +77,14 @@ public class ThrowSwordSkill : Skill
         }
 
         return aimDirection;
+
+            //// Smoothly tilts a transform towards a target rotation.
+            //float tiltAroundZ = Input.GetAxis("Horizontal") * tiltAngle;
+            //float tiltAroundX = Input.GetAxis("Vertical") * tiltAngle;
+
+            //// Rotate the cube by converting the angles into a quaternion.
+            //Quaternion target = Quaternion.Euler(tiltAroundX, 0, tiltAroundZ);
+
     }
     private Vector2 DotsPosition(float t)//在本脚本的Update里实现
     {

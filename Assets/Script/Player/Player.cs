@@ -27,6 +27,7 @@ public class Player : Entity
     [SerializeField] public bool isBusy;
 
     public PlayerSkillManager skill;
+    public GameObject sword {  get; private set; }
 
 
     #region States
@@ -111,6 +112,16 @@ public class Player : Entity
             skill.clone.CreateClone(transform);
         }
 
+    }
+
+    public void AssignSword(GameObject _Sword)
+    {
+        sword = _Sword;
+    }
+
+    public void ClearSword()
+    {
+        Destroy(sword);
     }
     public void AnimationTrigger() => stateMachine.currentState.AnimationFinishTrigger();
 
