@@ -35,7 +35,7 @@ public class ThrowSwordSkill : Skill
     }
     public void CreateSword( )//实例化prefabs,并且把小参数传给 TS_SKILL_CONTROLLER设置prefabs
     {
-        launchForce = AimDirection() * launchForce.magnitude;
+        launchForce = AimDirectionTemp(player.facingDir) * launchForce.magnitude;
 
 
         GameObject newSword = Instantiate( swordPrefab, player.transform.position, transform.rotation);
@@ -93,9 +93,27 @@ public class ThrowSwordSkill : Skill
         //Quaternion target = Quaternion.Euler(tiltAroundX, 0, tiltAroundZ);
 
     }
+
+    public Vector2 AimDirectionTemp(int playerFacingR)//临时用的
+    {
+
+        if (Input.GetAxisRaw("Horizontal") > 0 && playerFacingR <0)
+        {
+            player.Flip();
+         return Vector2.left;
+        }
+        
+        else if (Input.GetAxisRaw("Horizontal") < 0 && playerFacingR > 0)
+        {
+            player.Flip();
+        return Vector2.right;
+        }
+
+        return new Vector2(playerFacingR, 0);
+    }
     private Vector2 DotsPosition(float t)//在本脚本的Update里实现
     {
-        Vector2 position = (Vector2)player.transform.position + (AimDirection() * launchForce.magnitude) * t; //+ .5f * (Physics2D.gravity * swordGravity) * (t * t);
+        Vector2 position = (Vector2)player.transform.position + (AimDirectionTemp(player.facingDir) * launchForce.magnitude) * t; //+ .5f * (Physics2D.gravity * swordGravity) * (t * t);
 
         return position;
     }

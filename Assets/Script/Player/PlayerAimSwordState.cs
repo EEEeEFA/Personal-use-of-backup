@@ -26,6 +26,6 @@ public class PlayerAimSwordState : PlayerState
         {
             stateMachine.ChangeState(player.idleState);
         }
-        player.skill.TS.AimDirection();
+
     }
 }
