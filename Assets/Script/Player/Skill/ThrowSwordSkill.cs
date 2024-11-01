@@ -6,7 +6,7 @@ using UnityEngine.UIElements;
 public class ThrowSwordSkill : Skill
 {
     [Header("TS info")]
-    [SerializeField] Vector2 launchDir;
+    [SerializeField] Vector2 launchForce;
     [SerializeField] float swordGravity;
     [SerializeField] GameObject swordPrefab;
     [SerializeField] float returnSpeed;
@@ -35,9 +35,12 @@ public class ThrowSwordSkill : Skill
     }
     public void CreateSword( )//实例化prefabs,并且把小参数传给 TS_SKILL_CONTROLLER设置prefabs
     {
-        launchDir = AimDirection() * launchDir.magnitude;
+        launchForce = AimDirection() * launchForce.magnitude;
+
+
         GameObject newSword = Instantiate( swordPrefab, player.transform.position, transform.rotation);
-        newSword.GetComponent<TS_Skill_Controller>().SetupSword(launchDir, swordGravity, player, returnSpeed);
+        newSword.GetComponent<TS_Skill_Controller>().SetupSword(launchForce, swordGravity, player, returnSpeed);
+
         aimDirection = Vector2.right;
 
         player.AssignSword(newSword);
@@ -70,25 +73,29 @@ public class ThrowSwordSkill : Skill
         bool enterChance = false;
         if (Input.GetKeyDown(KeyCode.UpArrow) && !enterChance)
         {
-            aimDirection = Quaternion.Euler(0, 0, -5) * aimDirection;
-            Debug.Log("Aimdirecet");
+            float angle = -5f * Mathf.Deg2Rad; // 逆时针旋转5度
+            float cos = Mathf.Cos(angle);
+            float sin = Mathf.Sin(angle);
+            aimDirection = new Vector2(
+                aimDirection.x * cos - aimDirection.y * sin,
+                aimDirection.x * sin + aimDirection.y * cos
+            );
             enterChance = true;
-            
         }
 
-        return aimDirection;
+        return aimDirection.normalized; 
 
-            //// Smoothly tilts a transform towards a target rotation.
-            //float tiltAroundZ = Input.GetAxis("Horizontal") * tiltAngle;
-            //float tiltAroundX = Input.GetAxis("Vertical") * tiltAngle;
+        //// Smoothly tilts a transform towards a target rotation.
+        //float tiltAroundZ = Input.GetAxis("Horizontal") * tiltAngle;
+        //float tiltAroundX = Input.GetAxis("Vertical") * tiltAngle;
 
-            //// Rotate the cube by converting the angles into a quaternion.
-            //Quaternion target = Quaternion.Euler(tiltAroundX, 0, tiltAroundZ);
+        //// Rotate the cube by converting the angles into a quaternion.
+        //Quaternion target = Quaternion.Euler(tiltAroundX, 0, tiltAroundZ);
 
     }
     private Vector2 DotsPosition(float t)//在本脚本的Update里实现
     {
-        Vector2 position = (Vector2)player.transform.position + (AimDirection() * launchDir.magnitude) * t; //+ .5f * (Physics2D.gravity * swordGravity) * (t * t);
+        Vector2 position = (Vector2)player.transform.position + (AimDirection() * launchForce.magnitude) * t; //+ .5f * (Physics2D.gravity * swordGravity) * (t * t);
 
         return position;
     }
