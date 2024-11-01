@@ -28,7 +28,7 @@ public class TS_Skill_Controller : MonoBehaviour
         {
             transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
 
-            if(Vector2.Distance(transform.position, player.transform.position) < .5f)
+            if(Vector2.Distance(transform.position, player.transform.position) < .5f )
                 player.ClearSword();
         }
     }
@@ -38,6 +38,8 @@ public class TS_Skill_Controller : MonoBehaviour
         rb.isKinematic = false;
         transform.parent = null;
         isReturning = true;
+
+        anim.SetBool("Rotation", true);
     }
 
     public void SetupSword(Vector2 _velocity, float _gravityScale, Player _player, float _returnSpeed)
@@ -46,6 +48,8 @@ public class TS_Skill_Controller : MonoBehaviour
         rb.velocity = _velocity;
         rb.gravityScale = _gravityScale;
         speed = _returnSpeed;
+
+        anim.SetBool("Rotation", true);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -57,5 +61,6 @@ public class TS_Skill_Controller : MonoBehaviour
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
 
         transform.parent = collision.transform;
+        anim.SetBool("Rotation", false);
     }
 }
