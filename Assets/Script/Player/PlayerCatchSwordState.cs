@@ -13,7 +13,10 @@ public class PlayerCatchSwordState : PlayerState
     {
         base.Enter();
         sword = player.sword;
-        if()
+        if (sword.transform.position.x < player.transform.position.x && player.facingDir == 1)
+        {
+
+        }
     }
 
     public override void Exit()
