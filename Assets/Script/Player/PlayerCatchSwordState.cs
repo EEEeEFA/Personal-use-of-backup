@@ -13,6 +13,9 @@ public class PlayerCatchSwordState : PlayerState
     public override void Enter()
     {
         base.Enter();
+        // 启动特效
+        player.fx.StartCoroutine("BlingFX");
+
         sword = player.sword;
         if (Input.GetAxisRaw("Horizontal") == 0)
         {
@@ -28,14 +31,15 @@ public class PlayerCatchSwordState : PlayerState
             // 设置玩家的移动速度
             player.rb.velocity = new Vector2(5 * -player.facingDir, player.rb.velocity.y);
 
-            // 启动特效
-            player.fx.StartCoroutine("BlingFX");
+
         }
     }
 
     public override void Exit()
     {
         base.Exit();
+        player.StartCoroutine("BusyFor", .1f);
+
     }
 
     public override void Update()

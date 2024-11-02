@@ -12,11 +12,13 @@ public class PlayerAimSwordState : PlayerState
     {
         base.Enter();
         player.skill.TS.DotsActive(true);
+
     }
 
     public override void Exit()
     {
         base.Exit();
+        player.StartCoroutine("BusyFor", .1f);
     }
 
     public override void Update()
@@ -26,6 +28,6 @@ public class PlayerAimSwordState : PlayerState
         {
             stateMachine.ChangeState(player.idleState);
         }
-
+        player.SetVelocity(0, 0);
     }
 }
