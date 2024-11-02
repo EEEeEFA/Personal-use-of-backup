@@ -29,7 +29,7 @@ public class TS_Skill_Controller : MonoBehaviour
             transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
 
             if(Vector2.Distance(transform.position, player.transform.position) < .5f )
-                player.ClearSword();
+                player.CatchSword();
         }
     }
 

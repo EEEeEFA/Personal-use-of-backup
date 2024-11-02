@@ -119,8 +119,9 @@ public class Player : Entity
         sword = _Sword;
     }
 
-    public void ClearSword()
+    public void CatchSword()
     {
+        stateMachine.ChangeState(catchSwordState);
         Destroy(sword);
     }
     public void AnimationTrigger() => stateMachine.currentState.AnimationFinishTrigger();
