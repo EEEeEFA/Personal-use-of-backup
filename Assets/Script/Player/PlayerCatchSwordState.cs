@@ -14,12 +14,23 @@ public class PlayerCatchSwordState : PlayerState
     {
         base.Enter();
         sword = player.sword;
-        if (sword.transform.position.x < player.transform.position.x && player.facingDir == 1)
-            player.Flip();
-        else if (sword.transform.position.x > player.transform.position.x && player.facingDir == -1)
-            player.Flip();
+        if (Input.GetAxisRaw("Horizontal") == 0)
+        {
+            // 根据剑的位置和玩家的朝向决定是否翻转
+            bool shouldFlip = (sword.transform.position.x < player.transform.position.x && player.facingDir == 1) ||
+                              (sword.transform.position.x > player.transform.position.x && player.facingDir == -1);
 
-        player.SetVelocity(5 * player.facingDir, 0);
+            if (shouldFlip)
+            {
+                player.Flip();
+            }
+
+            // 设置玩家的移动速度
+            player.rb.velocity = new Vector2(5 * -player.facingDir, player.rb.velocity.y);
+
+            // 启动特效
+            player.fx.StartCoroutine("BlingFX");
+        }
     }
 
     public override void Exit()

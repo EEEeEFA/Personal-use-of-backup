@@ -8,6 +8,7 @@ public class EntityFX : MonoBehaviour
 
     [Header("FlashFX info")]
     [SerializeField] Material HitMat;
+    [SerializeField] Material GoldMat;
     Material originMat;
 
     private void Start()
@@ -19,6 +20,13 @@ public class EntityFX : MonoBehaviour
     private IEnumerator FlashFX()
     {
         sr.material = HitMat;
+        yield return new WaitForSeconds(.1f);
+        sr.material = originMat;
+    }
+
+    private IEnumerator BlingFX()
+    {
+        sr.material = GoldMat;
         yield return new WaitForSeconds(.1f);
         sr.material = originMat;
     }
