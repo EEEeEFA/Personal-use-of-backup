@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerCatchSwordState : PlayerState
 {
+    GameObject sword;
     public PlayerCatchSwordState(Player _player, PlayerStateMachine _stateMachine, string _animBoolName) : base(_player, _stateMachine, _animBoolName)
     {
     }
@@ -11,6 +12,8 @@ public class PlayerCatchSwordState : PlayerState
     public override void Enter()
     {
         base.Enter();
+        sword = player.sword;
+        if()
     }
 
     public override void Exit()
