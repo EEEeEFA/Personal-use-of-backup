@@ -12,6 +12,11 @@ public class TS_Skill_Controller : MonoBehaviour
     private bool isReturning = false;
     private float speed;
 
+    public bool isBouncing = true;
+    public int amountOfBounce;
+    public List<Transform> enemyTarget;
+    private int targetIndex;
+
     private void Awake()
     {
         anim = GetComponentInChildren<Animator>();
@@ -30,6 +35,11 @@ public class TS_Skill_Controller : MonoBehaviour
 
             if(Vector2.Distance(transform.position, player.transform.position) < .5f )
                 player.CatchSword();
+        }
+
+        if(isBouncing && enemyTarget.Count >0)
+        {
+            Debug.Log("right");
         }
     }
 
@@ -55,14 +65,36 @@ public class TS_Skill_Controller : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.GetComponent<Enemy>() != null)//剑碰到敌人进入
+        {
+            if (isBouncing && enemyTarget.Count <= 0)
+            {
+                Collider2D[] collider = Physics2D.OverlapCircleAll(transform.position, 30);
+
+                foreach ( var hit in collider)
+                {
+                    if (hit.GetComponent<Enemy>() != null)
+                        enemyTarget.Add(hit.transform); 
+
+                }
+            }
+        }
+
+        StuckInto(collision);
+    }
+
+    private void StuckInto(Collider2D collision)
+    {
         canRotate = false;
         cd.enabled = false;
 
         rb.isKinematic = true;
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
 
+        if (isBouncing && enemyTarget.Count > 0)
+            return;
+
         transform.parent = collision.transform;
-        Debug.Log("Collided with: " + collision.gameObject.name);
         anim.SetBool("Rotation", false);
     }
 }
