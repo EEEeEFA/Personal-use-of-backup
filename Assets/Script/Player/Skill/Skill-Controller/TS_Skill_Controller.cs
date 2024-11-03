@@ -35,7 +35,8 @@ public class TS_Skill_Controller : MonoBehaviour
 
     public void ReturnSword()
     {
-        rb.isKinematic = false;
+        rb.constraints = RigidbodyConstraints2D.FreezeAll;
+        //rb.isKinematic = false;
         transform.parent = null;
         isReturning = true;
 
@@ -57,10 +58,11 @@ public class TS_Skill_Controller : MonoBehaviour
         canRotate = false;
         cd.enabled = false;
 
-        rb.isKinematic = false;
+        rb.isKinematic = true;
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
 
         transform.parent = collision.transform;
+        Debug.Log("Collided with: " + collision.gameObject.name);
         anim.SetBool("Rotation", false);
     }
 }
