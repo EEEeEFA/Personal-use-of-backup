@@ -83,7 +83,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bouncingSpeed: 20
-  isBouncing: 1
+  isBouncing: 0
   amountOfBounce: 4
   enemyTarget: []
 --- !u!50 &5959468452682087947

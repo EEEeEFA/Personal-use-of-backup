@@ -10,6 +10,7 @@ public class Enemy : Entity
     [Header("Move info")]
     [SerializeField] public float moveSpeed;
     [SerializeField] public float idleTime;
+    [SerializeField] public float defaultSpeed;
 
     [Header("Attack info")]
     [SerializeField] public float attackDistance;
@@ -24,7 +25,7 @@ public class Enemy : Entity
     {
         base.Awake();
         stateMachine = new EnemyStateMachine();
-
+        defaultSpeed = moveSpeed;
     }
 
 
@@ -45,6 +46,30 @@ public class Enemy : Entity
         Gizmos.color = Color.red;
         Gizmos.DrawLine(transform.position,new Vector3(transform.position.x + attackDistance * facingDir, transform.position.y));
     }
+
+    #region TimeFrozen
+    public virtual void FreezeTime(bool _timeFrozen)
+    {
+        if (_timeFrozen)
+        {
+            anim.speed = 0;
+            moveSpeed = 0;
+        }
+        else
+        {
+            anim.speed = 1;
+            moveSpeed = defaultSpeed;
+        }
+    }
+
+    protected virtual IEnumerator FreezeTimerFor(float _seconds)
+    {
+        FreezeTime(true);
+        yield return new WaitForSeconds(_seconds);
+        FreezeTime(false);
+    }
+
+    #endregion
 
     public virtual void StunWindowOpen() => stunCheck = true;
 

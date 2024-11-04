@@ -187,7 +187,7 @@ Transform:
   m_GameObject: {fileID: 71768993}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -22.367876, y: 1.7459067, z: -9.926577}
+  m_LocalPosition: {x: -8.725056, y: 1.7459067, z: -9.926577}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -531,7 +531,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -22.367876, y: 1.7459067, z: -9.926577}
+  m_LocalPosition: {x: -8.725056, y: 1.7459067, z: -9.926577}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -636,6 +636,7 @@ MonoBehaviour:
   facingRight: 1
   moveSpeed: 5
   idleTime: 1
+  defaultSpeed: 0
   attackDistance: 1.57
   setPlayer:
     serializedVersion: 2
@@ -877,6 +878,7 @@ MonoBehaviour:
   facingRight: 1
   moveSpeed: 5
   idleTime: 1
+  defaultSpeed: 0
   attackDistance: 1.57
   setPlayer:
     serializedVersion: 2
@@ -1273,7 +1275,7 @@ Transform:
   m_GameObject: {fileID: 1028362553}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.59, y: -3.1, z: 0.06962737}
+  m_LocalPosition: {x: 14.89, y: -3.1, z: 0.06962737}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1551,6 +1553,7 @@ MonoBehaviour:
   facingRight: 1
   moveSpeed: 5
   idleTime: 1
+  defaultSpeed: 0
   attackDistance: 1.57
   setPlayer:
     serializedVersion: 2
@@ -8342,14 +8345,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldownTime: 0
+  swordType: 0
   launchForce: {x: 20, y: 1}
   swordGravity: 0
   swordPrefab: {fileID: 9203315307366413, guid: 938f1909b2f947e4cb88e27f02a5b20b, type: 3}
   returnSpeed: 15
+  freezeTimeDuration: 0.3
   numberOfDots: 20
   spaceBeetwenDots: 0.07
   dotPrefab: {fileID: 8050355541878490457, guid: aa897dd08c7630e4fb97c904a00a4956, type: 3}
   dotsParent: {fileID: 811198389}
+  bouncingSpeed: 30
+  isBouncing: 1
+  amountOfBounce: 5
 --- !u!1 &1672241336
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,7 +11,7 @@ public enum SwordType
 
 public class ThrowSwordSkill : Skill
 {
-    SwordType swordType = SwordType.Regular;
+    [SerializeField] SwordType swordType = SwordType.Regular;
 
     [Header("TS info")]
     [SerializeField] Vector2 launchForce;
@@ -20,6 +20,7 @@ public class ThrowSwordSkill : Skill
     [SerializeField] float returnSpeed;
     private Vector2 finalDir;
     private Vector2 aimDirection = Vector2.right;
+    [SerializeField]  private float freezeTimeDuration;
 
     [Header("Aim dots")]
     [SerializeField] private int numberOfDots;
@@ -55,7 +56,7 @@ public class ThrowSwordSkill : Skill
 
         TS_Skill_Controller newSwordScript = newSword.GetComponent<TS_Skill_Controller>();
 
-        newSwordScript.SetupSword(launchForce, swordGravity, player, returnSpeed);
+        newSwordScript.SetupSword(launchForce, swordGravity, player, returnSpeed, freezeTimeDuration);
 
         aimDirection = Vector2.right;
 
