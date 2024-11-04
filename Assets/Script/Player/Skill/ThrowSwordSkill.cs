@@ -1,10 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
+
+public enum SwordType
+{
+    Regular,
+    Bounce,
+    Pierce,
+    Spin    
+}
+
 
 public class ThrowSwordSkill : Skill
 {
+    SwordType swordType = SwordType.Regular;
+
     [Header("TS info")]
     [SerializeField] Vector2 launchForce;
     [SerializeField] float swordGravity;
@@ -16,9 +24,14 @@ public class ThrowSwordSkill : Skill
     [Header("Aim dots")]
     [SerializeField] private int numberOfDots;
     [SerializeField] private float spaceBeetwenDots;
-    [SerializeField] private GameObject dotPrefab; 
+    [SerializeField] private GameObject dotPrefab;
     [SerializeField] private Transform dotsParent;
-     private GameObject[] dots;
+    private GameObject[] dots;
+
+    [Header("Bounce info")]
+    [SerializeField] public float bouncingSpeed;
+    [SerializeField] public bool isBouncing = true;
+    [SerializeField] public int amountOfBounce;
 
     protected override void Start()
     {
@@ -33,27 +46,34 @@ public class ThrowSwordSkill : Skill
                 dots[i].transform.position = DotsPosition(i * spaceBeetwenDots);
         }
     }
-    public void CreateSword( )//实例化prefabs,并且把小参数传给 TS_SKILL_CONTROLLER设置prefabs
+    public void CreateSword()//实例化prefabs,并且把小参数传给 TS_SKILL_CONTROLLER设置prefabs
     {
         launchForce = AimDirectionTemp(player.facingDir) * launchForce.magnitude;
 
 
-        GameObject newSword = Instantiate( swordPrefab, player.transform.position, transform.rotation);
-        newSword.GetComponent<TS_Skill_Controller>().SetupSword(launchForce, swordGravity, player, returnSpeed);
+        GameObject newSword = Instantiate(swordPrefab, player.transform.position, transform.rotation);
+
+        TS_Skill_Controller newSwordScript = newSword.GetComponent<TS_Skill_Controller>();
+
+        newSwordScript.SetupSword(launchForce, swordGravity, player, returnSpeed);
 
         aimDirection = Vector2.right;
 
+        if(swordType == SwordType.Bounce)
+        {
+            newSwordScript.SetupBounce(isBouncing, amountOfBounce, bouncingSpeed);
+        }
         player.AssignSword(newSword);
 
         DotsActive(false);
     }
 
 
-
+    #region AimRegion
     private void GenereateDots()
-    {   
+    {
         dots = new GameObject[numberOfDots];
-        for(int i = 0; i < numberOfDots; i++)
+        for (int i = 0; i < numberOfDots; i++)
         {
             dots[i] = Instantiate(dotPrefab, player.transform.position, Quaternion.identity, dotsParent);
             dots[i].SetActive(false);
@@ -62,7 +82,7 @@ public class ThrowSwordSkill : Skill
 
     public void DotsActive(bool _isActive)//点可视化开关，状态机aim里打开，CreateSword里面关闭
     {
-        for(int i = 0;i <dots.Length; i++)
+        for (int i = 0; i < dots.Length; i++)
         {
             dots[i].SetActive(_isActive);
         }
@@ -83,7 +103,7 @@ public class ThrowSwordSkill : Skill
             enterChance = true;
         }
 
-        return aimDirection.normalized; 
+        return aimDirection.normalized;
 
         //// Smoothly tilts a transform towards a target rotation.
         //float tiltAroundZ = Input.GetAxis("Horizontal") * tiltAngle;
@@ -97,16 +117,16 @@ public class ThrowSwordSkill : Skill
     public Vector2 AimDirectionTemp(int playerFacingR)//临时用的
     {
 
-        if (Input.GetAxisRaw("Horizontal") > 0 && playerFacingR <0)
+        if (Input.GetAxisRaw("Horizontal") > 0 && playerFacingR < 0)
         {
             player.Flip();
-         return Vector2.left;
+            return Vector2.left;
         }
-        
+
         else if (Input.GetAxisRaw("Horizontal") < 0 && playerFacingR > 0)
         {
             player.Flip();
-        return Vector2.right;
+            return Vector2.right;
         }
 
         return new Vector2(playerFacingR, 0);
@@ -117,5 +137,6 @@ public class ThrowSwordSkill : Skill
 
         return position;
     }
+    #endregion
 
 }

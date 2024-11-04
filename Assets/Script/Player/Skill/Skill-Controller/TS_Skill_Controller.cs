@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class TS_Skill_Controller : MonoBehaviour
@@ -12,7 +14,9 @@ public class TS_Skill_Controller : MonoBehaviour
     private bool isReturning = false;
     private float speed;
 
-    public bool isBouncing = true;
+    [Header("Bounce info")]
+    public float bouncingSpeed;
+    public bool isBouncing;
     public int amountOfBounce;
     public List<Transform> enemyTarget;
     private int targetIndex;
@@ -33,13 +37,33 @@ public class TS_Skill_Controller : MonoBehaviour
         {
             transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
 
-            if(Vector2.Distance(transform.position, player.transform.position) < .5f )
+            if (Vector2.Distance(transform.position, player.transform.position) < .5f)
                 player.CatchSword();
         }
 
-        if(isBouncing && enemyTarget.Count >0)
+        BounceLogic();
+    }
+
+    private void BounceLogic()
+    {
+        if (isBouncing && enemyTarget.Count > 0)
         {
-            Debug.Log("right");
+            transform.position = Vector2.MoveTowards(transform.position, enemyTarget[targetIndex].position, bouncingSpeed * Time.deltaTime);
+
+            if (amountOfBounce < 0)
+            {
+                isBouncing = false;
+                isReturning = true;
+            }
+
+            if (Vector2.Distance(transform.position, enemyTarget[targetIndex].position) < .1f)
+            {
+                targetIndex++;
+                amountOfBounce--;
+            }
+
+            if (targetIndex >= enemyTarget.Count)
+                targetIndex = 0;
         }
     }
 
@@ -63,15 +87,22 @@ public class TS_Skill_Controller : MonoBehaviour
         anim.SetBool("Rotation", true);
     }
 
+    public void SetupBounce(bool _isBouncing, int _amountOfBounce, float _bouncingSpeed)
+    {
+        isBouncing = _isBouncing;
+        amountOfBounce = _amountOfBounce;
+        bouncingSpeed = _bouncingSpeed;
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.GetComponent<Enemy>() != null)//剑碰到敌人进入
         {
             if (isBouncing && enemyTarget.Count <= 0)
             {
-                Collider2D[] collider = Physics2D.OverlapCircleAll(transform.position, 30);
+                Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 20);
 
-                foreach ( var hit in collider)
+                foreach ( var hit in colliders)//检测周围是否有别的敌人
                 {
                     if (hit.GetComponent<Enemy>() != null)
                         enemyTarget.Add(hit.transform); 
