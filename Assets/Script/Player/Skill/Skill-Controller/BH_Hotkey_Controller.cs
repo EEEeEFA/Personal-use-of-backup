@@ -26,6 +26,7 @@ public class BH_Hotkey_Controller : MonoBehaviour
         if(Input.GetKeyDown(hotKey))
         {
             blackHole.AddEnemyTarget(Enemy);
+            Destroy(gameObject);
         }
 
     }

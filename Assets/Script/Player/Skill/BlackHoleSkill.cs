@@ -4,5 +4,31 @@ using UnityEngine;
 
 public class BlackHoleSkill : MonoBehaviour
 {
-    
+    public class BlackHole_Skill : Skill
+    {
+        [SerializeField] private int amountOfAttacks;
+        [SerializeField] private float attackCooldown;
+        [Space]
+        [SerializeField] private GameObject blackHolePrefab;
+        [SerializeField] private float maxSize;
+        [SerializeField] private float growSpeed;
+        [SerializeField] private float shrinkSpeed;
+
+        public override bool SkillCoolDownCheck()
+        {
+            return base.SkillCoolDownCheck();
+        }
+
+        public override void UseSkill()
+        {
+            base.UseSkill();
+
+            GameObject newBlackHole = Instantiate(blackHolePrefab);
+
+            BH_Skill_Controller newBlackHoleScript = newBlackHole.GetComponent<BH_Skill_Controller>();
+
+            newBlackHoleScript.SetupBlackHole(maxSize, growSpeed, shrinkSpeed, attackCooldown, amountOfAttacks);
+        }
+    }
+
 }

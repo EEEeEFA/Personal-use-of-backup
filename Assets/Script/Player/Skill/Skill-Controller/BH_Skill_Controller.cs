@@ -7,45 +7,65 @@ public class BH_Skill_Controller : MonoBehaviour
     [SerializeField] GameObject hotkeyPrefab;
     [SerializeField] List<KeyCode> KeyCodeList;
 
-    [SerializeField] public int attackAmount;
-    [SerializeField] public float attackTimer;
-    [SerializeField] public float attackCoolDownTime;
+    [SerializeField] private int attackAmount;
+    [SerializeField] private float attackTimer;
+    [SerializeField] private float attackCoolDownTime;
     [SerializeField] private bool canAttack = false;
     [SerializeField] private bool canShrink = false;
+    [SerializeField] private bool canCreateHotkey = true;
 
     [SerializeField] private float maxSize;
-    [SerializeField] private bool canGrow;
+    [SerializeField] private bool canGrow = true;
     [SerializeField] private float growSpeed;
     [SerializeField] private float shrinkSpeed;
 
-    [SerializeField] public List<Transform> enemyTargets = new List<Transform>();
-    [SerializeField] public List<GameObject> createdHotKeyPrefabs = new List<GameObject>();
+    [SerializeField] private List<Transform> enemyTargets = new List<Transform>();
+    [SerializeField] private List<Enemy> enemyScanned = new List<Enemy>();
+    [SerializeField] private List<GameObject> createdHotKeyPrefabs = new List<GameObject>();
+
+    public void SetupBlackHole(float _maxSize, float _growSpeed, float _shrinkSpeed, float _attackCoolDownTime, int _attackAmount)
+    {
+        maxSize = _maxSize;
+        growSpeed = _growSpeed;
+        shrinkSpeed = _shrinkSpeed;
+        attackAmount = _attackAmount;
+        attackCoolDownTime = _attackCoolDownTime;
+       
+    }
 
     private void Update()
     {
         attackTimer -= Time.deltaTime;  
-
-        if (canGrow && !canShrink)
-        {
-            transform.localScale = Vector2.Lerp( transform.localScale, new Vector2(maxSize, maxSize), growSpeed * Time.deltaTime);
-        }
-
-        if (canShrink)
-        {
-            transform.localScale = Vector2.Lerp(transform.localScale, new Vector2(-1, -1), shrinkSpeed * Time.deltaTime);
-
-            if(transform.localScale.x < 0)
-            Destroy(this.gameObject);
-        }
 
         if (Input.GetKeyDown(KeyCode.P))
         {
             DestoryHotKey();
 
             canAttack = true;
+
+            canCreateHotkey = false;
         }
 
-        if (attackTimer < 0 && canAttack)
+        if (canGrow && !canShrink)//扩黑洞
+        {
+            transform.localScale = Vector2.Lerp( transform.localScale, new Vector2(maxSize, maxSize), growSpeed * Time.deltaTime);
+        }
+
+        if (canShrink)//缩黑洞
+        {
+            transform.localScale = Vector2.Lerp(transform.localScale, new Vector2(-1, -1), shrinkSpeed * Time.deltaTime);
+
+            if(transform.localScale.x < 0)
+            Destroy(this.gameObject);
+
+            for (int i = 0; i < enemyScanned.Count; i++)
+            {
+                enemyScanned[i].FreezeTime(false);
+            }
+
+        }
+
+        if (attackTimer < 0 && canAttack)//按P后开始攻击
         {
             attackTimer = attackCoolDownTime;
 
@@ -74,11 +94,13 @@ public class BH_Skill_Controller : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)//碰到敌人冻结，并创造Hotkey
     {
         if (collision.GetComponent<Enemy>() != null)
         {
-            collision.GetComponent<Enemy>().FreezeTime(true);
+            Enemy enemy = collision.GetComponent<Enemy>();
+            enemyScanned.Add(enemy);
+            enemy.FreezeTime(true);
 
             CreateHotkey(collision);
         }
@@ -86,7 +108,7 @@ public class BH_Skill_Controller : MonoBehaviour
 
     private void CreateHotkey(Collider2D collision)
     {
-        if (canShrink)
+        if (!canCreateHotkey)
             return;
 
         GameObject newHotkey = Instantiate(hotkeyPrefab, collision.transform.position + new Vector3(0, 2), Quaternion.identity);
