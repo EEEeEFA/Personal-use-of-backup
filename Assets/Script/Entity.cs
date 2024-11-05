@@ -70,7 +70,6 @@ public class Entity : MonoBehaviour, IAttacker
     }
     public virtual void Damage(IAttacker _attacker)
     {
-        Debug.Log(gameObject.name + "was Damaged");
         fx.StartCoroutine("FlashFX");
 
         float facingDirFromAttacker = _attacker.facingDir;

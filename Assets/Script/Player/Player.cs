@@ -109,7 +109,7 @@ public class Player : Entity
                 dashDir = facingDir;
             stateMachine.ChangeState(dashState);
 
-            skill.clone.CreateClone(transform);
+            skill.clone.CreateClone(transform, Vector3.zero);
         }
 
     }

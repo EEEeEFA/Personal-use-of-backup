@@ -40,9 +40,9 @@ public class CloneSkillController : MonoBehaviour, Entity.IAttacker
 
     }
 
-    public void SetupClone(Transform _newtransform, float _cloneDuration)
+    public void SetupClone(Transform _newtransform, float _cloneDuration, Vector3 _offset)
     {
-        transform.position = _newtransform.position;
+        transform.position = _newtransform.position + _offset;
         cloneTimer = _cloneDuration;
 
         if (canAttack())
