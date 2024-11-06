@@ -39,13 +39,17 @@ public class Skill : MonoBehaviour
 
     public virtual bool CanUseSkill()
     {
-        if (skillUsed)
+        if (timeCounter < 0)
         {
-            skillUsed = false;
+            UseSkill();
+            timeCounter = cooldownTime;
             return true;
         }
-        else 
+        else
+        {
+            Debug.Log("Skill is on cooldown");
             return false;
+        }
     }
 
 

@@ -8363,7 +8363,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45f9bce8605cf9a42a337863bc34cd43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cooldownTime: 4
+  cooldownTime: 20
   amountOfAttacks: 6
   attackCooldown: 0.2
   blackHolePrefab: {fileID: 456962476}

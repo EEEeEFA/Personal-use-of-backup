@@ -35,28 +35,40 @@ public class BH_Skill_Controller : MonoBehaviour
 
     private void Update()
     {
-        attackTimer -= Time.deltaTime;  
+        attackTimer -= Time.deltaTime;
 
-        if (Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.H) && PlayerManager.instance.player.blackHoleState.skillUsed)
         {
-            DestoryHotKey();
-
-            canAttack = true;
-
-            canCreateHotkey = false;
+            ReleaseCloneAttack();
         }
 
+        CloneAttackLogic();
+    }
+
+    private void ReleaseCloneAttack()
+    {
+        DestoryHotKey();
+
+        canAttack = true;
+
+        canCreateHotkey = false;
+
+        PlayerManager.instance.player.MakeTransprent(true);
+    }
+
+    private void CloneAttackLogic()
+    {
         if (canGrow && !canShrink)//扩黑洞
         {
-            transform.localScale = Vector2.Lerp( transform.localScale, new Vector2(maxSize, maxSize), growSpeed * Time.deltaTime);
+            transform.localScale = Vector2.Lerp(transform.localScale, new Vector2(maxSize, maxSize), growSpeed * Time.deltaTime);
         }
 
         if (canShrink)//缩黑洞
         {
             transform.localScale = Vector2.Lerp(transform.localScale, new Vector2(-1, -1), shrinkSpeed * Time.deltaTime);
 
-            if(transform.localScale.x < 0)
-            Destroy(this.gameObject);
+            if (transform.localScale.x < 0)
+                Destroy(this.gameObject);
 
             for (int i = 0; i < enemyScanned.Count; i++)
             {
@@ -65,20 +77,32 @@ public class BH_Skill_Controller : MonoBehaviour
 
         }
 
-        if (attackTimer < 0 && canAttack)//按P后开始攻击
+        if (attackTimer < 0 && canAttack && attackAmount > 0)//按P后开始攻击
         {
             attackTimer = attackCoolDownTime;
 
             int randomIndex = Random.Range(0, enemyTargets.Count);
 
-            PlayerSkillManager.instance.clone.CreateClone(enemyTargets[randomIndex], new Vector3(2, 0, 0));
+            float xOffset;//随机选择一个偏移量
+
+            if (Random.Range(0, 100) > 50)
+                xOffset = 2;
+            else
+                xOffset = -2;
+
+
+            PlayerSkillManager.instance.clone.CreateClone(enemyTargets[randomIndex], new Vector3(xOffset, 0, 0));
             attackAmount--;
 
-            if(attackAmount <= 0)
+            if (attackAmount <= 0)
             {
                 canAttack = false;
 
                 canShrink = true;
+
+                PlayerManager.instance.player.MakeTransprent(false);
+
+                PlayerManager.instance.player.ExitBlackHole();
             }
 
         }
@@ -121,7 +145,7 @@ public class BH_Skill_Controller : MonoBehaviour
         BH_Hotkey_Controller newHotkeyScript = newHotkey.GetComponent<BH_Hotkey_Controller>();
 
         newHotkeyScript.SetupHotKey(choosenCode, collision.transform, this);
-    }
+    }//替身攻击的逻辑
 
     public void AddEnemyTarget(Transform _enemy)
     {

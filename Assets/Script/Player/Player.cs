@@ -118,18 +118,23 @@ public class Player : Entity
 
     }
 
-    private void BHSkill()
+    private void BHSkill()//放黑洞技能
     {
-        if (Input.GetKeyDown(KeyCode.H))
+        if (Input.GetKeyDown(KeyCode.H) && skill.BH.SkillCoolDownCheck())
         {
             stateMachine.ChangeState(blackHoleState);
+          
         }
+    }
+    public void ExitBlackHole()//退出黑洞技能
+    {
+        stateMachine.ChangeState(airState);
     }
 
     public void AssignSword(GameObject _Sword)
     {
         sword = _Sword;
-    }
+    }//用来检测是否丢过剑
 
     public void CatchSword()
     {

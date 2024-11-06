@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class PlayerBlackHoleState : PlayerState
 {
-    bool skillUsed;
-    float flyTime = 2;
+    public bool skillUsed;
+    float flyTime = 1;
     private float defaultgravity;
 
     public PlayerBlackHoleState(Player _player, PlayerStateMachine _stateMachine, string _animBoolName) : base(_player, _stateMachine, _animBoolName)
@@ -20,8 +20,6 @@ public class PlayerBlackHoleState : PlayerState
 
         defaultgravity = player.rb.gravityScale;
         player.rb.gravityScale = 0;
-
-        player.skill.BH.UseSkill();
         
     }
 
@@ -49,6 +47,14 @@ public class PlayerBlackHoleState : PlayerState
         if (stateTimer < 0)
         {
             player.rb.velocity = new Vector2 (0, -.1f);
+
+            if (!skillUsed)
+            {
+                player.skill.BH.CanUseSkill();
+                skillUsed = true;
+            }
         }
     }
+
+    //黑洞退出设置在攻击结束时，就是在BH SKILL CONTROLLER里面调用
 }
