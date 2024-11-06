@@ -187,7 +187,7 @@ Transform:
   m_GameObject: {fileID: 71768993}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.365057, y: 1.7459067, z: -9.926577}
+  m_LocalPosition: {x: 18.369932, y: 1.7459067, z: -9.926577}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -748,7 +748,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.365057, y: 1.7459067, z: -9.926577}
+  m_LocalPosition: {x: 18.369932, y: 1.7459067, z: -9.926577}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1284,10 +1284,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Clone
       objectReference: {fileID: 0}
-    - target: {fileID: 3144359725391337352, guid: 19cd4bb1c84b87544bd36bf7b1a1ffff, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1353,7 +1349,7 @@ Transform:
   m_GameObject: {fileID: 1028362553}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 18.25, y: -3.05, z: 0.06962737}
+  m_LocalPosition: {x: 43.23, y: -3.05, z: 0.06962737}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -12192,10 +12188,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: AimDots
       objectReference: {fileID: 0}
-    - target: {fileID: 8050355541878490457, guid: aa897dd08c7630e4fb97c904a00a4956, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -12253,10 +12245,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: BlackHoleHotkey
       objectReference: {fileID: 0}
-    - target: {fileID: 2521705856824660647, guid: f7a0b7be3c8586e4488cd2d858b41708, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -12273,10 +12261,6 @@ PrefabInstance:
     - target: {fileID: 9203315307366413, guid: 938f1909b2f947e4cb88e27f02a5b20b, type: 3}
       propertyPath: m_Name
       value: Sword
-      objectReference: {fileID: 0}
-    - target: {fileID: 9203315307366413, guid: 938f1909b2f947e4cb88e27f02a5b20b, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5310993301995952756, guid: 938f1909b2f947e4cb88e27f02a5b20b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -12334,10 +12318,6 @@ PrefabInstance:
     - target: {fileID: 2644223832210183311, guid: 0278d5ee8624da84194544051ea89f73, type: 3}
       propertyPath: m_Name
       value: BlackHole
-      objectReference: {fileID: 0}
-    - target: {fileID: 2644223832210183311, guid: 0278d5ee8624da84194544051ea89f73, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7555550088402084767, guid: 0278d5ee8624da84194544051ea89f73, type: 3}
       propertyPath: m_LocalPosition.x

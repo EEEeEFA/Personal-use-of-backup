@@ -12,16 +12,21 @@ using UnityEngine;
         [SerializeField] private float growSpeed;
         [SerializeField] private float shrinkSpeed;
 
-        public override bool SkillCoolDownCheck()
+
+    public override bool SkillCoolDownCheck()
         {
             return base.SkillCoolDownCheck();
         }
+    public override bool CanUseSkill()
+    {
+        return base.CanUseSkill();
+    }
 
         public override void UseSkill()
         {
             base.UseSkill();
 
-            GameObject newBlackHole = Instantiate(blackHolePrefab);
+            GameObject newBlackHole = Instantiate(blackHolePrefab, player.transform.position, Quaternion.identity);
 
             BH_Skill_Controller newBlackHoleScript = newBlackHole.GetComponent<BH_Skill_Controller>();
 

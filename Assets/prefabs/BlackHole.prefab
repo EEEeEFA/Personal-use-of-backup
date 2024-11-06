@@ -100,19 +100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hotkeyPrefab: {fileID: 0}
   KeyCodeList: 690000006a0000006b0000006c000000
-  attackAmount: 6
-  attackTimer: 0
-  attackCoolDownTime: 0.2
-  canAttack: 0
   canShrink: 0
-  canCreateHotkey: 1
-  maxSize: 15
-  canGrow: 0
-  growSpeed: 6
-  shrinkSpeed: 5
-  enemyTargets: []
-  enemyScanned: []
-  createdHotKeyPrefabs: []
 --- !u!58 &2285991739413904161
 CircleCollider2D:
   m_ObjectHideFlags: 0

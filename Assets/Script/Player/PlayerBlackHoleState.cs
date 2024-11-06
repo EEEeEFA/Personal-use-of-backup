@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerBlackHoleState : PlayerState
 {
     bool skillUsed;
-    float durationTime;
+    float flyTime = 2;
     private float defaultgravity;
 
     public PlayerBlackHoleState(Player _player, PlayerStateMachine _stateMachine, string _animBoolName) : base(_player, _stateMachine, _animBoolName)
@@ -16,30 +16,39 @@ public class PlayerBlackHoleState : PlayerState
     {
         base.Enter();
         skillUsed = false;
-        stateTimer = durationTime;
+        stateTimer = flyTime;
+
         defaultgravity = player.rb.gravityScale;
+        player.rb.gravityScale = 0;
 
         player.skill.BH.UseSkill();
-
+        
     }
 
     public override void Exit()
     {
         base.Exit();
+        player.rb.gravityScale = defaultgravity;
     }
 
     public override void Update()
     {
         base.Update();
-        if (!canShrink)
+         
+        if (stateTimer > 0)
         {
-            player.rb.gravityScale = 0;
-            player.rb.velocity = Vector2.Lerp(player.transform.position, player.transform.position + new Vector3(0 , 10), 4 * Time.deltaTime);
+            //Vector3 targetPosition = player.transform.position + new Vector3(0, 15, 0); // 目标位置：正上方15单位
+            //float moveSpeed = 15f / 2f; // 两秒内移动15个单位，因此速度是 15 / 2
+
+            //player.transform.position = Vector2.MoveTowards(player.transform.position, targetPosition, moveSpeed * Time.deltaTime);
+
+            player.rb.velocity = new Vector2(0, 10);
         }
 
-        if (canShrink)
+
+        if (stateTimer < 0)
         {
-            player.rb.gravityScale = defaultgravity;
+            player.rb.velocity = new Vector2 (0, -.1f);
         }
     }
 }
