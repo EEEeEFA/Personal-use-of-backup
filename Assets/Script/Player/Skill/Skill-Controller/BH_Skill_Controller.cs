@@ -7,21 +7,21 @@ public class BH_Skill_Controller : MonoBehaviour
     [SerializeField] GameObject hotkeyPrefab;
     [SerializeField] List<KeyCode> KeyCodeList;
 
-    [SerializeField] private int attackAmount;
-    [SerializeField] private float attackTimer;
-    [SerializeField] private float attackCoolDownTime;
-    [SerializeField] private bool canAttack = false;
-    [SerializeField] private bool canShrink = false;
-    [SerializeField] private bool canCreateHotkey = true;
+    private int attackAmount;
+    private float attackTimer;
+    private float attackCoolDownTime;
+    private bool canAttack = false;
+    public bool canShrink = false;
+    private bool canCreateHotkey = true;
 
-    [SerializeField] private float maxSize;
-    [SerializeField] private bool canGrow = true;
-    [SerializeField] private float growSpeed;
-    [SerializeField] private float shrinkSpeed;
+    private float maxSize;
+    private bool canGrow = true;
+    private float growSpeed;
+    private float shrinkSpeed;
 
-    [SerializeField] private List<Transform> enemyTargets = new List<Transform>();
-    [SerializeField] private List<Enemy> enemyScanned = new List<Enemy>();
-    [SerializeField] private List<GameObject> createdHotKeyPrefabs = new List<GameObject>();
+     private List<Transform> enemyTargets = new List<Transform>();
+    private List<Enemy> enemyScanned = new List<Enemy>();
+    private List<GameObject> createdHotKeyPrefabs = new List<GameObject>();
 
     public void SetupBlackHole(float _maxSize, float _growSpeed, float _shrinkSpeed, float _attackCoolDownTime, int _attackAmount)
     {

@@ -49,6 +49,7 @@ public class Player : Entity
 
     public PlayerAimSwordState aimSwordState { get; private set; }
     public PlayerCatchSwordState catchSwordState { get; private set; }
+    public PlayerBlackHoleState blackHoleState { get; private set; }
 
     #endregion
 
@@ -72,6 +73,8 @@ public class Player : Entity
         aimSwordState = new PlayerAimSwordState(this, stateMachine, "AimSword");
         catchSwordState = new PlayerCatchSwordState(this, stateMachine, "CatchSword");
 
+        blackHoleState = new PlayerBlackHoleState(this, stateMachine, "blackHole");
+
     }
 
     protected override void Start()
@@ -86,6 +89,7 @@ public class Player : Entity
         base.Update();
         stateMachine.currentState.Update();
         CheckDash();
+        BHSkill();
     }
 
     public IEnumerator BusyFor(float _seconds)
@@ -112,6 +116,14 @@ public class Player : Entity
             skill.clone.CreateClone(transform, Vector3.zero);
         }
 
+    }
+
+    private void BHSkill()
+    {
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            stateMachine.ChangeState(blackHoleState);
+        }
     }
 
     public void AssignSword(GameObject _Sword)

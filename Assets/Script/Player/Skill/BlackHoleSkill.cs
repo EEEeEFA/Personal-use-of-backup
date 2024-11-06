@@ -2,9 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BlackHoleSkill : MonoBehaviour
-{
-    public class BlackHole_Skill : Skill
+    public class BlackHoleSkill : Skill
     {
         [SerializeField] private int amountOfAttacks;
         [SerializeField] private float attackCooldown;
@@ -31,4 +29,3 @@ public class BlackHoleSkill : MonoBehaviour
         }
     }
 
-}
