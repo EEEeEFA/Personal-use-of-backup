@@ -24,7 +24,9 @@ using UnityEngine;
         {
             base.UseSkill();
 
-            GameObject newBlackHole = Instantiate(blackHolePrefab, player.transform.position, Quaternion.identity);
+        Debug.Log("BlackHoleSkill处使用黑洞成功");
+
+        GameObject newBlackHole = Instantiate(blackHolePrefab, player.transform.position, Quaternion.identity);
 
             currentBlackHole = newBlackHole.GetComponent<BH_Skill_Controller>();
 
@@ -33,7 +35,7 @@ using UnityEngine;
 
     public bool BlackHoleFinish()
     {
-        if(currentBlackHole == null) 
+        if(!currentBlackHole) 
             return false;
 
         if (currentBlackHole.canExitBH)

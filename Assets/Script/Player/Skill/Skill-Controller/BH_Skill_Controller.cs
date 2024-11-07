@@ -13,7 +13,9 @@ public class BH_Skill_Controller : MonoBehaviour
     private bool canAttack = false;
     public bool canShrink = false;
     private bool canCreateHotkey = true;
-    private float blackholeDuration;
+    private float blackholeDuration ;
+
+    private bool playerCanDisapear = true;
 
     private float maxSize;
     private bool canGrow = true;
@@ -26,24 +28,29 @@ public class BH_Skill_Controller : MonoBehaviour
     private List<Enemy> enemyScanned = new List<Enemy>();
     private List<GameObject> createdHotKeyPrefabs = new List<GameObject>();
 
-    public void SetupBlackHole(float _maxSize, float _growSpeed, float _shrinkSpeed, float _attackCoolDownTime, int _attackAmount, float _blackHoleDuration)
+    public void SetupBlackHole(float _maxSize, float _growSpeed, float _shrinkSpeed, float _attackCoolDownTime, int _attackAmount, float _blackholeDuration)
     {
         maxSize = _maxSize;
         growSpeed = _growSpeed;
         shrinkSpeed = _shrinkSpeed;
         attackAmount = _attackAmount;
         attackCoolDownTime = _attackCoolDownTime;
-        blackholeDuration = _blackHoleDuration;
 
-
+        blackholeDuration = _blackholeDuration;
     }
 
     private void Update()
     {
         attackTimer -= Time.deltaTime;
-        blackholeDuration -= Time.deltaTime;
 
-        if(blackholeDuration < 0) //超时未选， 退出黑洞技能
+        if(blackholeDuration > 0f)
+        {
+        blackholeDuration -= Time.deltaTime;
+        Debug.Log(blackholeDuration);
+
+        }
+
+        if (blackholeDuration < 0) //超时未选， 退出黑洞技能
         {
             blackholeDuration = Mathf.Infinity;
 
@@ -51,6 +58,7 @@ public class BH_Skill_Controller : MonoBehaviour
                 ReleaseCloneAttack();
             else
             FinishBlackHole();
+
 
         }
 
@@ -65,13 +73,21 @@ public class BH_Skill_Controller : MonoBehaviour
 
     private void ReleaseCloneAttack()
     {
+        if(enemyTargets.Count <= 0) 
+            return;
+
         DestoryHotKey();
 
         canAttack = true;
 
         canCreateHotkey = false;
 
-        PlayerManager.instance.player.MakeTransprent(true);
+        if (playerCanDisapear)
+        {
+            PlayerManager.instance.player.MakeTransprent(true);
+            playerCanDisapear = false;
+        }
+   
     }
 
     private void CloneAttackLogic()
@@ -86,7 +102,10 @@ public class BH_Skill_Controller : MonoBehaviour
             transform.localScale = Vector2.Lerp(transform.localScale, new Vector2(-1, -1), shrinkSpeed * Time.deltaTime);
 
             if (transform.localScale.x < 0)
+            {
                 Destroy(this.gameObject);
+                Debug.Log("Controller处抹除黑洞成功");
+            }
 
             for (int i = 0; i < enemyScanned.Count; i++)
             {
@@ -114,7 +133,7 @@ public class BH_Skill_Controller : MonoBehaviour
 
             if (attackAmount <= 0)
             {
-                Invoke("FinishBlackHoleAbility", .5f);
+                Invoke("FinishBlackHole", .5f);
             }
 
         }
@@ -122,15 +141,15 @@ public class BH_Skill_Controller : MonoBehaviour
     }
     void FinishBlackHole()
     {
-            canAttack = false;
+        DestoryHotKey();
+        canAttack = false;
+        canShrink = true;
 
-            canShrink = true;
+        PlayerManager.instance.player.MakeTransprent(false);
 
-            PlayerManager.instance.player.MakeTransprent(false);
-
-            canExitBH = true;
+        canExitBH = true;
         //PlayerManager.instance.player.ExitBlackHole();
-             DestoryHotKey();
+
     }
 
     private void DestoryHotKey()
@@ -157,6 +176,13 @@ public class BH_Skill_Controller : MonoBehaviour
 
     private void CreateHotkey(Collider2D collision)
     {
+
+        if (KeyCodeList.Count <= 0)
+        {
+            Debug.LogWarning("Not enough hot keys");
+            return;
+        }
+
         if (!canCreateHotkey)
             return;
 

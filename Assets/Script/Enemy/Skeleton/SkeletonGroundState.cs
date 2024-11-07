@@ -27,7 +27,6 @@ public class SkeletonGroundState : EnemyState
         if (enemy.isPlayerDectected()||Vector2.Distance(player.transform.position, enemy.transform.position) < 3)
         {
             stateMachine.ChangeState(enemy.battleState);
-            Debug.Log("into battleState");
         }
         //²âÊÔ°´¼ü
         if (Input.GetKeyDown(KeyCode.P))

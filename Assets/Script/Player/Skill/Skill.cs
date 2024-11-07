@@ -7,7 +7,7 @@ using UnityEngine;
 public class Skill : MonoBehaviour
 {
     [SerializeField] public float cooldownTime;
-    protected float timeCounter;
+    [SerializeField] protected float timeCounter;
     protected Player player;
     protected bool skillUsed = true;
 

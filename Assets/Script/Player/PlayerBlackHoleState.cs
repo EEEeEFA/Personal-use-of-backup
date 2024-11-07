@@ -5,7 +5,9 @@ using UnityEngine;
 public class PlayerBlackHoleState : PlayerState
 {
     public bool skillUsed;
-    float flyTime = 1;
+    public bool activeBH;
+    float flyTime = .5f;
+
     private float defaultgravity;
 
     public PlayerBlackHoleState(Player _player, PlayerStateMachine _stateMachine, string _animBoolName) : base(_player, _stateMachine, _animBoolName)
@@ -15,7 +17,10 @@ public class PlayerBlackHoleState : PlayerState
     public override void Enter()
     {
         base.Enter();
+
         skillUsed = false;
+        activeBH = true;
+
         stateTimer = flyTime;
 
         defaultgravity = player.rb.gravityScale;
@@ -27,6 +32,7 @@ public class PlayerBlackHoleState : PlayerState
     {
         base.Exit();
         player.rb.gravityScale = defaultgravity;
+        activeBH = false;
     }
 
     public override void Update()
@@ -50,13 +56,17 @@ public class PlayerBlackHoleState : PlayerState
 
             if (!skillUsed)
             {
-                player.skill.BH.CanUseSkill();
+                if (player.skill.BH.CanUseSkill())
+                {
+                    Debug.Log("状态机处使用黑洞成功");
                 skillUsed = true;
+                }
 
             }
                 if (player.skill.BH.BlackHoleFinish())
                 {
-                    stateMachine.ChangeState(player.airState);
+                Debug.Log("状态机处退出黑洞");
+                stateMachine.ChangeState(player.airState);
                 }
         }
     }

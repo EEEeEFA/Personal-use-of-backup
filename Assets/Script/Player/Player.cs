@@ -120,7 +120,7 @@ public class Player : Entity
 
     private void BHSkill()//·ÅºÚ¶´¼¼ÄÜ
     {
-        if (Input.GetKeyDown(KeyCode.H) && skill.BH.CanUseSkill())
+        if (Input.GetKeyDown(KeyCode.H) && !blackHoleState.activeBH)
         {
             stateMachine.ChangeState(blackHoleState);
           

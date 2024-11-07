@@ -8287,6 +8287,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldownTime: 1
+  timeCounter: 0
 --- !u!114 &1668047587
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8327,6 +8328,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldownTime: 1
+  timeCounter: 0
   clonePrefab: {fileID: 3144359725391337352, guid: 19cd4bb1c84b87544bd36bf7b1a1ffff, type: 3}
   cloneDuration: 1
 --- !u!114 &1668047590
@@ -8342,6 +8344,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldownTime: 0
+  timeCounter: 0
   swordType: 1
   launchForce: {x: 20, y: 1}
   swordGravity: 0
@@ -8368,9 +8371,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldownTime: 20
+  timeCounter: 0
   amountOfAttacks: 6
   attackCooldown: 0.2
-  blackHoleDuration: 6
+  blackHoleDuration: 10
   blackHolePrefab: {fileID: 456962476}
   maxSize: 30
   growSpeed: 5
