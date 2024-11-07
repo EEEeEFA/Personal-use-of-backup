@@ -49,6 +49,7 @@ public class Player : Entity
 
     public PlayerAimSwordState aimSwordState { get; private set; }
     public PlayerCatchSwordState catchSwordState { get; private set; }
+    public PlayerBlackHoleState blackHoleState { get; private set; }
 
     #endregion
 
@@ -72,6 +73,8 @@ public class Player : Entity
         aimSwordState = new PlayerAimSwordState(this, stateMachine, "AimSword");
         catchSwordState = new PlayerCatchSwordState(this, stateMachine, "CatchSword");
 
+        blackHoleState = new PlayerBlackHoleState(this, stateMachine, "blackHole");
+
     }
 
     protected override void Start()
@@ -86,6 +89,7 @@ public class Player : Entity
         base.Update();
         stateMachine.currentState.Update();
         CheckDash();
+        BHSkill();
     }
 
     public IEnumerator BusyFor(float _seconds)
@@ -114,10 +118,23 @@ public class Player : Entity
 
     }
 
+    private void BHSkill()//放黑洞技能
+    {
+        if (Input.GetKeyDown(KeyCode.H) && skill.BH.SkillCoolDownCheck())
+        {
+            stateMachine.ChangeState(blackHoleState);
+          
+        }
+    }
+    //public void ExitBlackHole()//退出黑洞技能
+    //{
+    //    stateMachine.ChangeState(airState);
+    //}
+
     public void AssignSword(GameObject _Sword)
     {
         sword = _Sword;
-    }
+    }//用来检测是否丢过剑
 
     public void CatchSword()
     {

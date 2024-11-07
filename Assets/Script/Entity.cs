@@ -7,7 +7,7 @@ public class Entity : MonoBehaviour, IAttacker
     #region Components
     public Animator anim { get; private set; }
     public Rigidbody2D rb { get; private set; }
-
+    public SpriteRenderer sr { get; private set; }
     public EntityFX fx { get; private set; }
 
     public Player player;
@@ -41,6 +41,7 @@ public class Entity : MonoBehaviour, IAttacker
     }
     protected virtual void Start()
     {
+        sr = GetComponentInChildren<SpriteRenderer>();
         anim = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody2D>();
         fx = GetComponent<EntityFX>();
@@ -51,7 +52,7 @@ public class Entity : MonoBehaviour, IAttacker
     {
         
     }
-    public bool IsGroundDetected() => Physics2D.Raycast(groundCheck.position, Vector2.down, distancetoground, setGround);
+    public bool IsGroundDetected() => Physics2D.Raycast(groundCheck.position, Vector2.down, distancetoground, setGround);//第一周作业 射线检测
     public bool IsWallDetected() => Physics2D.Raycast(wallCheck.position, Vector2.right * facingDir, distancetowall, setWall);
 
     public virtual void SetVelocity(float _xVelocity, float _yVelocity)
@@ -90,6 +91,18 @@ public class Entity : MonoBehaviour, IAttacker
         isKnocked = false;
         rb.velocity = new Vector2(0, 0);
 
+    }
+
+    public void MakeTransprent(bool _Transprent)
+    {
+        if (_Transprent)
+        {
+            sr.color = Color.clear;
+        }
+        else
+        {
+            sr.color = Color.white;
+        }
     }
 
     #region interface

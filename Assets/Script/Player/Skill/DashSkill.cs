@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DashSkill : Skill
 {
-    protected override void UseSkill()
+    public override void UseSkill()
     {
         base.UseSkill();
     }
