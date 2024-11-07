@@ -13,6 +13,7 @@ public class BH_Skill_Controller : MonoBehaviour
     private bool canAttack = false;
     public bool canShrink = false;
     private bool canCreateHotkey = true;
+    private float blackholeDuration;
 
     private float maxSize;
     private bool canGrow = true;
@@ -25,19 +26,34 @@ public class BH_Skill_Controller : MonoBehaviour
     private List<Enemy> enemyScanned = new List<Enemy>();
     private List<GameObject> createdHotKeyPrefabs = new List<GameObject>();
 
-    public void SetupBlackHole(float _maxSize, float _growSpeed, float _shrinkSpeed, float _attackCoolDownTime, int _attackAmount)
+    public void SetupBlackHole(float _maxSize, float _growSpeed, float _shrinkSpeed, float _attackCoolDownTime, int _attackAmount, float _blackHoleDuration)
     {
         maxSize = _maxSize;
         growSpeed = _growSpeed;
         shrinkSpeed = _shrinkSpeed;
         attackAmount = _attackAmount;
         attackCoolDownTime = _attackCoolDownTime;
-       
+        blackholeDuration = _blackHoleDuration;
+
+
     }
 
     private void Update()
     {
         attackTimer -= Time.deltaTime;
+        blackholeDuration -= Time.deltaTime;
+
+        if(blackholeDuration < 0) //超时未选， 退出黑洞技能
+        {
+            blackholeDuration = Mathf.Infinity;
+
+            if (enemyTargets.Count > 0)
+                ReleaseCloneAttack();
+            else
+            FinishBlackHole();
+
+        }
+
 
         if (Input.GetKeyDown(KeyCode.H) && PlayerManager.instance.player.blackHoleState.skillUsed)
         {
@@ -79,7 +95,7 @@ public class BH_Skill_Controller : MonoBehaviour
 
         }
 
-        if (attackTimer < 0 && canAttack && attackAmount > 0)//按P后开始攻击
+        if (attackTimer < 0 && canAttack && attackAmount > 0)//按H后 canAttack设置为true 开始攻击
         {
             attackTimer = attackCoolDownTime;
 
@@ -98,17 +114,23 @@ public class BH_Skill_Controller : MonoBehaviour
 
             if (attackAmount <= 0)
             {
-                canAttack = false;
-
-                canShrink = true;
-
-                PlayerManager.instance.player.MakeTransprent(false);
-
-                canExitBH = true;
-                //PlayerManager.instance.player.ExitBlackHole();
+                Invoke("FinishBlackHoleAbility", .5f);
             }
 
         }
+
+    }
+    void FinishBlackHole()
+    {
+            canAttack = false;
+
+            canShrink = true;
+
+            PlayerManager.instance.player.MakeTransprent(false);
+
+            canExitBH = true;
+        //PlayerManager.instance.player.ExitBlackHole();
+             DestoryHotKey();
     }
 
     private void DestoryHotKey()

@@ -21,7 +21,7 @@ public class Skill : MonoBehaviour
     }
 
 
-    public virtual bool SkillCoolDownCheck()//通过冷却时间判断是否能够释放技能
+    public virtual bool CanUseSkill()//通过冷却时间判断是否能够释放技能
     {
         if(timeCounter < 0)
         {
@@ -35,21 +35,6 @@ public class Skill : MonoBehaviour
     public virtual void UseSkill()
     {
 
-    }
-
-    public virtual bool CanUseSkill()
-    {
-        if (timeCounter < 0)
-        {
-            UseSkill();
-            timeCounter = cooldownTime;
-            return true;
-        }
-        else
-        {
-            Debug.Log("Skill is on cooldown");
-            return false;
-        }
     }
 
 

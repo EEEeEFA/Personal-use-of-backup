@@ -106,7 +106,7 @@ public class Player : Entity
         if (IsWallDetected()) 
             return;
 
-        if (Input.GetKeyDown(KeyCode.LeftShift)&& PlayerSkillManager.instance.dash.SkillCoolDownCheck())
+        if (Input.GetKeyDown(KeyCode.LeftShift)&& PlayerSkillManager.instance.dash.CanUseSkill())
         {
             dashDir = Input.GetAxisRaw("Horizontal");
             if (dashDir == 0)
@@ -120,7 +120,7 @@ public class Player : Entity
 
     private void BHSkill()//·ÅºÚ¶´¼¼ÄÜ
     {
-        if (Input.GetKeyDown(KeyCode.H) && skill.BH.SkillCoolDownCheck())
+        if (Input.GetKeyDown(KeyCode.H) && skill.BH.CanUseSkill())
         {
             stateMachine.ChangeState(blackHoleState);
           

@@ -6,6 +6,7 @@ using UnityEngine;
     {
         [SerializeField] private int amountOfAttacks;
         [SerializeField] private float attackCooldown;
+        [SerializeField] private float blackHoleDuration;
         [Space]
         [SerializeField] private GameObject blackHolePrefab;
         [SerializeField] private float maxSize;
@@ -14,14 +15,10 @@ using UnityEngine;
         
         BH_Skill_Controller currentBlackHole;
 
-    public override bool SkillCoolDownCheck()
-        {
-            return base.SkillCoolDownCheck();
-        }
     public override bool CanUseSkill()
-    {
-        return base.CanUseSkill();
-    }
+        {
+            return base.CanUseSkill();
+        }
 
         public override void UseSkill()
         {
@@ -31,7 +28,7 @@ using UnityEngine;
 
             currentBlackHole = newBlackHole.GetComponent<BH_Skill_Controller>();
 
-            currentBlackHole.SetupBlackHole(maxSize, growSpeed, shrinkSpeed, attackCooldown, amountOfAttacks);
+            currentBlackHole.SetupBlackHole(maxSize, growSpeed, shrinkSpeed, attackCooldown, amountOfAttacks, blackHoleDuration);
         }
 
     public bool BlackHoleFinish()

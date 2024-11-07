@@ -8370,6 +8370,7 @@ MonoBehaviour:
   cooldownTime: 20
   amountOfAttacks: 6
   attackCooldown: 0.2
+  blackHoleDuration: 6
   blackHolePrefab: {fileID: 456962476}
   maxSize: 30
   growSpeed: 5
