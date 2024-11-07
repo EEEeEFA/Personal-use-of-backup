@@ -126,10 +126,10 @@ public class Player : Entity
           
         }
     }
-    public void ExitBlackHole()//退出黑洞技能
-    {
-        stateMachine.ChangeState(airState);
-    }
+    //public void ExitBlackHole()//退出黑洞技能
+    //{
+    //    stateMachine.ChangeState(airState);
+    //}
 
     public void AssignSword(GameObject _Sword)
     {

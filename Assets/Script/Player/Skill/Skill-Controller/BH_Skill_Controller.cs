@@ -19,6 +19,8 @@ public class BH_Skill_Controller : MonoBehaviour
     private float growSpeed;
     private float shrinkSpeed;
 
+    public bool canExitBH {  get; private set; } = false;
+
      private List<Transform> enemyTargets = new List<Transform>();
     private List<Enemy> enemyScanned = new List<Enemy>();
     private List<GameObject> createdHotKeyPrefabs = new List<GameObject>();
@@ -102,7 +104,8 @@ public class BH_Skill_Controller : MonoBehaviour
 
                 PlayerManager.instance.player.MakeTransprent(false);
 
-                PlayerManager.instance.player.ExitBlackHole();
+                canExitBH = true;
+                //PlayerManager.instance.player.ExitBlackHole();
             }
 
         }

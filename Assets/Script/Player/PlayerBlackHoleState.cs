@@ -52,9 +52,13 @@ public class PlayerBlackHoleState : PlayerState
             {
                 player.skill.BH.CanUseSkill();
                 skillUsed = true;
+
             }
+                if (player.skill.BH.BlackHoleFinish())
+                {
+                    stateMachine.ChangeState(player.airState);
+                }
         }
     }
 
-    //黑洞退出设置在攻击结束时，就是在BH SKILL CONTROLLER里面调用
 }

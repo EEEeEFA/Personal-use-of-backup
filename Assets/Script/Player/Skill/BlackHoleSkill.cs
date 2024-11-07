@@ -11,7 +11,8 @@ using UnityEngine;
         [SerializeField] private float maxSize;
         [SerializeField] private float growSpeed;
         [SerializeField] private float shrinkSpeed;
-
+        
+        BH_Skill_Controller currentBlackHole;
 
     public override bool SkillCoolDownCheck()
         {
@@ -28,9 +29,22 @@ using UnityEngine;
 
             GameObject newBlackHole = Instantiate(blackHolePrefab, player.transform.position, Quaternion.identity);
 
-            BH_Skill_Controller newBlackHoleScript = newBlackHole.GetComponent<BH_Skill_Controller>();
+            currentBlackHole = newBlackHole.GetComponent<BH_Skill_Controller>();
 
-            newBlackHoleScript.SetupBlackHole(maxSize, growSpeed, shrinkSpeed, attackCooldown, amountOfAttacks);
+            currentBlackHole.SetupBlackHole(maxSize, growSpeed, shrinkSpeed, attackCooldown, amountOfAttacks);
         }
+
+    public bool BlackHoleFinish()
+    {
+        if(currentBlackHole == null) 
+            return false;
+
+        if (currentBlackHole.canExitBH)
+        
+            return true;
+  
+        else 
+            return false;
+    }
     }
 
