@@ -52,7 +52,7 @@ public class Entity : MonoBehaviour, IAttacker
     {
         
     }
-    public bool IsGroundDetected() => Physics2D.Raycast(groundCheck.position, Vector2.down, distancetoground, setGround);
+    public bool IsGroundDetected() => Physics2D.Raycast(groundCheck.position, Vector2.down, distancetoground, setGround);//第一周作业 射线检测
     public bool IsWallDetected() => Physics2D.Raycast(wallCheck.position, Vector2.right * facingDir, distancetowall, setWall);
 
     public virtual void SetVelocity(float _xVelocity, float _yVelocity)

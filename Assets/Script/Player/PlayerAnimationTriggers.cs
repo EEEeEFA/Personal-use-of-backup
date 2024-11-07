@@ -13,7 +13,9 @@ public class PlayerAnimationTriggers : MonoBehaviour
 
     private void AttackTrigger()
     {
-        Collider2D[] collider = Physics2D.OverlapCircleAll(player.setAttackP.position, player.attackCheckRadius);
+        Collider2D[] collider = Physics2D.OverlapCircleAll(player.setAttackP.position, player.attackCheckRadius);//第一周作业 画圆检测 
+
+        // Physics.SphereCast (position, settings.boundsRadius, forward, out hit, settings.collisionAvoidDst, settings.obstacleMask
 
         foreach (var hit in collider)
         {
@@ -29,9 +31,8 @@ public class PlayerAnimationTriggers : MonoBehaviour
         foreach (var hit in collider)
         {
             if (hit.GetComponent<Enemy>() != null)
-                if (hit.GetComponent<Enemy>().StunCheck())
+                if (hit.GetComponent<Enemy>().StunCheck())//判断敌人是否在stunWindow内
                 {
-                    Debug.Log("Stunned!!");
                     AnimationTrigger();
 
                 }
