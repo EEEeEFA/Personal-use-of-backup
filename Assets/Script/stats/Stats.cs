@@ -9,16 +9,17 @@ public class Stats
     public List<int> modifiers;
     public int GetVuale()
     {
-        
+        //baseValue + modifiers ¡ú final
+        return 0;
     }
 
-    public void AddModifier()
+    public void AddModifier(int _modifer)
     {
-        
+        modifiers.Add(_modifer);
     }
 
-    public void RemoveModifier()
+    public void RemoveModifier(int _modifer)
     {
-
+        modifiers.Remove(_modifer);
     }
 }
