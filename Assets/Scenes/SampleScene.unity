@@ -796,6 +796,7 @@ GameObject:
   - component: {fileID: 565867962}
   - component: {fileID: 565867963}
   - component: {fileID: 565867964}
+  - component: {fileID: 565867965}
   m_Layer: 7
   m_Name: E_Skeleton
   m_TagString: Untagged
@@ -948,6 +949,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HitMat: {fileID: 2100000, guid: 0731ac8531f1f5d4db07c044cbc8cf91, type: 2}
   GoldMat: {fileID: 0}
+--- !u!114 &565867965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 565867958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f48dfaebc1822604b8972c69a8e1a047, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHP: 0
+  dealDamage: 0
+  currentHP: 0
 --- !u!1 &566853712
 GameObject:
   m_ObjectHideFlags: 0
@@ -1271,6 +1287,7 @@ GameObject:
   - component: {fileID: 1028362555}
   - component: {fileID: 1028362557}
   - component: {fileID: 1028362558}
+  - component: {fileID: 1028362559}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -1416,6 +1433,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HitMat: {fileID: 2100000, guid: 0731ac8531f1f5d4db07c044cbc8cf91, type: 2}
   GoldMat: {fileID: 2100000, guid: 7f8ab6d5e56c57247a1c8a7724ffc57f, type: 2}
+--- !u!114 &1028362559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1028362553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f48dfaebc1822604b8972c69a8e1a047, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHP: 0
+  dealDamage: 0
+  currentHP: 0
 --- !u!1 &1033268297
 GameObject:
   m_ObjectHideFlags: 0
