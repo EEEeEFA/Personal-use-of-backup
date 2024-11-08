@@ -1,18 +1,27 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class CharacterStats : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public int maxHP;
+    public int dealDamage;
+
+    [SerializeField] private int currentHP;
+
+    private void Start()
     {
-        
+        currentHP = maxHP;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void TakeDamage(int _takeDamage)//被打了触发
     {
-        
+        currentHP -= _takeDamage;
+
+        if (currentHP < 0)
+        {
+            
+        }
     }
 }

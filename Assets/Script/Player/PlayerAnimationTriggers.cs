@@ -11,7 +11,7 @@ public class PlayerAnimationTriggers : MonoBehaviour
         player.AnimationTrigger();
     }
 
-    private void AttackTrigger()
+    private void AttackTrigger()//攻击判定
     {
         Collider2D[] collider = Physics2D.OverlapCircleAll(player.setAttackP.position, player.attackCheckRadius);//第一周作业 画圆检测 
 
@@ -21,10 +21,11 @@ public class PlayerAnimationTriggers : MonoBehaviour
         {
             if (hit.GetComponent<Enemy>() != null)
                 hit.GetComponent<Enemy>().Damage(player);
+                hit.GetComponent<CharacterStats>().TakeDamage(player.stats.dealDamage);
         }
     }
 
-    private void CounterAttackTrigger()
+    private void CounterAttackTrigger()//反击判定
     {
         Collider2D[] collider = Physics2D.OverlapCircleAll(player.setAttackP.position, player.attackCheckRadius);
 

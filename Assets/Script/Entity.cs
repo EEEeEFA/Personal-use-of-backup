@@ -10,6 +10,8 @@ public class Entity : MonoBehaviour, IAttacker
     public SpriteRenderer sr { get; private set; }
     public EntityFX fx { get; private set; }
 
+    public CharacterStats stats { get; private set; }
+
     public Player player;
     #endregion
 
@@ -45,6 +47,8 @@ public class Entity : MonoBehaviour, IAttacker
         anim = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody2D>();
         fx = GetComponent<EntityFX>();
+        stats = GetComponent<CharacterStats>();
+
     }
 
     // Update is called once per frame
