@@ -7,21 +7,35 @@ public class CharacterStats : MonoBehaviour
 {
     public Stats maxHP;
     public Stats dealDamage;
+    public Stats strength;
 
     [SerializeField] private int currentHP;
 
-    private void Start()
+    protected virtual void Start()
     {
-        currentHP = maxHP.GetVuale();
+        currentHP = maxHP.GetValue();
     }
 
-    public void TakeDamage(int _takeDamage)//被打了触发
+    public virtual void DoDamage(CharacterStats _target)
+    {
+        int _totalDamage = dealDamage.GetValue() + strength.GetValue();
+
+        Debug.Log( "DoDamage=" + _totalDamage);
+
+        _target.TakeDamage(_totalDamage);
+    }
+    public virtual void TakeDamage(int _takeDamage)//被打了触发
     {
         currentHP -= _takeDamage;
-
+        Debug.Log(gameObject.name +_takeDamage);
         if (currentHP < 0)
         {
-            
+            Die();
         }
+    }
+
+    protected virtual void Die()
+    {
+        Debug.Log("去世了");
     }
 }

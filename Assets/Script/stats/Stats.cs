@@ -7,10 +7,14 @@ public class Stats
 {
     [SerializeField] private int baseValue;
     public List<int> modifiers;
-    public int GetVuale()
+    public int GetValue()
     {
-        //baseValue + modifiers ¡ú final
-        return 0;
+        int finalValue = baseValue;
+        foreach (int modifier in modifiers)
+        {
+            finalValue += modifier;
+        }
+        return finalValue;
     }
 
     public void AddModifier(int _modifer)
