@@ -25,6 +25,7 @@ public class PlayerBlackHoleState : PlayerState
 
         defaultgravity = player.rb.gravityScale;
         player.rb.gravityScale = 0;
+
         
     }
 

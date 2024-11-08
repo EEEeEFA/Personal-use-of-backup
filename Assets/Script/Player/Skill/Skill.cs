@@ -20,10 +20,15 @@ public class Skill : MonoBehaviour
         timeCounter -= Time.deltaTime;
     }
 
-
-    public virtual bool CanUseSkill()//通过冷却时间判断是否能够释放技能
+    public virtual bool OnlyTime()//冷却时间到了就返回true
     {
-        if(timeCounter < 0)
+        if (timeCounter < 0)
+            return true;
+        else return false;
+    }
+    public virtual bool CanUseSkill()//冷却时间到了则释放技能
+    {
+        if(OnlyTime())
         {
             UseSkill();
             timeCounter = cooldownTime;

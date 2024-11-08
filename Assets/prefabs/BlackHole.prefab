@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dea92509e34f9124d986036123de0ed2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hotkeyPrefab: {fileID: 0}
+  hotkeyPrefab: {fileID: 2521705856824660647, guid: f7a0b7be3c8586e4488cd2d858b41708, type: 3}
   KeyCodeList: 690000006a0000006b0000006c000000
   canShrink: 0
 --- !u!58 &2285991739413904161
