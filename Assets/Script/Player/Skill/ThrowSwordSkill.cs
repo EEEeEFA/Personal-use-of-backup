@@ -49,7 +49,7 @@ public class ThrowSwordSkill : Skill
     }
     public void CreateSword()//实例化prefabs,并且把小参数传给 TS_SKILL_CONTROLLER设置prefabs
     {
-        launchForce = AimDirection(player.facingDir) * launchForce.magnitude;
+        launchForce = AimDirectionTemp(player.facingDir) * launchForce.magnitude;
 
 
         GameObject newSword = Instantiate(swordPrefab, player.transform.position, transform.rotation);
@@ -89,7 +89,7 @@ public class ThrowSwordSkill : Skill
         }
     }
 
-    public Vector2 AimDirection(int playerFacingR)//丢剑的方向，按↑旋转
+    public Vector2 AimDirection()//丢剑的方向，按↑旋转
     {
         bool enterChance = false;
         if (Input.GetKeyDown(KeyCode.UpArrow) && !enterChance)
@@ -134,7 +134,7 @@ public class ThrowSwordSkill : Skill
     }
     private Vector2 DotsPosition(float t)//在本脚本的Update里实现
     {
-        Vector2 position = (Vector2)player.transform.position + (AimDirection(player.facingDir) * launchForce.magnitude) * t; //+ .5f * (Physics2D.gravity * swordGravity) * (t * t);
+        Vector2 position = (Vector2)player.transform.position + (AimDirectionTemp(player.facingDir) * launchForce.magnitude) * t; //+ .5f * (Physics2D.gravity * swordGravity) * (t * t);
 
         return position;
     }
