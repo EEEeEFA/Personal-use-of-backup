@@ -99,7 +99,6 @@ public class TS_Skill_Controller : MonoBehaviour
         isBouncing = _isBouncing;
         amountOfBounce = _amountOfBounce;
         bouncingSpeed = _bouncingSpeed;
-        Debug.Log("1");
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

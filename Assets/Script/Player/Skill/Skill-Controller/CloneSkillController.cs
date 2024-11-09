@@ -1,7 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.Mathematics;
 using UnityEngine;
 
 public class CloneSkillController : MonoBehaviour, Entity.IAttacker
@@ -61,8 +57,8 @@ public class CloneSkillController : MonoBehaviour, Entity.IAttacker
             if (hit.GetComponent<Enemy>() != null)
             {
                 float distanceToEnemy = Vector2.Distance(transform.position, hit.transform.position);
-                
-                if(distanceToEnemy < closestDistance)
+
+                if (distanceToEnemy < closestDistance)
                 {
                     closestDistance = distanceToEnemy;
                     closestEnemy = hit.transform;
@@ -70,7 +66,7 @@ public class CloneSkillController : MonoBehaviour, Entity.IAttacker
             }
 
         }
-        if(closestEnemy.position.x < transform.position.x)
+        if (closestEnemy.position.x < transform.position.x)
         {
             facingDir = -1;
             transform.rotation = Quaternion.Euler(0, 180, 0);
