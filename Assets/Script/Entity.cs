@@ -10,6 +10,8 @@ public class Entity : MonoBehaviour, IAttacker
     public SpriteRenderer sr { get; private set; }
     public EntityFX fx { get; private set; }
 
+    public CapsuleCollider2D cd { get; private set; }
+
     public CharacterStats stats { get; private set; }
 
     public Player player;
@@ -48,7 +50,7 @@ public class Entity : MonoBehaviour, IAttacker
         rb = GetComponent<Rigidbody2D>();
         fx = GetComponent<EntityFX>();
         stats = GetComponent<CharacterStats>();
-
+        cd = GetComponent<CapsuleCollider2D>();
     }
 
     // Update is called once per frame
@@ -107,6 +109,11 @@ public class Entity : MonoBehaviour, IAttacker
         {
             sr.color = Color.white;
         }
+    }
+
+    public virtual void Die()
+    {
+        
     }
 
     #region interface

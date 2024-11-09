@@ -146,4 +146,10 @@ public class Player : Entity
     }
     public void AnimationTrigger() => stateMachine.currentState.AnimationFinishTrigger();
 
+    public override void Die()
+    {
+        base.Die();
+        stateMachine.ChangeState(deadState);
+
+    }
 }

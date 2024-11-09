@@ -8,6 +8,7 @@ public class E_Skeleton : Enemy
     public SkeletonBattleState battleState { get; private set; }
     public SkeletonAttackState attackState { get; private set; }
     public SkeletonStunnedState stunnedState { get; private set; }
+    public SkeletonDeadState deadState { get; private set; }    
     #endregion
 
     [SerializeField] public float battleTime;
@@ -21,6 +22,7 @@ public class E_Skeleton : Enemy
         battleState = new SkeletonBattleState(this, stateMachine, "Move", this);
         attackState = new SkeletonAttackState(this, stateMachine, "Attack", this);
         stunnedState = new SkeletonStunnedState(this, stateMachine, "Stunned", this);
+        deadState = new SkeletonDeadState(this,stateMachine,"Dead", this);
     }
 
     protected override void Start()
@@ -45,5 +47,11 @@ public class E_Skeleton : Enemy
         }
         else 
             return false;
+    }
+
+    public override void Die()
+    {
+        base.Die();
+        stateMachine.ChangeState(deadState);
     }
 }

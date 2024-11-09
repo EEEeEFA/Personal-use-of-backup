@@ -21,6 +21,9 @@ public class Enemy : Entity
     [SerializeField] public Vector2 StunDistance;
     public bool stunCheck;
 
+
+    private string lastAnimBoolName;
+
     protected override void Awake()
     {
         base.Awake();
@@ -71,6 +74,7 @@ public class Enemy : Entity
 
     #endregion
 
+    #region stun
     public virtual void StunWindowOpen() => stunCheck = true;
 
     public  virtual void StunWindowClose() => stunCheck = false;
@@ -82,8 +86,13 @@ public class Enemy : Entity
         else
             return false;
     }
+    #endregion
 
-
+    public void AssginLastBoolName(string _animBoolName)
+    {
+        lastAnimBoolName = _animBoolName;
+    }
     public virtual void AnimationTriggerCalled() => stateMachine.currentState.AnimationTriggerCalled();
+    
 
 }

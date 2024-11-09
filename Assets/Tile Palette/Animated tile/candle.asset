@@ -10,15 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 13b75c95f34a00d4e8c04f76b73312e6, type: 3}
-  m_Name: magic floor
+  m_Name: candle
   m_EditorClassIdentifier: 
   m_AnimatedSprites:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  m_MinSpeed: 1
-  m_MaxSpeed: 1
+  - {fileID: 21300000, guid: 2862dee693c52ad4bb51faeea377b4ee, type: 3}
+  - {fileID: 21300000, guid: 6313ae3dba5dd7f47bc1c7b5113785fb, type: 3}
+  - {fileID: 21300000, guid: 48fd5ac3165c15a4f814cdb57e1b64a6, type: 3}
+  - {fileID: 21300000, guid: 75a3407504e27b245bf410aa29b15ad2, type: 3}
+  - {fileID: 21300000, guid: a86d49f830ab08e4191876ce9f69ac79, type: 3}
+  - {fileID: 21300000, guid: 4764b71b9241bc34caec4a626d9257f8, type: 3}
+  m_MinSpeed: 8
+  m_MaxSpeed: 8
   m_AnimationStartTime: 0
   m_AnimationStartFrame: 0
   m_TileColliderType: 0

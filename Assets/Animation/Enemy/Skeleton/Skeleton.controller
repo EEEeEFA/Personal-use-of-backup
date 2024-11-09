@@ -23,7 +23,7 @@ AnimatorStateMachine:
     m_Position: {x: 380, y: 160, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -6780975612239339713}
-    m_Position: {x: 480, y: 520, z: 0}
+    m_Position: {x: 400, y: 470, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 6305009606380298789}
     m_Position: {x: 380, y: 280, z: 0}
@@ -183,6 +183,12 @@ AnimatorController:
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
   - m_Name: Attack
+    m_Type: 4
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
+  - m_Name: Dead
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0

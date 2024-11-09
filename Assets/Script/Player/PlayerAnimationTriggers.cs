@@ -21,11 +21,12 @@ public class PlayerAnimationTriggers : MonoBehaviour
         {
             if (hit.GetComponent<Enemy>() != null)
             {
-                hit.GetComponent<Enemy>().DamageEffect(player);
+                Enemy _enemy = hit.GetComponent<Enemy>();
+                _enemy.DamageEffect(player);
 
                 EnemyStats _target = hit.GetComponent<EnemyStats>();
 
-                player.stats.DoDamage(_target);
+                player.stats.DoDamage(_target, _enemy);
 
                 
             }
@@ -39,12 +40,20 @@ public class PlayerAnimationTriggers : MonoBehaviour
         foreach (var hit in collider)
         {
             if (hit.GetComponent<Enemy>() != null)
-                if (hit.GetComponent<Enemy>().StunCheck())//判断敌人是否在stunWindow内
+            {
+                Enemy _enemy = hit.GetComponent<Enemy>();
+
+                if (_enemy.StunCheck())//判断敌人是否在stunWindow内
                 {
                     AnimationTrigger();
-                    hit.GetComponent<CharacterStats>().TakeDamage(player.stats.dealDamage.GetValue());
-                    Debug.Log("反击伤害="+player.stats.dealDamage.GetValue());
+
+                    CharacterStats _target = hit.GetComponent<CharacterStats>();
+
+                    player.stats.DoDamage(_target, _enemy);
                 }
+
+
+            }
 
 
         }
