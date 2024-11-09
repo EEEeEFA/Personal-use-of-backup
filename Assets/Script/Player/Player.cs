@@ -50,6 +50,7 @@ public class Player : Entity
     public PlayerAimSwordState aimSwordState { get; private set; }
     public PlayerCatchSwordState catchSwordState { get; private set; }
     public PlayerBlackHoleState blackHoleState { get; private set; }
+    public PlayerDeadState deadState { get; private set; }
 
     #endregion
 
@@ -74,6 +75,8 @@ public class Player : Entity
         catchSwordState = new PlayerCatchSwordState(this, stateMachine, "CatchSword");
 
         blackHoleState = new PlayerBlackHoleState(this, stateMachine, "blackHole");
+
+        deadState = new PlayerDeadState(this, stateMachine, "dead");
 
     }
 

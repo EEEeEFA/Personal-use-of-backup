@@ -18,9 +18,10 @@ public class SkeletonAnima : MonoBehaviour
         {
             if (hit.GetComponent<Player>() != null)
             {
-                hit.GetComponent<Player>().Damage(enemy);
+                hit.GetComponent<Player>().DamageEffect(enemy);//受击位移、特效
+
                 CharacterStats _target = hit.GetComponent<CharacterStats>();
-                enemy.stats.DoDamage(_target);
+                enemy.stats.DoDamage(_target);//受击伤害计算
             }
         }
     }

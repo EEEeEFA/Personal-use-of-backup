@@ -73,7 +73,7 @@ public class Entity : MonoBehaviour, IAttacker
         Gizmos.DrawLine(wallCheck.position, new Vector3(wallCheck.position.x + distancetowall, wallCheck.position.y));
         Gizmos.DrawWireSphere(setAttackP.position, attackCheckRadius);
     }
-    public virtual void Damage(IAttacker _attacker)
+    public virtual void DamageEffect(IAttacker _attacker)
     {
         fx.StartCoroutine("FlashFX");
 

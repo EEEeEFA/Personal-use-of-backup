@@ -95,7 +95,7 @@ public class CloneSkillController : MonoBehaviour, Entity.IAttacker
         foreach (var hit in collider)
         {
             if (hit.GetComponent<Enemy>() != null)
-                hit.GetComponent<Enemy>().Damage(this);
+                hit.GetComponent<Enemy>().DamageEffect(this);
         }
     }
 }
