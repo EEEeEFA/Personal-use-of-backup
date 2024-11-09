@@ -21,12 +21,13 @@ public class PlayerAnimationTriggers : MonoBehaviour
         {
             if (hit.GetComponent<Enemy>() != null)
             {
-                //hit.GetComponent<Enemy>().Damage(player);
+                hit.GetComponent<Enemy>().Damage(player);
 
                 EnemyStats _target = hit.GetComponent<EnemyStats>();
 
                 player.stats.DoDamage(_target);
 
+                
             }
         }
     }
