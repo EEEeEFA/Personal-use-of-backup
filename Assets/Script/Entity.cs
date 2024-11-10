@@ -39,6 +39,8 @@ public class Entity : MonoBehaviour, IAttacker
     [SerializeField] protected bool facingRight = true;
     #endregion
 
+    public System.Action onFilpped;
+
     protected virtual void Awake()
     {
 
@@ -132,6 +134,11 @@ public class Entity : MonoBehaviour, IAttacker
         facingDir = facingDir * -1;
         facingRight = !facingRight;
         transform.Rotate(0, 180, 0);
+
+        if(onFilpped != null)
+        {
+            onFilpped();
+        }
     }
 
   

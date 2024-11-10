@@ -21,11 +21,13 @@ public class CharacterStats : MonoBehaviour
 
 
 
-    [SerializeField] private int currentHP;
+    public int currentHP;
+
+    public System.Action onHealthChanged;
 
     protected virtual void Start()
     {
-        currentHP = maxHP.GetValue();
+        currentHP = GetMaxHealthValue();
     }
 
     public virtual void DoDamage(CharacterStats _target, Entity _beAttacked)//if A打B ，这里计算A造成的伤害总和后 调用B的TakeDamage
@@ -49,6 +51,7 @@ public class CharacterStats : MonoBehaviour
     public virtual void TakeDamage(int _takeDamage,Entity _beAttacked)//被打了触发
     {
         currentHP -= _takeDamage;
+        onHealthChanged();
         Debug.Log(gameObject.name +_takeDamage);
         if (currentHP < 0)
         {
@@ -90,5 +93,17 @@ public class CharacterStats : MonoBehaviour
             return false;
     }
 
+    #endregion
+
+    #region finalStats calculate
+    public int GetMaxHealthValue()
+    {
+       return maxHP.GetValue() + vitality.GetValue() * 5;
+    }
+
+    //public int GetFinalDamageValue()
+    //{
+
+    //}
     #endregion
 }
