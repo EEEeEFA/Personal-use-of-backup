@@ -59,7 +59,7 @@ public class PlayerAnimationTriggers : MonoBehaviour
         }
     }
 
-    private void CreateSword()
+    private void CreateSword()//动画处调用
     {
         player.skill.TS.CreateSword();
     }

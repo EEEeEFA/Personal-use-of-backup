@@ -34,6 +34,9 @@ public class ThrowSwordSkill : Skill
     [SerializeField] public bool isBouncing = true;
     [SerializeField] public int amountOfBounce;
 
+
+    private Vector2 cachedAimDirection;
+    private bool hasPressedUp = false;
     protected override void Start()
     {
         base.Start();
@@ -46,10 +49,21 @@ public class ThrowSwordSkill : Skill
             for (int i = 0; i < dots.Length; i++)
                 dots[i].transform.position = DotsPosition(i * spaceBeetwenDots);
         }
+
+        if (Input.GetKeyDown(KeyCode.UpArrow) && !hasPressedUp)
+        {
+            cachedAimDirection = CalculateAimDirection(player.facingDir); // 更新缓存的 AimDirection 值
+            hasPressedUp = true;
+        }
+
+        if (Input.GetKeyUp(KeyCode.UpArrow))
+        {
+            hasPressedUp = false; // 松开↑键时重置
+        }
     }
     public void CreateSword()//实例化prefabs,并且把小参数传给 TS_SKILL_CONTROLLER设置prefabs
     {
-        launchForce = AimDirection(player.facingDir) * launchForce.magnitude;
+        launchForce = cachedAimDirection * launchForce.magnitude;
 
 
         GameObject newSword = Instantiate(swordPrefab, player.transform.position, transform.rotation);
@@ -89,19 +103,17 @@ public class ThrowSwordSkill : Skill
         }
     }
 
-    public Vector2 AimDirection(int playerFacingR)//丢剑的方向，按↑旋转
+    public Vector2 CalculateAimDirection(int playerFacingR)//丢剑的方向，按↑旋转
     {
-        bool enterChance = false;
-        if (Input.GetKeyDown(KeyCode.UpArrow) && !enterChance)
+        if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            float angle = -5f * Mathf.Deg2Rad; // 逆时针旋转5度
+            float angle = 25f * Mathf.Deg2Rad; // 逆时针旋转5度
             float cos = Mathf.Cos(angle);
             float sin = Mathf.Sin(angle);
             aimDirection = new Vector2(
                 aimDirection.x * cos - aimDirection.y * sin,
                 aimDirection.x * sin + aimDirection.y * cos
             );
-            enterChance = true;
         }
 
         return aimDirection.normalized;
@@ -134,7 +146,9 @@ public class ThrowSwordSkill : Skill
     }
     private Vector2 DotsPosition(float t)//在本脚本的Update里实现
     {
-        Vector2 position = (Vector2)player.transform.position + (AimDirection(player.facingDir) * launchForce.magnitude) * t; //+ .5f * (Physics2D.gravity * swordGravity) * (t * t);
+        Vector2 position = (Vector2)player.transform.position 
+                             + (cachedAimDirection * launchForce.magnitude) * t
+                             + (0.5f * (Physics2D.gravity * swordGravity) * (t * t));
 
         return position;
     }

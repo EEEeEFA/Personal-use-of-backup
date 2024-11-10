@@ -50,13 +50,20 @@ public class CharacterStats : MonoBehaviour
     }
     public virtual void TakeDamage(int _takeDamage,Entity _beAttacked)//被打了触发
     {
-        currentHP -= _takeDamage;
-        onHealthChanged();
+        DecreaseHealthBy(_takeDamage);
         Debug.Log(gameObject.name +_takeDamage);
+
+
         if (currentHP < 0)
         {
             _beAttacked.Die();
         }
+    }
+    protected virtual void DecreaseHealthBy(int _damage)
+    {
+        currentHP -= _damage;
+        if (onHealthChanged != null)
+            onHealthChanged();
     }
 
     #region Attack Result Detection

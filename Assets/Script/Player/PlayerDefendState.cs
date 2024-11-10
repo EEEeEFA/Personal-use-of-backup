@@ -12,7 +12,7 @@ public class PlayerDefendState : PlayerState
     {
         base.Enter();
         stateTimer = .2f;
-        player.SetVelocity(0, 0);
+
     }
 
     public override void Exit()
@@ -22,6 +22,7 @@ public class PlayerDefendState : PlayerState
 
     public override void Update()
     {
+        player.SetVelocity(0, 0);
         base.Update();
         if (triggerCalled)
         {
