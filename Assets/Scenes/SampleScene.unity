@@ -912,6 +912,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HitMat: {fileID: 2100000, guid: 0731ac8531f1f5d4db07c044cbc8cf91, type: 2}
   GoldMat: {fileID: 0}
+  chillColor: {r: 0, g: 0, b: 0, a: 0}
+  igniteColor: []
+  shockColor: []
 --- !u!114 &565867965
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1593,6 +1596,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HitMat: {fileID: 2100000, guid: 0731ac8531f1f5d4db07c044cbc8cf91, type: 2}
   GoldMat: {fileID: 2100000, guid: 7f8ab6d5e56c57247a1c8a7724ffc57f, type: 2}
+  chillColor: {r: 0, g: 0, b: 0, a: 0}
+  igniteColor: []
+  shockColor: []
 --- !u!114 &1028362559
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8619,7 +8625,7 @@ MonoBehaviour:
   timeCounter: 0
   swordType: 1
   launchForce: {x: 20, y: 1}
-  swordGravity: 5
+  swordGravity: 0
   swordPrefab: {fileID: 9203315307366413, guid: 938f1909b2f947e4cb88e27f02a5b20b, type: 3}
   returnSpeed: 15
   freezeTimeDuration: 0.3
