@@ -47,6 +47,9 @@ TagManager:
   - name: G
     uniqueID: 3587761601
     locked: 0
+  - name: Item
+    uniqueID: 2479532997
+    locked: 0
   - name: E
     uniqueID: 1818352939
     locked: 0

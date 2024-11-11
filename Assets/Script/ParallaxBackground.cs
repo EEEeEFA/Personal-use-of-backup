@@ -22,8 +22,8 @@ public class ParallaxBackground : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float distanceToMove = cam.transform.position.x * parallaxEffect;
-        float distanceMoved = cam.transform.position.x * (1 - parallaxEffect);
+        float distanceToMove = cam.transform.position.x * parallaxEffect;//背景要移动的距离
+        float distanceMoved = cam.transform.position.x * (1 - parallaxEffect);//背景和摄像机的相对位移
 
         transform.position = new Vector3(xPosition + distanceToMove, transform.position.y);
 
