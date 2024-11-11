@@ -50,7 +50,8 @@ public class CharacterStats : MonoBehaviour
     }
     public virtual void TakeDamage(int _takeDamage,Entity _beAttacked)//被打了触发
     {
-        DecreaseHealthBy(_takeDamage);
+        DecreaseHealthBy(_takeDamage);//血量计算
+                                      //受击效果 因为要传入接口，单独放在各个伤害的trigger那了
         Debug.Log(gameObject.name +_takeDamage);
 
 

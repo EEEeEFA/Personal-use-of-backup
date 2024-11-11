@@ -117,6 +117,7 @@ public class TS_Skill_Controller : MonoBehaviour
         void DamageAndFrozen(Enemy enemy)
         {
             enemy.DamageEffect(player);
+            player.stats.DoDamage(enemy.GetComponent<CharacterStats>(), enemy);
             enemy.StartCoroutine("FreezeTimerFor", freezeTimeDuration);
         }
 

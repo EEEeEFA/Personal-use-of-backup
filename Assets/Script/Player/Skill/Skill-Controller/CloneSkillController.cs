@@ -7,6 +7,8 @@ public class CloneSkillController : MonoBehaviour, Entity.IAttacker
 
     private SpriteRenderer sr;
 
+    private Player player;
+
     Transform closestEnemy;
 
     Animator anim;
@@ -36,10 +38,11 @@ public class CloneSkillController : MonoBehaviour, Entity.IAttacker
 
     }
 
-    public void SetupClone(Transform _newtransform, float _cloneDuration, Vector3 _offset)
+    public void SetupClone(Transform _newtransform, float _cloneDuration, Vector3 _offset, Player _player)
     {
         transform.position = _newtransform.position + _offset;
         cloneTimer = _cloneDuration;
+        player = _player;
 
         if (canAttack())
         {
@@ -94,6 +97,7 @@ public class CloneSkillController : MonoBehaviour, Entity.IAttacker
             {
                 Enemy _enemy = hit.GetComponent<Enemy>();
                 _enemy.DamageEffect(this);
+                player.stats.DoDamage(_enemy.GetComponent<CharacterStats>(), _enemy);
 
 
             }
