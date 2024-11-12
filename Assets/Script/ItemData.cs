@@ -7,4 +7,9 @@ public class ItemData : ScriptableObject
 {
     public string itemName;
     public Sprite icon;
+    private void OnValidate()
+    {
+        // 同步 itemName 和对象名称
+        itemName = this.name;
+    }
 }

@@ -1,18 +1,25 @@
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class UI_ItemSlot : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public InventoryItem item;
+    [SerializeField] private Image itemImage;
+    [SerializeField] private TextMeshProUGUI itemText;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public void UpdataSlot(InventoryItem _newItem)
+    {   
+        item = _newItem;   
+
+        if(item != null)
+        {
+            itemImage.sprite = item.itemData.icon; //Í¼±ê
+
+            if (item.stackSize > 1)//ÊýÁ¿
+                itemText.text = item.stackSize.ToString();
+            else
+                itemText.text = "";
+        }
     }
 }
