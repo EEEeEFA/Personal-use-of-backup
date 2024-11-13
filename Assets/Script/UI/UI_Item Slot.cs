@@ -10,6 +10,8 @@ public class UI_ItemSlot : MonoBehaviour
 
     public void UpdataSlot(InventoryItem _newItem)
     {   
+        itemImage.color = Color.white;
+
         item = _newItem;   
 
         if(item != null)

@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43c2f8c03502ed242a6c20657970247a, type: 3}
   m_Name: BestSwordInCountry
   m_EditorClassIdentifier: 
-  itemName: Sword
+  type: 1
+  itemName: BestSwordInCountry
   icon: {fileID: 21300000, guid: d2da73ea7adc9654c8adc7a4512cf3a5, type: 3}
