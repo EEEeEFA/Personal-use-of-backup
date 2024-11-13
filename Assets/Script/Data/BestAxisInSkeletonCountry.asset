@@ -9,9 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43c2f8c03502ed242a6c20657970247a, type: 3}
-  m_Name: BestSwordInCountry
+  m_Script: {fileID: 11500000, guid: 4594657448217c146851cbb28c8f4fac, type: 3}
+  m_Name: BestAxisInSkeletonCountry
   m_EditorClassIdentifier: 
   type: 1
-  itemName: BestSwordInCountry
-  icon: {fileID: 21300000, guid: d2da73ea7adc9654c8adc7a4512cf3a5, type: 3}
+  itemName: BestAxisInSkeletonCountry
+  icon: {fileID: -1743815016, guid: a9ca9a41598dd2e44b125928045c518f, type: 3}
+  equipmentType: 0
