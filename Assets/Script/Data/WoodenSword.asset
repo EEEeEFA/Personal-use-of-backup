@@ -13,5 +13,20 @@ MonoBehaviour:
   m_Name: WoodenSword
   m_EditorClassIdentifier: 
   type: 1
-  itemName: WoldenSwrod
+  itemName: WoodenSword
   icon: {fileID: 1025091068, guid: a9ca9a41598dd2e44b125928045c518f, type: 3}
+  equipmentType: 0
+  strength: 0
+  agility: 0
+  intelligence: 0
+  vitality: 0
+  dealDamage: 4
+  critChance: 0
+  critPower: 0
+  health: 0
+  armor: 0
+  evasion: 5
+  magicResistance: 0
+  fireDamage: 0
+  iceDamage: 0
+  lightningDamage: 0

@@ -57,9 +57,15 @@ public class CharacterStats : MonoBehaviour
 
         if (currentHP < 0)
         {
-            _beAttacked.Die();
+            Die(_beAttacked);
         }
     }
+
+    protected virtual void Die(Entity _beAttacked)
+    {
+        _beAttacked.Die();
+    }
+
     protected virtual void DecreaseHealthBy(int _damage)
     {
         currentHP -= _damage;

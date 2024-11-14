@@ -15,3 +15,18 @@ MonoBehaviour:
   type: 1
   itemName: SkeletonGloves
   icon: {fileID: 1622045194, guid: a9ca9a41598dd2e44b125928045c518f, type: 3}
+  equipmentType: 1
+  strength: 0
+  agility: 0
+  intelligence: 0
+  vitality: 0
+  dealDamage: 0
+  critChance: 0
+  critPower: 0
+  health: 0
+  armor: 10
+  evasion: -2
+  magicResistance: 0
+  fireDamage: 0
+  iceDamage: 0
+  lightningDamage: 0

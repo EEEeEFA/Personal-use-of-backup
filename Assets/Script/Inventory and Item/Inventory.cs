@@ -55,6 +55,7 @@ public class Inventory : MonoBehaviour
 
     public void Equip(ItemData _item)
     {
+
         ItemData_Equipment newEquipment = _item as ItemData_Equipment;
 
         InventoryItem newItem = new InventoryItem(newEquipment);
@@ -72,11 +73,7 @@ public class Inventory : MonoBehaviour
         //移除旧物品
         if (oldEquipment != null)
         {
-            if(equipmentDictionaryList.TryGetValue(oldEquipment, out InventoryItem value))
-            {
-            equipmentList.Remove(value);
-            equipmentDictionaryList.Remove(oldEquipment);
-            }
+            UnEquip(oldEquipment);
             AddItem(oldEquipment);
         }
         //添加物品
@@ -84,9 +81,23 @@ public class Inventory : MonoBehaviour
         equipmentDictionaryList.Add(newEquipment, newItem);
         RemoveItem(newItem.itemData);
 
+        newEquipment.AddModifiers();
+
         UpdateSlotUI();
 
     }
+
+    public void UnEquip(ItemData_Equipment oldEquipment)
+    {
+        if (equipmentDictionaryList.TryGetValue(oldEquipment, out InventoryItem value))
+        {
+            equipmentList.Remove(value);
+            equipmentDictionaryList.Remove(oldEquipment);
+            oldEquipment.RemoveModifiers();
+            
+        }
+    }
+
     public void AddItem(ItemData _item)
     {
         if (_item.type == ItemType.Equipment)
@@ -157,12 +168,12 @@ public class Inventory : MonoBehaviour
     }
     private void UpdateSlotUI()
     {
-        for (int i = 0; i < inventoryItemsList.Count; i++)
+        for (int i = 0; i < itemSlot.Length; i++)
         {
             itemSlot[i].CleanUpSlot();
         }
 
-        for (int i = 0; i < stashItemsList.Count; i++)
+        for (int i = 0; i < stashSlot.Length; i++)
         {
             stashSlot[i].CleanUpSlot();
         }
@@ -183,7 +194,6 @@ public class Inventory : MonoBehaviour
             {
                 if (item.Key.equipmentType == equipmentSlot[i].slotType)
                 {
-                    Debug.Log("装备UI更新");
                     equipmentSlot[i].UpdataSlot(item.Value);
                 }
             }

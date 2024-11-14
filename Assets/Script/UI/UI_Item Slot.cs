@@ -9,7 +9,7 @@ public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler
     [SerializeField] private Image itemImage;
     [SerializeField] private TextMeshProUGUI itemText;
 
-    public void OnPointerDown(PointerEventData eventData)
+    public virtual void OnPointerDown(PointerEventData eventData)
     {
         if(item.itemData.type == ItemType.Equipment)
         Inventory.instance.Equip(item.itemData);
