@@ -52,6 +52,6 @@ public class EnemyStats : CharacterStats
     protected override void Die(Entity _beAttacked)
     {
         base.Die(_beAttacked);
-        dropSystem.DropItem();//物品掉落
+        dropSystem.GenerateDrop();//物品掉落#
     }
 }

@@ -9,7 +9,7 @@ public class ItemObject : MonoBehaviour
     [SerializeField] Rigidbody2D rb;
     [SerializeField] Vector2 velocity;
 
-    private void OnValidate()
+    private void SetupItemVisual()
     {
         if (itemData == null)
         {
@@ -22,7 +22,9 @@ public class ItemObject : MonoBehaviour
     public void SetupItem(ItemData itemData, Vector2 velocity)
     {
         this.itemData = itemData;
-        this.velocity = velocity;   
+        this.velocity = velocity;
+
+        SetupItemVisual();
     }
     public void PickupItem(Collider2D collision)
     {

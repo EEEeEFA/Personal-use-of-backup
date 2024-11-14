@@ -55,7 +55,7 @@ public class CharacterStats : MonoBehaviour
         Debug.Log(gameObject.name +_takeDamage);
 
 
-        if (currentHP < 0)
+        if (currentHP <= 0)
         {
             Die(_beAttacked);
         }

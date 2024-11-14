@@ -4,13 +4,33 @@ using UnityEngine;
 
 public class ItemDrop : MonoBehaviour
 {
+    [SerializeField] private int amountOfDropItems;
+    [SerializeField] private ItemData[] possibleDrop;
+    private List<ItemData> dropList = new List<ItemData>();
+
     [SerializeField] private GameObject dropPrefab;
     [SerializeField] private ItemData item;
 
-    public void DropItem()
+    public void GenerateDrop()
     {
+        for (int i = 0; i < possibleDrop.Length; i++)
+        {
+            if (Random.Range(0, 100) <= possibleDrop[i].dropChance)
+                dropList.Add(possibleDrop[i]);
+        }
+
+        for (int i = 0; i < amountOfDropItems; i++)
+        {
+            ItemData randomItem = dropList[Random.Range(0, dropList.Count - 1)];
+            dropList.Remove(randomItem);
+            DropItem(randomItem);
+        }
+    }
+    public void DropItem(ItemData randomItem)    
+    {
+        Debug.Log("DropItem");
         GameObject newDrop = Instantiate(dropPrefab, transform.position, Quaternion.identity);
-        Vector2 randomVelocity = new Vector2(Random.Range(-5, 5), Random.Range(12, 15));
-        newDrop.GetComponent<ItemObject>().SetupItem(item, randomVelocity);
+        Vector2 randomVelocity = new Vector2(Random.Range(-5, 5), Random.Range(15, 20));
+        newDrop.GetComponent<ItemObject>().SetupItem(randomItem, randomVelocity);
     }
 }

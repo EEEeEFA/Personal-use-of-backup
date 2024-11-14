@@ -15,6 +15,7 @@ MonoBehaviour:
   type: 1
   itemName: BestAxisInSkeletonCountry
   icon: {fileID: -1743815016, guid: a9ca9a41598dd2e44b125928045c518f, type: 3}
+  dropChance: 100
   equipmentType: 0
   strength: 0
   agility: 0
