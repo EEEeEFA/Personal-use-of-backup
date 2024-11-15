@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class SkeletonDeadState : EnemyState
 {
@@ -32,7 +33,8 @@ public class SkeletonDeadState : EnemyState
         enemy.fx.StartCoroutine("FlashFX");
         enemy.fx.InvokeRepeating("RedColourBlink", 0, 1f);
 
-        Vector3 targetPosition = enemy.transform.position + new Vector3(0, 8, 0);
+        Vector3 targetPosition = enemy.transform.position + new Vector3(0, 3, 0);
+
         enemy.transform.position = Vector2.MoveTowards(enemy.transform.position, targetPosition, 4f * Time.deltaTime);
 
         if (stateTimer < 0)

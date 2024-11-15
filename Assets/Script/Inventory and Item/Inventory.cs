@@ -154,14 +154,14 @@ public class Inventory : MonoBehaviour
 
         if (stashDictionaryList.TryGetValue(_item, out InventoryItem stashvalue))
         {
-            if (value.stackSize <= 1)
+            if (stashvalue.stackSize <= 1)
             {
                 stashItemsList.Remove(value);
                 stashDictionaryList.Remove(_item);
             }
             else
             {
-                value.RemoveStack();
+                stashvalue.RemoveStack();
             }
         }
         UpdateSlotUI();
@@ -198,6 +198,36 @@ public class Inventory : MonoBehaviour
                 }
             }
         }
+    }
+
+    public bool CanCraft(ItemData_Equipment itemToCreate  , List<InventoryItem> _MaterialNeeded )
+    {
+        List<InventoryItem> ItemToRemove = new List<InventoryItem>();
+
+        for (int i = 0; i < _MaterialNeeded.Count; i++)
+        {
+            if(stashDictionaryList.TryGetValue(_MaterialNeeded[i].itemData, out InventoryItem value))
+            {
+                if (value.stackSize >= _MaterialNeeded[i].stackSize)
+                {
+                    ItemToRemove.Add(value);
+                }
+                else
+                {
+                    Debug.Log("Not enough Material");
+                    return false;
+                }
+            }
+        }
+
+        for(int i = 0; i < ItemToRemove.Count ; i++)
+        {
+            RemoveItem(ItemToRemove[i].itemData); 
+        }
+
+        AddItem(itemToCreate);
+        Debug.Log("itemDone"+ itemToCreate.name);
+        return true;
     }
 
 }

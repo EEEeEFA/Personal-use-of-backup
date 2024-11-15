@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class CloneSkillController : MonoBehaviour, Entity.IAttacker
 {
-    private float cloneTimer;
+    public float cloneTimer;
     private float cloneLossingSpeed = 1;
 
     private SpriteRenderer sr;
@@ -27,7 +27,11 @@ public class CloneSkillController : MonoBehaviour, Entity.IAttacker
     private void Update()
     {
         cloneTimer -= Time.deltaTime;
+        if (GetComponent<Collider>())
+        {
         closestEnemyCheck();
+
+        }
 
         if (cloneTimer < 0)
         {

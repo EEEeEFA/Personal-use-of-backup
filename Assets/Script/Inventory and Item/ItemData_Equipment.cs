@@ -37,6 +37,9 @@ public class ItemData_Equipment : ItemData
     public int iceDamage;
     public int lightningDamage;
 
+    [Header("Craft Material")]
+    public List<InventoryItem> craftingMaterials;
+
 
     public void AddModifiers()
     {
