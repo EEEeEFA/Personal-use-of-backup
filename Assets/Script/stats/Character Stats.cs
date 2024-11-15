@@ -19,7 +19,7 @@ public class CharacterStats : MonoBehaviour
     public Stats armor;
     public Stats evasion;
 
-
+    public bool Dead = false;
 
     public int currentHP;
 
@@ -55,15 +55,17 @@ public class CharacterStats : MonoBehaviour
         Debug.Log(gameObject.name +_takeDamage);
 
 
-        if (currentHP <= 0)
-        {
+        if (currentHP <= 0 && !Dead)
+        {   
+            Dead = true;
             Die(_beAttacked);
         }
     }
 
     protected virtual void Die(Entity _beAttacked)
     {
-        _beAttacked.Die();
+        _beAttacked.Die();//切换状态机到deadState,每个实体后续都加个Die方法
+                          //骷髅的物品掉落放在 死亡动画里面触发
     }
 
     protected virtual void DecreaseHealthBy(int _damage)

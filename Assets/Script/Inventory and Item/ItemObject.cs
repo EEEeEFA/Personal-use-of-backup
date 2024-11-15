@@ -7,7 +7,7 @@ public class ItemObject : MonoBehaviour
 {
     [SerializeField] ItemData itemData;
     [SerializeField] Rigidbody2D rb;
-    [SerializeField] Vector2 velocity;
+    //[SerializeField] Vector2 velocity;
 
     private void SetupItemVisual()
     {
@@ -22,8 +22,7 @@ public class ItemObject : MonoBehaviour
     public void SetupItem(ItemData itemData, Vector2 velocity)
     {
         this.itemData = itemData;
-        this.velocity = velocity;
-
+        rb.velocity = velocity;
         SetupItemVisual();
     }
     public void PickupItem(Collider2D collision)

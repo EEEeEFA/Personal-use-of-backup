@@ -28,11 +28,5 @@ public class SkeletonGroundState : EnemyState
         {
             stateMachine.ChangeState(enemy.battleState);
         }
-        //²âÊÔ°´¼ü
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            stateMachine.ChangeState(enemy.stunnedState);
-        }
-
     }
 }

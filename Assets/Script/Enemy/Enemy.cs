@@ -93,6 +93,5 @@ public class Enemy : Entity
         lastAnimBoolName = _animBoolName;
     }
     public virtual void AnimationTriggerCalled() => stateMachine.currentState.AnimationTriggerCalled();
-    
 
 }

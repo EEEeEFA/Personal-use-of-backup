@@ -9,9 +9,12 @@ public class E_Skeleton : Enemy
     public SkeletonAttackState attackState { get; private set; }
     public SkeletonStunnedState stunnedState { get; private set; }
     public SkeletonDeadState deadState { get; private set; }    
+    public SkeletonBoomState boomState { get; private set; }
     #endregion
 
     [SerializeField] public float battleTime;
+
+    public ItemDrop dropSystem => GetComponent<ItemDrop>();
 
     protected override void Awake()
     {
@@ -22,7 +25,8 @@ public class E_Skeleton : Enemy
         battleState = new SkeletonBattleState(this, stateMachine, "Move", this);
         attackState = new SkeletonAttackState(this, stateMachine, "Attack", this);
         stunnedState = new SkeletonStunnedState(this, stateMachine, "Stunned", this);
-        deadState = new SkeletonDeadState(this,stateMachine,"Dead", this);
+        deadState = new SkeletonDeadState(this,stateMachine, "Stunned", this);
+        boomState = new SkeletonBoomState(this, stateMachine, "Boom");
     }
 
     protected override void Start()

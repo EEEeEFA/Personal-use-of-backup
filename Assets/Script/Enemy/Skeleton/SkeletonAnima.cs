@@ -29,4 +29,10 @@ public class SkeletonAnima : MonoBehaviour
 
     private void StunWindowClose() => enemy.StunWindowClose();
     private void StunWindowOpen()=> enemy.StunWindowOpen();
+
+    private void BoomAndDrop()
+    {
+        enemy.dropSystem.GenerateDrop();
+        Destroy(transform.parent.gameObject);
+    }
 }

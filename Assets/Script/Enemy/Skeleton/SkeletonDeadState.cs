@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class SkeletonDeadState : EnemyState
@@ -13,11 +14,31 @@ public class SkeletonDeadState : EnemyState
     public override void Enter()
     {
         base.Enter();
+        enemyBase.anim.SetBool("Move",false);
         enemy.SetVelocity(0, 0);
+        stateTimer = 1f;
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+        enemy.fx.Invoke("CancelColorChange", 0);
+
     }
 
     public override void Update()
     {
         base.Update();
+        enemy.fx.StartCoroutine("FlashFX");
+        enemy.fx.InvokeRepeating("RedColourBlink", 0, 1f);
+
+        Vector3 targetPosition = enemy.transform.position + new Vector3(0, 8, 0);
+        enemy.transform.position = Vector2.MoveTowards(enemy.transform.position, targetPosition, 4f * Time.deltaTime);
+
+        if (stateTimer < 0)
+        {
+            enemy.stateMachine.ChangeState(enemy.boomState);
+        }
+
     }
 }

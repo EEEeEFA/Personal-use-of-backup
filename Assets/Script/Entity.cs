@@ -84,8 +84,6 @@ public class Entity : MonoBehaviour, IAttacker
         float facingDirFromAttacker = _attacker.facingDir;
      
         StartCoroutine(HitKnocked(facingDirFromAttacker));
-
-
     }
         
     protected virtual IEnumerator HitKnocked(float facingDirFromAttacker)

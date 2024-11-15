@@ -10,7 +10,7 @@ public class EnemyStats : CharacterStats
     [Range(0f, 1f)]
     [SerializeField] private float percentageModifier;
 
-    ItemDrop dropSystem => GetComponent<ItemDrop>();
+    //ItemDrop dropSystem => GetComponent<ItemDrop>();
     protected override void Start()
     {
         ApplyUpgrade();
@@ -52,6 +52,6 @@ public class EnemyStats : CharacterStats
     protected override void Die(Entity _beAttacked)
     {
         base.Die(_beAttacked);
-        dropSystem.GenerateDrop();//物品掉落#
+       // dropSystem.GenerateDrop();//物品掉落#
     }
 }
