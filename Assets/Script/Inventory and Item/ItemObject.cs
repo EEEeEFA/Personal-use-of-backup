@@ -29,7 +29,7 @@ public class ItemObject : MonoBehaviour
     {
         if (collision.GetComponent<Player>() != null)
         {
-            Inventory.instance.AddItem(itemData);
+            Inventory.instance.AddItem(itemData, 1);
             Destroy(gameObject);
         }
     }

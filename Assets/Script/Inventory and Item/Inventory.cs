@@ -74,12 +74,12 @@ public class Inventory : MonoBehaviour
         if (oldEquipment != null)
         {
             UnEquip(oldEquipment);
-            AddItem(oldEquipment);
+            AddItem(oldEquipment, 1);
         }
         //添加物品
         equipmentList.Add(newItem);
         equipmentDictionaryList.Add(newEquipment, newItem);
-        RemoveItem(newItem.itemData);
+        RemoveItem(newItem.itemData, 1);
 
         newEquipment.AddModifiers();
 
@@ -98,70 +98,74 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public void AddItem(ItemData _item)
+    public void AddItem(ItemData _item, int _amountToAdd)
     {
         if (_item.type == ItemType.Equipment)
-            AddEquipment(_item);
+            AddEquipment(_item, _amountToAdd);
         if (_item.type == ItemType.Material)
-            AddMaterial(_item);
+            AddMaterial(_item, _amountToAdd);
 
         UpdateSlotUI();
 
     }
 
-    private void AddMaterial(ItemData _item)
+    private void AddMaterial(ItemData _item, int _amountToAdd)
     {
         if (stashDictionaryList.TryGetValue(_item, out InventoryItem value))
         {
-            value.AddStack();
+            value.AddStack(_amountToAdd);
         }
         else
         {
             InventoryItem newItem = new InventoryItem(_item);
+            newItem.stackSize = _amountToAdd;
+
             stashItemsList.Add(newItem);
             stashDictionaryList.Add(_item, newItem);
         }
     }
 
-    private void AddEquipment(ItemData _item)
+    private void AddEquipment(ItemData _item, int _amountToAdd)
     {
         if (inventoryDictionaryList.TryGetValue(_item, out InventoryItem value))
         {
-            value.AddStack();
+            value.AddStack(_amountToAdd);
         }
         else
         {
             InventoryItem newItem = new InventoryItem(_item);
+            newItem.stackSize = _amountToAdd;
+
             inventoryItemsList.Add(newItem);
             inventoryDictionaryList.Add(_item, newItem);
         }
     }
 
-    public void RemoveItem(ItemData _item)
+    public void RemoveItem(ItemData _item, int _amountToRemove)//调用一次删_amountToRemove个
     {
         if (inventoryDictionaryList.TryGetValue(_item, out InventoryItem value))
         {
-            if (value.stackSize <= 1)
+            if (value.stackSize <= _amountToRemove)
             {
                 inventoryItemsList.Remove(value);
                 inventoryDictionaryList.Remove(_item);
             }
             else
             {
-                value.RemoveStack();
+                value.RemoveStack(_amountToRemove);
             }
         }
 
         if (stashDictionaryList.TryGetValue(_item, out InventoryItem stashvalue))
         {
-            if (stashvalue.stackSize <= 1)
+            if (stashvalue.stackSize <= _amountToRemove)
             {
                 stashItemsList.Remove(value);
                 stashDictionaryList.Remove(_item);
             }
             else
             {
-                stashvalue.RemoveStack();
+                stashvalue.RemoveStack(_amountToRemove);
             }
         }
         UpdateSlotUI();
@@ -208,7 +212,7 @@ public class Inventory : MonoBehaviour
         {
             if(stashDictionaryList.TryGetValue(_MaterialNeeded[i].itemData, out InventoryItem value))
             {
-                if (value.stackSize >= _MaterialNeeded[i].stackSize)
+                if (value.stackSize >= _MaterialNeeded[i].stackSize)//万一一个够了另一个不够？
                 {
                     ItemToRemove.Add(value);
                 }
@@ -222,11 +226,11 @@ public class Inventory : MonoBehaviour
 
         for(int i = 0; i < ItemToRemove.Count ; i++)
         {
-            RemoveItem(ItemToRemove[i].itemData); 
+            RemoveItem(ItemToRemove[i].itemData, _MaterialNeeded[i].stackSize); 
         }
 
-        AddItem(itemToCreate);
-        Debug.Log("itemDone"+ itemToCreate.name);
+        AddItem(itemToCreate, 1);//因为这里是按一下触发一次，后续1可能会变
+        Debug.Log("itemDone"+ itemToCreate.name);   
         return true;
     }
 
