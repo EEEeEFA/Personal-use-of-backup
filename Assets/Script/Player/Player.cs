@@ -151,5 +151,6 @@ public class Player : Entity
         base.Die();
         stateMachine.ChangeState(deadState);
 
+        GetComponent<PlayerItemDrop>()?.GenerateDrop(); 
     }
 }

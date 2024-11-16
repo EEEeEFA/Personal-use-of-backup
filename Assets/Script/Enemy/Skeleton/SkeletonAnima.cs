@@ -30,7 +30,7 @@ public class SkeletonAnima : MonoBehaviour
     private void StunWindowClose() => enemy.StunWindowClose();
     private void StunWindowOpen()=> enemy.StunWindowOpen();
 
-    private void BoomAndDrop()
+    private void BoomAndDrop()//死亡 销毁对象 并 生成凋落物 在骷髅的动画机里的SkeletonBoom里面通过事件调用
     {
         enemy.dropSystem.GenerateDrop();
         Destroy(transform.parent.gameObject);

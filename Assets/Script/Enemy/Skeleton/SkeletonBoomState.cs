@@ -14,7 +14,7 @@ public class SkeletonBoomState : EnemyState
         enemyBase.rb.isKinematic = true;
     }
 
-    public override void Exit()
+    public override void Exit()//对象销毁通过  动画机调用SkeletonAnima中的BoomAndDrop()实现
     {
         base.Exit();
     }

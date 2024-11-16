@@ -19,17 +19,17 @@ public class ItemObject : MonoBehaviour
         gameObject.name = "Item object - " + itemData.itemName;
     }
 
-    public void SetupItem(ItemData itemData, Vector2 velocity)
+    public void SetupItem(ItemData _itemData, Vector2 velocity)
     {
-        this.itemData = itemData;
+        itemData = _itemData;
         rb.velocity = velocity;
         SetupItemVisual();
     }
-    public void PickupItem(Collider2D collision)
+    public void PickupItem(Collider2D collision)//子项中的boxcollider碰撞检测后 调用这个函数
     {
         if (collision.GetComponent<Player>() != null)
         {
-            Inventory.instance.AddItem(itemData, 1);
+            Inventory.instance.AddItem(itemData, 1);//往仓库添加 1 个这个物品，并删除物品
             Destroy(gameObject);
         }
     }

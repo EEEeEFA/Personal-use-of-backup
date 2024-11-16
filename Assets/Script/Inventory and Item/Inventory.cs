@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static UnityEditor.Progress;
+using static UnityEditor.Timeline.Actions.MenuPriority;
 
 public class Inventory : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class Inventory : MonoBehaviour
     [SerializeField] private Transform stashSlotParent;
     [SerializeField] private Transform equipmentSlotParent;
 
+    [SerializeField] private List<InventoryItem> StartEquipmentList;
 
     private UI_ItemSlot[] itemSlot;
     private UI_ItemSlot[] stashSlot;
@@ -51,6 +53,11 @@ public class Inventory : MonoBehaviour
         itemSlot = inventorySlotParent.GetComponentsInChildren<UI_ItemSlot>();
         stashSlot = stashSlotParent.GetComponentsInChildren<UI_ItemSlot>();
         equipmentSlot = equipmentSlotParent.GetComponentsInChildren<UI_EquipmentSlot>();
+
+        for (int i = 0; i < StartEquipmentList.Count; i++)
+        {
+            AddItem(StartEquipmentList[i].itemData, StartEquipmentList[i].stackSize);
+        }
     }
 
     public void Equip(ItemData _item)
@@ -98,9 +105,9 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public void AddItem(ItemData _item, int _amountToAdd)
+    public void AddItem(ItemData _item, int _amountToAdd)//往仓库添加物品 ItemData为物品类型， amountToAdd为添加的数量
     {
-        if (_item.type == ItemType.Equipment)
+        if (_item.type == ItemType.Equipment)//判断属于哪种物品
             AddEquipment(_item, _amountToAdd);
         if (_item.type == ItemType.Material)
             AddMaterial(_item, _amountToAdd);
@@ -160,7 +167,7 @@ public class Inventory : MonoBehaviour
         {
             if (stashvalue.stackSize <= _amountToRemove)
             {
-                stashItemsList.Remove(value);
+                stashItemsList.Remove(stashvalue);
                 stashDictionaryList.Remove(_item);
             }
             else
@@ -208,13 +215,13 @@ public class Inventory : MonoBehaviour
     {
         List<InventoryItem> ItemToRemove = new List<InventoryItem>();
 
-        for (int i = 0; i < _MaterialNeeded.Count; i++)
+        for (int i = 0; i < _MaterialNeeded.Count; i++)//在stashDictionaryList中检索 材料是否足够 
         {
             if(stashDictionaryList.TryGetValue(_MaterialNeeded[i].itemData, out InventoryItem value))
             {
-                if (value.stackSize >= _MaterialNeeded[i].stackSize)//万一一个够了另一个不够？
+                if (value.stackSize >= _MaterialNeeded[i].stackSize)//材料足够则将材料加入ItemToRemove中
                 {
-                    ItemToRemove.Add(value);
+                    ItemToRemove.Add(value);                        //万一一个够了另一个不够？
                 }
                 else
                 {
@@ -226,7 +233,8 @@ public class Inventory : MonoBehaviour
 
         for(int i = 0; i < ItemToRemove.Count ; i++)
         {
-            RemoveItem(ItemToRemove[i].itemData, _MaterialNeeded[i].stackSize); 
+            RemoveItem(ItemToRemove[i].itemData, _MaterialNeeded[i].stackSize);
+            Debug.Log("item:" + ItemToRemove[i].itemData + "stackSize:"+ _MaterialNeeded[i].stackSize);
         }
 
         AddItem(itemToCreate, 1);//因为这里是按一下触发一次，后续1可能会变
@@ -234,4 +242,5 @@ public class Inventory : MonoBehaviour
         return true;
     }
 
+    public List<InventoryItem> GetEquipmentList() => equipmentList;
 }

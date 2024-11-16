@@ -9,9 +9,8 @@ public class ItemDrop : MonoBehaviour
     private List<ItemData> dropList = new List<ItemData>();
 
     [SerializeField] private GameObject dropPrefab;
-    [SerializeField] private ItemData item;
 
-    public void GenerateDrop()
+    public virtual void GenerateDrop()//在possibleDrop中判定物体是否掉落，若掉落则加入dropList
     {
         for (int i = 0; i < possibleDrop.Length; i++)
         {
@@ -19,11 +18,11 @@ public class ItemDrop : MonoBehaviour
                 dropList.Add(possibleDrop[i]);
         }
 
-        for (int i = 0; i < amountOfDropItems; i++)
+        for (int i = 0; i < amountOfDropItems; i++)//在dropList中抽 amountOfDropItems 个掉落
         {
             ItemData randomItem = dropList[Random.Range(0, dropList.Count - 1)];
             dropList.Remove(randomItem);
-            DropItem(randomItem);
+            DropItem(randomItem);//将掉落物信息传给实例化对象,并随机生成速度弹出实例
         }
     }
     public void DropItem(ItemData randomItem)    
