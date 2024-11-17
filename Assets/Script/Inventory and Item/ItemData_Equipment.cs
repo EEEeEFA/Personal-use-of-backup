@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public enum EquipmentType
@@ -14,6 +15,7 @@ public enum EquipmentType
 public class ItemData_Equipment : ItemData
 {
     public EquipmentType equipmentType;
+    public itemEffect[] effects;
 
     [Header("Major stats")]
     public int strength;
@@ -83,5 +85,13 @@ public class ItemData_Equipment : ItemData
         //playerStats.fireDamage.RemoveModifier(fireDamage);
         //playerStats.iceDamage.RemoveModifier(iceDamage);
         //playerStats.lightningDamage.RemoveModifier(lightningDamage);
+    }
+
+    public void UseItemEffect()
+    {
+        for (int i = 0;i < effects.Length; i++)
+        {
+            effects[i].UseEffect();
+        }
     }
 }

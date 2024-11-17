@@ -69,10 +69,10 @@ public class Inventory : MonoBehaviour
 
         ItemData_Equipment oldEquipment = null;
 
-        //检测是否有相同物品
+        //检测是否有相同类型的物品
         foreach ( KeyValuePair<ItemData_Equipment, InventoryItem> item in equipmentDictionaryList)
         {
-            if(item.Key.equipmentType == newEquipment.equipmentType)
+            if(item.Key.equipmentType == newEquipment.equipmentType)//把item in equipmentDictionaryList一个一个和newEquipment对比
             {
                 oldEquipment = item.Key;
             }
@@ -243,4 +243,18 @@ public class Inventory : MonoBehaviour
     }
 
     public List<InventoryItem> GetEquipmentList() => equipmentList;
+
+    public List<ItemData_Equipment> GetEquipedEquipment(EquipmentType _typeOfEquipment)//获取被装备的装备列表 
+    {
+        List < ItemData_Equipment > equipedItem = new List<ItemData_Equipment>();      //自己写的： 相比P115把equipedItem改成了List方便后续多个装备触发
+
+        foreach (KeyValuePair<ItemData_Equipment, InventoryItem> item in equipmentDictionaryList)
+        {
+            if (item.Key.equipmentType == _typeOfEquipment)
+            {
+                equipedItem.Add(item.Key);
+            }
+        }
+        return equipedItem;
+    }
 }

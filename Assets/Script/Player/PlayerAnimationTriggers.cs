@@ -22,13 +22,23 @@ public class PlayerAnimationTriggers : MonoBehaviour
             if (hit.GetComponent<Enemy>() != null)
             {
                 Enemy _enemy = hit.GetComponent<Enemy>();
-                _enemy.DamageEffect(player);
-
                 EnemyStats _target = hit.GetComponent<EnemyStats>();
+
+
+                _enemy.DamageEffect(player);
 
                 player.stats.DoDamage(_target, _enemy);
 
+                List<ItemData_Equipment> equipedItem = Inventory.instance.GetEquipedEquipment(EquipmentType.Weapon);
                 
+                for (int i = 0; i < equipedItem.Count; i++)//自己写的超绝双层嵌套屎山，标记一下以后再改
+                {   
+                    for (int j = 0; j < equipedItem[i].effects.Length; j++)
+                    {
+                        equipedItem[i].effects[j].UseEffect();
+
+                    }
+                }
             }
         }
     }

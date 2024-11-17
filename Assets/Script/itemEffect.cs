@@ -5,15 +5,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Item Effect ",menuName = "Data/Item Effect")]
 public class itemEffect : ScriptableObject
 {
-    // Start is called before the first frame update
-    void Start()
+    public void UseEffect()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        Debug.Log("Test Succeed!!!");
     }
 }
