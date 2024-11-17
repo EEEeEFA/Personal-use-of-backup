@@ -29,7 +29,6 @@ public class Player : Entity
     public PlayerSkillManager skill;
     public GameObject sword {  get; private set; }
 
-
     #region States
     public PlayerStateMachine stateMachine { get; private set; }
     public PlayerIdleState idleState { get; private set; }
@@ -151,6 +150,29 @@ public class Player : Entity
         base.Die();
         stateMachine.ChangeState(deadState);
 
-        GetComponent<PlayerItemDrop>()?.GenerateDrop(); 
+        //自己写的
+        ChangLayer();
+
+        GetComponent<PlayerItemDrop>()?.GenerateDrop();
+    }
+
+    private void ChangLayer()
+    {
+        int targetLayer = LayerMask.NameToLayer(DeadGuys) - 1;//使targetLayer作为 DeadGuys 层 的索引，但是我不知道为什么要-1
+        Debug.Log(targetLayer);
+        // 更改当前 GameObject 的图层
+        gameObject.layer = targetLayer;
+
+        // 如果需要递归更改子对象的图层
+        SetLayerRecursively(gameObject, targetLayer);
+    }
+
+    void SetLayerRecursively(GameObject obj, LayerMask newLayer)
+    {
+        obj.layer = newLayer;
+        foreach (Transform child in obj.transform)
+        {
+            SetLayerRecursively(child.gameObject, newLayer);
+        }
     }
 }

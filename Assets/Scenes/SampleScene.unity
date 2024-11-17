@@ -1586,7 +1586,7 @@ Transform:
   m_GameObject: {fileID: 565867958}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.82, y: -3.05, z: 0}
+  m_LocalPosition: {x: 22.94, y: -3.05, z: 0}
   m_LocalScale: {x: 2.02, y: 2.02, z: 2.02}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -1649,6 +1649,9 @@ MonoBehaviour:
   setWall:
     serializedVersion: 2
     m_Bits: 8
+  DeadGuys:
+    serializedVersion: 2
+    m_Bits: 0
   knockDuration: 1
   isKnocked: 0
   knockVelocity: {x: 6, y: 0}
@@ -3159,6 +3162,9 @@ MonoBehaviour:
   setWall:
     serializedVersion: 2
     m_Bits: 8
+  DeadGuys:
+    serializedVersion: 2
+    m_Bits: 2048
   knockDuration: 0.2
   isKnocked: 0
   knockVelocity: {x: 20, y: 0}
@@ -3252,7 +3258,7 @@ MonoBehaviour:
   amountOfDropItems: 0
   possibleDrop: []
   dropPrefab: {fileID: 7555910627570296910, guid: 95194a26a2d30894f801e899ad6ed925, type: 3}
-  chanceToLooseItems: 101.8
+  chanceToLooseItems: 100
 --- !u!1 &1033268297
 GameObject:
   m_ObjectHideFlags: 0

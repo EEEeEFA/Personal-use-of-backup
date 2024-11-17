@@ -27,6 +27,7 @@ public class Entity : MonoBehaviour, IAttacker
     [SerializeField] protected Transform wallCheck;
     [SerializeField] protected float distancetowall;
     [SerializeField] protected LayerMask setWall;
+    [SerializeField] protected string DeadGuys;
 
     [Header("knock info")]
     [SerializeField] protected float knockDuration;
