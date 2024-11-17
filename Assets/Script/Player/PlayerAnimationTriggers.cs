@@ -22,12 +22,12 @@ public class PlayerAnimationTriggers : MonoBehaviour
             if (hit.GetComponent<Enemy>() != null)
             {
                 Enemy _enemy = hit.GetComponent<Enemy>();
-                EnemyStats _target = hit.GetComponent<EnemyStats>();
+                EnemyStats _enemyStats = hit.GetComponent<EnemyStats>();
 
 
                 _enemy.DamageEffect(player);//击退效果 和 视觉效果
 
-                player.stats.DoDamage(_target, _enemy);//伤害计算
+                player.stats.DoDamage(_enemyStats, _enemy);//伤害计算
 
                 EquipmentEffect(_enemy.transform);//装备效果
 

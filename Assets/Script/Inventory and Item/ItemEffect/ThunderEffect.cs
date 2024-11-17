@@ -10,6 +10,7 @@ public class ThunderEffect : itemEffect
     public override void UseEffect(Transform _enemyTarget)
     {
         GameObject newThunderStrike = Instantiate(thunderPrefabs, _enemyTarget.position, Quaternion.identity);
+        Destroy(newThunderStrike ,1f);
         //GameObject newThunderStrike = Instantiate(thunderPrefabs, _enemyTarget);
     }
 }

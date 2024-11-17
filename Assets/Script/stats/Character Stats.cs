@@ -30,9 +30,9 @@ public class CharacterStats : MonoBehaviour
         currentHP = GetMaxHealthValue();
     }
 
-    public virtual void DoDamage(CharacterStats _target, Entity _beAttacked)//if A打B ，这里计算A造成的伤害总和后 调用B的TakeDamage
+    public virtual void DoDamage(CharacterStats _targetStats, Entity _beAttacked)//if A打B ，这里计算A造成的伤害总和后 调用B的TakeDamage
     {
-        if (TargetCanAvoidAttack(_target))
+        if (TargetCanAvoidAttack(_targetStats))
         {
             return;
         }
@@ -43,10 +43,10 @@ public class CharacterStats : MonoBehaviour
 
         //}
 
-        _totalDamage = CalculateArmor(_target, _totalDamage);
+        _totalDamage = CalculateArmor(_targetStats, _totalDamage);
         Debug.Log("DoDamage=" + _totalDamage);
 
-        _target.TakeDamage(_totalDamage, _beAttacked);
+        _targetStats.TakeDamage(_totalDamage, _beAttacked);
     }
     public virtual void TakeDamage(int _takeDamage,Entity _beAttacked)//被打了触发
     {

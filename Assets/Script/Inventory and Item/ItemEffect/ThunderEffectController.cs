@@ -1,14 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst.CompilerServices;
 using UnityEngine;
 
 public class ThunderEffectController : MonoBehaviour
 {
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
-        //PlayerStats playerStats = PlayerManager.instance.player.GetComponent<PlayerStats>();
-        //playerStats.DoDamage()
-        //伤害计算要传入敌人的Stats和Entity有点麻烦
+        if(collision.GetComponent<Enemy>() != null)
+        {
+            Debug.Log("雷鸣");
+            Enemy _enemy = collision.GetComponent<Enemy>();
+            EnemyStats _enemyStats = collision.GetComponent<EnemyStats>();
+
+            PlayerStats playerStats = PlayerManager.instance.player.GetComponent<PlayerStats>();
+
+
+            playerStats.DoDamage(_enemyStats, _enemy);
+
+        }
 
 
     }
