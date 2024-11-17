@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Item Effect ",menuName = "Data/Item Effect")]
 public class itemEffect : ScriptableObject
 {
-    public void UseEffect()
+    public virtual void UseEffect(Transform _enemyTarget)
     {
         Debug.Log("Test Succeed!!!");
     }

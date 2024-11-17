@@ -87,11 +87,11 @@ public class ItemData_Equipment : ItemData
         //playerStats.lightningDamage.RemoveModifier(lightningDamage);
     }
 
-    public void UseItemEffect()
+    public void UseItemEffect(Transform _enemyTarget)
     {
         for (int i = 0;i < effects.Length; i++)
         {
-            effects[i].UseEffect();
+            effects[i].UseEffect(_enemyTarget);
         }
     }
 }

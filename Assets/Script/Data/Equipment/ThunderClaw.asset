@@ -18,9 +18,7 @@ MonoBehaviour:
   dropChance: 0
   equipmentType: 0
   effects:
-  - {fileID: 11400000, guid: 1aed8268d6891ba4498f636e7833fa60, type: 2}
-  - {fileID: 11400000, guid: 1aed8268d6891ba4498f636e7833fa60, type: 2}
-  - {fileID: 11400000, guid: 1aed8268d6891ba4498f636e7833fa60, type: 2}
+  - {fileID: 11400000, guid: 7bd04660988359448b3397149809a9f2, type: 2}
   strength: 0
   agility: 0
   intelligence: 0
