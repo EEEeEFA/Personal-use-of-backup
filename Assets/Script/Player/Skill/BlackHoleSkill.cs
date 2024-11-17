@@ -24,7 +24,7 @@ using UnityEngine;
         {
             base.UseSkill();
 
-        Debug.Log("BlackHoleSkill处使用黑洞成功");
+       // Debug.Log("BlackHoleSkill处使用黑洞成功");
 
         GameObject newBlackHole = Instantiate(blackHolePrefab, player.transform.position, Quaternion.identity);
 

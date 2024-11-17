@@ -30,6 +30,7 @@ public class BH_Skill_Controller : MonoBehaviour
 
     public void SetupBlackHole(float _maxSize, float _growSpeed, float _shrinkSpeed, float _attackCoolDownTime, int _attackAmount, float _blackholeDuration)
     {
+        //黑洞技能的参数 maxSize范围 growSpeed扩张速度 shrinkSpped收缩速度 attackAmount攻击次数 attackCoolDownTime攻击间隔 blackholeDuration技能待机时间
         maxSize = _maxSize;
         growSpeed = _growSpeed;
         shrinkSpeed = _shrinkSpeed;
@@ -46,23 +47,21 @@ public class BH_Skill_Controller : MonoBehaviour
         if(blackholeDuration > 0f)
         {
         blackholeDuration -= Time.deltaTime;
-        Debug.Log(blackholeDuration);
-
         }
 
         if (blackholeDuration < 0) //超时未选， 退出黑洞技能
         {
             blackholeDuration = Mathf.Infinity;
 
-            if (enemyTargets.Count > 0)
+            if (enemyTargets.Count > 0)//如果选了目标就放技能
                 ReleaseCloneAttack();
             else
-            FinishBlackHole();
+            FinishBlackHole();//没选目标直接结束技能
 
 
         }
 
-
+        //再次按H释放技能
         if (Input.GetKeyDown(KeyCode.H) && PlayerManager.instance.player.blackHoleState.skillUsed)
         {
             ReleaseCloneAttack();
@@ -76,7 +75,7 @@ public class BH_Skill_Controller : MonoBehaviour
         if(enemyTargets.Count <= 0) 
             return;
 
-        DestoryHotKey();
+        DestoryHotKey();//消除怪物头上的字母
 
         canAttack = true;
 
@@ -97,14 +96,13 @@ public class BH_Skill_Controller : MonoBehaviour
             transform.localScale = Vector2.Lerp(transform.localScale, new Vector2(maxSize, maxSize), growSpeed * Time.deltaTime);
         }
 
-        if (canShrink)//缩黑洞
+        if (canShrink)//缩黑洞 
         {
             transform.localScale = Vector2.Lerp(transform.localScale, new Vector2(-1, -1), shrinkSpeed * Time.deltaTime);
 
             if (transform.localScale.x < 0)
             {
                 Destroy(this.gameObject);
-                Debug.Log("Controller处抹除黑洞成功");
             }
 
             for (int i = 0; i < enemyScanned.Count; i++)
@@ -170,7 +168,7 @@ public class BH_Skill_Controller : MonoBehaviour
             enemyScanned.Add(enemy);
             enemy.FreezeTime(true);
 
-            CreateHotkey(collision);
+            CreateHotkey(collision);//创建HotKey
         }
     }
 
@@ -190,13 +188,13 @@ public class BH_Skill_Controller : MonoBehaviour
 
         createdHotKeyPrefabs.Add(newHotkey);
 
-        KeyCode choosenCode = KeyCodeList[Random.Range(0, KeyCodeList.Count)];
+        KeyCode choosenCode = KeyCodeList[Random.Range(0, KeyCodeList.Count)];//从预设置的键位分配给各个敌人
         KeyCodeList.Remove(choosenCode);
 
         BH_Hotkey_Controller newHotkeyScript = newHotkey.GetComponent<BH_Hotkey_Controller>();
 
-        newHotkeyScript.SetupHotKey(choosenCode, collision.transform, this);
-    }//替身攻击的逻辑
+        newHotkeyScript.SetupHotKey(choosenCode, collision.transform, this);//传入键位 敌人位置 黑洞控制脚本信息
+    }                                                                       //                  黑洞脚本用来调用AddEnemyTarget
 
     public void AddEnemyTarget(Transform _enemy)
     {
