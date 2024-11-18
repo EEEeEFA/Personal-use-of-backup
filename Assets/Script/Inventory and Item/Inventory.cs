@@ -273,7 +273,7 @@ public class Inventory : MonoBehaviour
             if (CanUseFlask)
             {
                 lastTimeUsed = Time.time;
-                _flask.UseItemEffect(null);
+                _flask.UseDynamicItemEffect(null);
             Debug.Log(_flask.name);
         }
             else

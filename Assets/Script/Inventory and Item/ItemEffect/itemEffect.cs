@@ -9,4 +9,5 @@ public class itemEffect : ScriptableObject
     {
         Debug.Log("Test Succeed!!!");
     }
+
 }

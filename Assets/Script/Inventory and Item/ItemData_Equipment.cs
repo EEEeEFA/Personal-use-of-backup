@@ -15,7 +15,8 @@ public enum EquipmentType
 public class ItemData_Equipment : ItemData
 {
     public EquipmentType equipmentType;
-    public itemEffect[] effects;
+    public itemEffect[] dynamicEffects;
+    public itemEffect[] passvieEffects;
 
 
     [SerializeField] public float FlaskCoolDown;
@@ -90,11 +91,19 @@ public class ItemData_Equipment : ItemData
         //playerStats.lightningDamage.RemoveModifier(lightningDamage);
     }
 
-    public void UseItemEffect(Transform _enemyTarget)
+    public void UseDynamicItemEffect(Transform _enemyTarget)
     {
-        for (int i = 0;i < effects.Length; i++)
+        for (int i = 0;i < dynamicEffects.Length; i++)
         {
-            effects[i].UseEffect(_enemyTarget);
+            dynamicEffects[i].UseEffect(_enemyTarget);
+        }
+    }
+
+    public void UsePassiveItemEffect(Transform _enemyTarget)
+    {
+        for (int i = 0; i < passvieEffects.Length; i++)
+        {
+            passvieEffects[i].UseEffect(_enemyTarget);
         }
     }
 }

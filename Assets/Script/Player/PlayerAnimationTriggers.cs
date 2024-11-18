@@ -29,18 +29,19 @@ public class PlayerAnimationTriggers : MonoBehaviour
 
                 player.stats.DoDamage(_enemyStats, _enemy);//伤害计算
 
-                EquipmentEffect(_enemy.transform);//装备效果
+                DynamicEquipmentEffect(_enemy.transform);//装备效果
 
             }
         }
     }
 
-    private static void EquipmentEffect(Transform _enemyTarget)
+    private void DynamicEquipmentEffect(Transform _enemyTarget)//主动型装备效果 普攻、防反触发
     {
+        
         ItemData_Equipment equipedItem = Inventory.instance.GetEquipedEquipment(EquipmentType.Weapon);
         if (equipedItem != null)
         {
-                equipedItem.UseItemEffect(_enemyTarget);
+                equipedItem.UseDynamicItemEffect(_enemyTarget);
         }
     }
 
@@ -61,12 +62,22 @@ public class PlayerAnimationTriggers : MonoBehaviour
                     CharacterStats _target = hit.GetComponent<CharacterStats>();
 
                     player.stats.DoDamage(_target, _enemy);
-                }
 
+                    PassvityEquipmentEffect(_enemy.transform);
+                    DynamicEquipmentEffect(_enemy.transform);
+                }
 
             }
 
 
+        }
+    }
+    private void PassvityEquipmentEffect(Transform _enemyTarget)//被动性装备效果 只有防反触发
+    {
+        ItemData_Equipment equipedItem = Inventory.instance.GetEquipedEquipment(EquipmentType.Weapon);
+        if (equipedItem != null)
+        {
+            equipedItem.UsePassiveItemEffect(_enemyTarget);
         }
     }
 
