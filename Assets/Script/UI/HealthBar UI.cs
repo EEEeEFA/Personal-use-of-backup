@@ -22,7 +22,7 @@ public class HealthBarUI : MonoBehaviour
         UpdateSlider();//重开时更新血量
     }
     
-    private void UpdateSlider()
+    private void UpdateSlider()//更新血条
     {
         slider.maxValue = myStats.GetMaxHealthValue();
         slider.value = myStats.currentHP;

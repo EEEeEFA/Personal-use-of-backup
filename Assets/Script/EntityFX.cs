@@ -26,11 +26,16 @@ public class EntityFX : MonoBehaviour
     private IEnumerator FlashFX()
     {
         sr.material = HitMat;
+        Color currentcolor = sr.color;
+
+        sr.color = Color.white;
         yield return new WaitForSeconds(.1f);
+
+        sr.color = currentcolor;
         sr.material = originMat;
     }
 
-    private IEnumerator BlingFX()
+    private IEnumerator BlingFX()//回收剑时的特效
     {
         sr.material = GoldMat;
         yield return new WaitForSeconds(.1f);
@@ -65,8 +70,27 @@ public class EntityFX : MonoBehaviour
             sr.color = igniteColor[1];
     }
 
-    private void ChillFxFor();
+    public void ChillFxFor(float _ailmentsDuration)
+    {
+        Invoke("ChillColorFx", .3f);
+        Invoke("CancelColorChange", _ailmentsDuration);
+    }
+    public void ChillColorFx()
+    {
+        if(sr.color != chillColor)
+            sr.color = chillColor;
+    }
 
-    private void ShockFxFor();
-
+    public void ShockFxFor(float _ailmentsDuration)
+    {
+        InvokeRepeating("ShockColorFx", 0, 0.3f);
+        Invoke("CancelColorChange", _ailmentsDuration);
+    }
+    public void ShockColorFx()
+    {
+        if (sr.color != shockColor[0])
+            sr.color = shockColor[0];
+        else
+            sr.color = shockColor[1];
+    }
 }

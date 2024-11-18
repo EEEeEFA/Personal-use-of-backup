@@ -26,6 +26,10 @@ public class Inventory : MonoBehaviour
     private UI_ItemSlot[] itemSlot;
     private UI_ItemSlot[] stashSlot;
     private UI_EquipmentSlot[] equipmentSlot;
+
+    [Header("Equipment Counter")]
+
+    private float lastTimeUsed;
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -244,17 +248,36 @@ public class Inventory : MonoBehaviour
 
     public List<InventoryItem> GetEquipmentList() => equipmentList;
 
-    public List<ItemData_Equipment> GetEquipedEquipment(EquipmentType _typeOfEquipment)//获取被装备的装备列表 
+    public ItemData_Equipment GetEquipedEquipment(EquipmentType _typeOfEquipment)//获取被装备的装备列表 
     {
-        List < ItemData_Equipment > equipedItem = new List<ItemData_Equipment>();      //自己写的： 相比P115把equipedItem改成了List方便后续多个装备触发
+        ItemData_Equipment equipedItem = null;      //自己写的： 相比P115把equipedItem改成了List方便后续多个装备触发
 
         foreach (KeyValuePair<ItemData_Equipment, InventoryItem> item in equipmentDictionaryList)
         {
             if (item.Key.equipmentType == _typeOfEquipment)
             {
-                equipedItem.Add(item.Key);
+                equipedItem = item.Key;
             }
         }
         return equipedItem;
+    }
+
+    public void UseFlask()//检测Flask的CD，CD转好了就用
+    {
+        ItemData_Equipment _flask = GetEquipedEquipment(EquipmentType.Flask);
+
+        lastTimeUsed = -(_flask.FlaskCoolDown);
+
+            bool CanUseFlask = Time.time > _flask.FlaskCoolDown + lastTimeUsed;
+
+            if (CanUseFlask)
+            {
+                lastTimeUsed = Time.time;
+                _flask.UseItemEffect(null);
+            Debug.Log(_flask.name);
+        }
+            else
+                Debug.Log("FlaskOnCoolDown");
+
     }
 }

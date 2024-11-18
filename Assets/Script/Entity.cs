@@ -117,6 +117,17 @@ public class Entity : MonoBehaviour, IAttacker
         
     }
 
+    public virtual void SlowEntityBy(float slowPercentage, float ailmentsDuration)//±ù¶³×´Ì¬¼õ»º¶¯×÷
+    {
+
+    }
+
+    protected virtual void ReturnDefaultSpeed()
+    {
+
+    }
+
+
     #region interface
     public interface IAttacker
     {

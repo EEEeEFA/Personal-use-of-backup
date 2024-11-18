@@ -11,7 +11,7 @@ public class PlayerDashState :  PlayerState
     public override void Enter()
     {
         base.Enter();
-        stateTimer = player.DashDuration;
+        stateTimer = player.dashDuration;
     }
 
     public override void Exit()
@@ -22,7 +22,7 @@ public class PlayerDashState :  PlayerState
 
     public override void Update()
     {
-        player.SetVelocity(player.dashDir * player.DashSpeed, 0); Debug.Log("SetVelocityDash");
+        player.SetVelocity(player.dashDir * player.dashSpeed, 0); Debug.Log("SetVelocityDash");
 
         if (!player.IsGroundDetected() && player.IsWallDetected())
         {

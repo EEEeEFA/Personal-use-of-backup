@@ -136,6 +136,7 @@ public class CharacterStats : MonoBehaviour
         _totalDamage = CalculateArmor(_targetStats, _totalDamage);
 
         _targetStats.TakeDamage(_totalDamage, _beAttacked);
+        DoMagicDamage(_targetStats, _beAttacked);
     }
 
     #region Magic Damage and ailments
@@ -300,12 +301,12 @@ public class CharacterStats : MonoBehaviour
 
 
         //寻找最近的敌人然后雷击
-        if (closestEnemy != null)
-        {
-            GameObject newShockStrike = Instantiate(shockStrikePrefab, transform.position, Quaternion.identity);
+        //if (closestEnemy != null)
+        //{
+        //    GameObject newShockStrike = Instantiate(shockStrikePrefab, transform.position, Quaternion.identity);
 
-            newShockStrike.GetComponent<ShockStrike_Controller>().Setup(shockDamage, closestEnemy.GetComponent<CharacterStats>());
-        }
+        //    newShockStrike.GetComponent<ShockStrike_Controller>().Setup(shockDamage, closestEnemy.GetComponent<CharacterStats>());
+        //}
     }//闪电攻击附近的目标
 
     private void ApplyIgniteDamage()
@@ -351,6 +352,16 @@ public class CharacterStats : MonoBehaviour
                           //骷髅的物品掉落放在 死亡动画里面触发
     }
 
+    public virtual void IncreaseHealthBy(int _heal)
+    {
+        currentHP += _heal;
+
+        if (currentHP > GetMaxHealthValue())
+            currentHP = GetMaxHealthValue();
+
+        if (onHealthChanged != null)
+            onHealthChanged();
+    }
     protected virtual void DecreaseHealthBy(int _damage)
     {
         currentHP -= _damage;

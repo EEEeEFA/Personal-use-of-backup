@@ -37,14 +37,10 @@ public class PlayerAnimationTriggers : MonoBehaviour
 
     private static void EquipmentEffect(Transform _enemyTarget)
     {
-        List<ItemData_Equipment> equipedItem = Inventory.instance.GetEquipedEquipment(EquipmentType.Weapon);
+        ItemData_Equipment equipedItem = Inventory.instance.GetEquipedEquipment(EquipmentType.Weapon);
         if (equipedItem != null)
         {
-
-            for (int i = 0; i < equipedItem.Count; i++)//自己写的超绝双层嵌套屎山，标记一下以后再改
-            {
-                equipedItem[i].UseItemEffect(_enemyTarget);
-            }
+                equipedItem.UseItemEffect(_enemyTarget);
         }
     }
 

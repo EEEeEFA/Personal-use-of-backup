@@ -10,9 +10,13 @@ public class Player : Entity
     public float jumpForce = 8f;
 
     [Header("Dash info")]
-    public float DashSpeed = 20f;
-    public float DashDuration = 0.15f;
+    public float dashSpeed = 20f;
+    public float dashDuration = 0.15f;
     public float dashDir { get; private set; }
+
+    public float defaultMoveSpeed;
+    public float defaultJumpForce;
+    public float defaultDashSpeed;
 
     [Header("OnWall info")]
     public float slideSpeed;
@@ -83,15 +87,22 @@ public class Player : Entity
     {
         base.Start();
         skill = PlayerSkillManager.instance;
-        stateMachine.Initialize(idleState);     
+        stateMachine.Initialize(idleState);
+
+        defaultMoveSpeed = moveSpeed;
+        defaultJumpForce = jumpForce;
+        defaultDashSpeed = dashSpeed;
     }
 
     protected override void Update()
     {
         base.Update();
         stateMachine.currentState.Update();
+
+        //以下为可以随时触发的玩家动作
         CheckDash();
         BHSkill();
+        UseFlask();
     }
 
     public IEnumerator BusyFor(float _seconds)
@@ -101,9 +112,10 @@ public class Player : Entity
         yield return new WaitForSeconds(_seconds);
 
         isBusy = false;
-    } 
+    }
 
-    private void CheckDash()
+    #region 可以从任意状态进入的玩家动作
+    private void CheckDash()//冲刺
     {
         if (IsWallDetected()) 
             return;
@@ -128,10 +140,17 @@ public class Player : Entity
           
         }
     }
-    //public void ExitBlackHole()//退出黑洞技能
-    //{
-    //    stateMachine.ChangeState(airState);
-    //}
+
+    private void UseFlask()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            Debug.Log("R");
+            Inventory.instance.UseFlask();
+        }
+    }
+
+    #endregion
 
     public void AssignSword(GameObject _Sword)
     {
@@ -174,5 +193,24 @@ public class Player : Entity
         {
             SetLayerRecursively(child.gameObject, newLayer);
         }
+    }
+
+    public override void SlowEntityBy(float _slowPercentage, float _slowDuration)
+    {
+        moveSpeed = moveSpeed * (1 - _slowPercentage);
+        jumpForce = jumpForce * (1 - _slowPercentage);
+        dashSpeed = dashSpeed * (1 - _slowPercentage);
+        anim.speed = anim.speed * (1 - _slowPercentage);
+
+        Invoke("ReturnDefaultSpeed", _slowDuration);
+    }
+
+    protected override void ReturnDefaultSpeed()
+    {
+        base.ReturnDefaultSpeed();
+
+        moveSpeed = defaultMoveSpeed;
+        jumpForce = defaultJumpForce;
+        dashSpeed = defaultDashSpeed;
     }
 }

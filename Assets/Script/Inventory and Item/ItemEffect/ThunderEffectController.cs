@@ -16,7 +16,7 @@ public class ThunderEffectController : MonoBehaviour
             PlayerStats playerStats = PlayerManager.instance.player.GetComponent<PlayerStats>();
 
 
-            playerStats.DoDamage(_enemyStats, _enemy);
+            playerStats.DoMagicDamage(_enemyStats, _enemy);
 
         }
 
