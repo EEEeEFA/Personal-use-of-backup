@@ -65,4 +65,8 @@ public class EntityFX : MonoBehaviour
             sr.color = igniteColor[1];
     }
 
+    private void ChillFxFor();
+
+    private void ShockFxFor();
+
 }

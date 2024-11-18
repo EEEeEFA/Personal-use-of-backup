@@ -69,9 +69,14 @@ public class CharacterStats : MonoBehaviour
 
     public System.Action onHealthChanged;
 
+    private EntityFX fx;
+
     protected virtual void Start()
     {
+        critPower.SetDefaultValue(150);
         currentHP = GetMaxHealthValue();
+
+        fx = GetComponent<EntityFX>();
     }
 
     protected virtual void Update()
@@ -313,7 +318,7 @@ public class CharacterStats : MonoBehaviour
             //currentHealth -= igniteDamage;
 
             if (currentHP < 0 && !Dead)
-                Die();
+                Die(GetComponent<Entity>());
 
             igniteDamageTimer = igniteDamageCoolDown;
         }
