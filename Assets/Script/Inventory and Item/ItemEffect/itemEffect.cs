@@ -7,7 +7,7 @@ public class itemEffect : ScriptableObject
 {
     public virtual void UseEffect(Transform _enemyTarget)
     {
-        Debug.Log("Test Succeed!!!");
+
     }
 
 }

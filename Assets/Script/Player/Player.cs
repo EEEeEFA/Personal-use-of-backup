@@ -141,7 +141,7 @@ public class Player : Entity
         }
     }
 
-    private void UseFlask()
+    private void UseFlask()//ºÈÒ©Ë®
     {
         if (Input.GetKeyDown(KeyCode.R))
         {

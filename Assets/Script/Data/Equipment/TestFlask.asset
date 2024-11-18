@@ -10,15 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4594657448217c146851cbb28c8f4fac, type: 3}
-  m_Name: HealingFlask
+  m_Name: TestFlask
   m_EditorClassIdentifier: 
   type: 1
-  itemName: HealingFlask
+  itemName: TestFlask
   icon: {fileID: -410334530, guid: a9ca9a41598dd2e44b125928045c518f, type: 3}
   dropChance: 0
   equipmentType: 3
   dynamicEffects:
   - {fileID: 11400000, guid: bb1e5f3b08c7bdb46b28947fadedff36, type: 2}
+  - {fileID: 11400000, guid: 2e7bdead1fe733b4eb1874135374a1cc, type: 2}
   passvieEffects: []
   FlaskCoolDown: 5
   strength: 0
