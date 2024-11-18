@@ -17,8 +17,10 @@ MonoBehaviour:
   icon: {fileID: 367297872, guid: a9ca9a41598dd2e44b125928045c518f, type: 3}
   dropChance: 0
   equipmentType: 0
-  effects:
+  dynamicEffects:
   - {fileID: 11400000, guid: 7bd04660988359448b3397149809a9f2, type: 2}
+  passvieEffects: []
+  FlaskCoolDown: 0
   strength: 0
   agility: 0
   intelligence: 0
