@@ -274,7 +274,6 @@ public class Inventory : MonoBehaviour
             {
                 lastTimeUsed = Time.time;
                 _flask.UseDynamicItemEffect(null);
-            Debug.Log(_flask.name);
         }
             else
                 Debug.Log("FlaskOnCoolDown");

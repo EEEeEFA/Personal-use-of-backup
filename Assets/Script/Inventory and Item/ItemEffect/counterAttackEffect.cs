@@ -10,7 +10,7 @@ public class counterAttackEffect : itemEffect
     {
         Transform _player = PlayerManager.instance.player.transform;
         GameObject newbarbPrefabs = Instantiate(barbPrefabs, _player.position, _player.rotation);
-        Destroy(newbarbPrefabs, 2f);//TRY 在动画结束的时候删除
+        Destroy(newbarbPrefabs, .7f);//TRY 在动画结束的时候删除
 
     }
 }
