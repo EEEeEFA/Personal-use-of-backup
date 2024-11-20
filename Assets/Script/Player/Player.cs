@@ -146,7 +146,13 @@ public class Player : Entity
         if (Input.GetKeyDown(KeyCode.R))
         {
             Debug.Log("R");
-            Inventory.instance.UseFlask();
+
+            ItemData_Equipment _flask = Inventory.instance.GetEquipedEquipment(EquipmentType.Flask);
+
+           if(_flask.CoolDownCounter())
+            {
+                _flask.UseDynamicItemEffect(null);
+            }
         }
     }
 
