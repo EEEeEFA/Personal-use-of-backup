@@ -8,12 +8,14 @@ public class EchoofDemiseEffect : itemEffect
     public override void UseEffect(Transform _enemyTarget)
     {
         base.UseEffect(_enemyTarget);
+
+
     }
     //TODO 回忆血条做法
     //血量低于10%
     //在DecreaseHealthBy(int _damage)里触发 yep Intellegence
 
-    //技能冷却，放在inventory里
+    //技能冷却，模块放在inventory里 模块也在在DecreaseHealthBy调用
 
     //减速周围敌人90% 2秒
 }

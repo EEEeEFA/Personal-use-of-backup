@@ -18,8 +18,9 @@ public class ItemData_Equipment : ItemData
     public itemEffect[] dynamicEffects;
     public itemEffect[] passvieEffects;
 
-
+    //装备冷却时间
     [SerializeField] public float FlaskCoolDown;
+    [SerializeField] public float ArmorCoolDown;
 
     [Header("Major stats")]
     public int strength;

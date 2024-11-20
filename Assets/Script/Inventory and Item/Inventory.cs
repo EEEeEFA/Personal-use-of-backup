@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using static UnityEditor.Progress;
 using static UnityEditor.Timeline.Actions.MenuPriority;
@@ -28,8 +29,10 @@ public class Inventory : MonoBehaviour
     private UI_EquipmentSlot[] equipmentSlot;
 
     [Header("Equipment Counter")]
+    private float lastTimeUsedFlask; 
+    private float lastTimeUsedArmor;
 
-    private float lastTimeUsed;
+    
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -266,17 +269,30 @@ public class Inventory : MonoBehaviour
     {
         ItemData_Equipment _flask = GetEquipedEquipment(EquipmentType.Flask);
 
-        lastTimeUsed = -(_flask.FlaskCoolDown);
+        lastTimeUsedFlask = -Mathf.Infinity;//防止游戏一开始用不了
 
-            bool CanUseFlask = Time.time > _flask.FlaskCoolDown + lastTimeUsed;
+        bool CanUseFlask = Time.time > _flask.FlaskCoolDown + lastTimeUsedFlask;
 
             if (CanUseFlask)
             {
-                lastTimeUsed = Time.time;
+                lastTimeUsedFlask = Time.time;
                 _flask.UseDynamicItemEffect(null);
         }
             else
                 Debug.Log("FlaskOnCoolDown");
 
+    }
+    public bool CanUseArmor()
+    {
+        ItemData_Equipment _Armor = GetEquipedEquipment(EquipmentType.Armor);
+
+        lastTimeUsedArmor = -Mathf.Infinity;
+
+        if (Time.time > _Armor.ArmorCoolDown + lastTimeUsedArmor)
+        {
+            lastTimeUsedArmor = Time.time;
+            return true;
+        }
+        else return false;
     }
 }

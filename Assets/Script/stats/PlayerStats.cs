@@ -9,9 +9,16 @@ public class PlayerStats : CharacterStats
     {
         base.DecreaseHealthBy(_damage);
         
-        if(currentHP <= GetMaxHealthValue() * .1f)
+        if(currentHP <= GetMaxHealthValue() * .1f)//血量鉴定
         {
-            inventory.GetEquipedEquipment(EquipmentType.Armor);
+            if (!Inventory.instance.CanUseArmor())//冷却时间鉴定
+                return;
+            ItemData_Equipment _Armor = inventory.GetEquipedEquipment(EquipmentType.Armor);
+            if (_Armor != null)
+            {   
+              
+                _Armor.UsePassiveItemEffect(null);
+            }
         }
     }
 
