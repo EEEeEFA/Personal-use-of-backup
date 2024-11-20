@@ -11,7 +11,9 @@ public class EchoofDemiseEffect : itemEffect
     }
     //TODO 回忆血条做法
     //血量低于10%
-    //在DecreaseHealthBy(int _damage)里触发？
+    //在DecreaseHealthBy(int _damage)里触发 yep Intellegence
+
+    //技能冷却，放在inventory里
 
     //减速周围敌人90% 2秒
 }

@@ -250,7 +250,7 @@ public class Inventory : MonoBehaviour
 
     public ItemData_Equipment GetEquipedEquipment(EquipmentType _typeOfEquipment)//获取被装备的装备列表 
     {
-        ItemData_Equipment equipedItem = null;      //自己写的： 相比P115把equipedItem改成了List方便后续多个装备触发
+        ItemData_Equipment equipedItem = null;      //自己写的： 相比P115把equipedItem改成了List方便后续多个装备触发 删掉了，很多地方其实都只需要调用一个 后续要加多装备系统再改
 
         foreach (KeyValuePair<ItemData_Equipment, InventoryItem> item in equipmentDictionaryList)
         {
