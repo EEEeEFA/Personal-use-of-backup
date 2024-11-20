@@ -11,18 +11,25 @@ public class AllFreeze : itemEffect
     {
         Collider2D[] collider = Physics2D.OverlapCircleAll(_transform.position, CircleRadius);
 
-        foreach (var hit in collider)
-        {
-            hit.GetComponent<Enemy>()?.FreezeTimeFor(TimeToFreeze);
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(_transform.position, 100);//寻找并冻结敌人
 
-    
+        foreach (var hit in colliders)//敌人冻结逻辑
+        {
+            if (hit.GetComponent<Enemy>() != null)
+            {
+                Debug.Log("冻结");
+                hit.GetComponent<Enemy>()?.FreezeTimeFor(TimeToFreeze);//?是为了保证有这个组件
+            }
+
+        }
+
             //    Enemy _enemy = hit.GetComponent<Enemy>();
             //if (_enemy != null)
             //{
             //    _enemy.FreezeTimeFor(TimeToFreeze);
             //    Debug.Log(_enemy.name);
             //}
-        }
+
 
     }
     //血量低于10%

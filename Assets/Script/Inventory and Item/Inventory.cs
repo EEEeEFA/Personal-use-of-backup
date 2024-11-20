@@ -110,6 +110,8 @@ public class Inventory : MonoBehaviour
             oldEquipment.RemoveModifiers();
             
         }
+
+        UpdateSlotUI();
     }
 
     public void AddItem(ItemData _item, int _amountToAdd)//往仓库添加物品 ItemData为物品类型， amountToAdd为添加的数量
@@ -265,23 +267,23 @@ public class Inventory : MonoBehaviour
         return equipedItem;
     }
 
-    public void UseFlask()//检测Flask的CD，CD转好了就用
-    {
-        ItemData_Equipment _flask = GetEquipedEquipment(EquipmentType.Flask);
+    //public void UseFlask()//检测Flask的CD，CD转好了就用
+    //{
+    //    ItemData_Equipment _flask = GetEquipedEquipment(EquipmentType.Flask);
 
-        lastTimeUsedFlask = -Mathf.Infinity;//防止游戏一开始用不了
+    //    lastTimeUsedFlask = -Mathf.Infinity;//防止游戏一开始用不了
 
-        bool CanUseFlask = Time.time > _flask.FlaskCoolDown + lastTimeUsedFlask;
+    //    bool CanUseFlask = Time.time > _flask.FlaskCoolDown + lastTimeUsedFlask;
 
-            if (CanUseFlask)
-            {
-                lastTimeUsedFlask = Time.time;
-                _flask.UseDynamicItemEffect(null);
-        }
-            else
-                Debug.Log("FlaskOnCoolDown");
+    //        if (CanUseFlask)
+    //        {
+    //            lastTimeUsedFlask = Time.time;
+    //            _flask.UseDynamicItemEffect(null);
+    //    }
+    //        else
+    //            Debug.Log("FlaskOnCoolDown");
 
-    }
+    //}
     //public bool CanUseArmor()
     //{
     //    ItemData_Equipment _Armor = GetEquipedEquipment(EquipmentType.Armor);

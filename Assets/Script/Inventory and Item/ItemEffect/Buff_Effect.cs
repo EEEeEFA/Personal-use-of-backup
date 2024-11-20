@@ -68,7 +68,6 @@ public class Buff_Effect : itemEffect
 
 public override void UseEffect(Transform _enemyTarget)
     {
-        base.UseEffect(_enemyTarget);
         stats = PlayerManager.instance.player.GetComponent<PlayerStats>();
         stats.IncreaseStatBy(buffValue, buffDuration, StatToModify());
     }
