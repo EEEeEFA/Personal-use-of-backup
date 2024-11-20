@@ -79,7 +79,7 @@ public class Enemy : Entity
         }
     }
 
-    protected virtual IEnumerator FreezeTimerFor(float _seconds)
+    public virtual IEnumerator FreezeTimeFor(float _seconds)
     {
         FreezeTime(true);
         yield return new WaitForSeconds(_seconds);

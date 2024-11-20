@@ -19,8 +19,11 @@ public class ItemData_Equipment : ItemData
     public itemEffect[] passvieEffects;
 
     //装备冷却时间
+    [Header("Equipment Counter")]
+    private float lastTimeUsedFlask;
+    static float lastTimeUsed = -Mathf.Infinity;
     [SerializeField] public float FlaskCoolDown;
-    [SerializeField] public float ArmorCoolDown;
+    [SerializeField] public float CoolDownTime;
 
     [Header("Major stats")]
     public int strength;
@@ -92,19 +95,33 @@ public class ItemData_Equipment : ItemData
         //playerStats.lightningDamage.RemoveModifier(lightningDamage);
     }
 
-    public void UseDynamicItemEffect(Transform _enemyTarget)
+    public void UseDynamicItemEffect(Transform _Target)
     {
         for (int i = 0;i < dynamicEffects.Length; i++)
         {
-            dynamicEffects[i].UseEffect(_enemyTarget);
+            dynamicEffects[i].UseEffect(_Target);
         }
     }
 
-    public void UsePassiveItemEffect(Transform _enemyTarget)
+    public void UsePassiveItemEffect(Transform _Target)//使用装备 passvieEffects栏 中的效果
     {
         for (int i = 0; i < passvieEffects.Length; i++)
         {
-            passvieEffects[i].UseEffect(_enemyTarget);
+            passvieEffects[i].UseEffect(_Target);
         }
+    }
+
+    public bool CoolDownCounter()
+    {
+        Debug.Log(Time.time);
+        Debug.Log(CoolDownTime);
+        Debug.Log(lastTimeUsed);
+        if (Time.time > CoolDownTime + lastTimeUsed)
+        {
+            lastTimeUsed = Time.time;
+            return true;
+        }
+        else 
+            return false;
     }
 }

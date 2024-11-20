@@ -178,7 +178,6 @@ public class Player : Entity
     private void ChangLayer()
     {
         int targetLayer = LayerMask.NameToLayer(DeadGuys) - 1;//使targetLayer作为 DeadGuys 层 的索引，但是我不知道为什么要-1
-        Debug.Log(targetLayer);
         // 更改当前 GameObject 的图层
         gameObject.layer = targetLayer;
 

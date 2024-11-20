@@ -251,7 +251,7 @@ public class Inventory : MonoBehaviour
 
     public List<InventoryItem> GetEquipmentList() => equipmentList;
 
-    public ItemData_Equipment GetEquipedEquipment(EquipmentType _typeOfEquipment)//获取被装备的装备列表 
+    public ItemData_Equipment GetEquipedEquipment(EquipmentType _typeOfEquipment)//获取被装备的装备
     {
         ItemData_Equipment equipedItem = null;      //自己写的： 相比P115把equipedItem改成了List方便后续多个装备触发 删掉了，很多地方其实都只需要调用一个 后续要加多装备系统再改
 
@@ -282,17 +282,17 @@ public class Inventory : MonoBehaviour
                 Debug.Log("FlaskOnCoolDown");
 
     }
-    public bool CanUseArmor()
-    {
-        ItemData_Equipment _Armor = GetEquipedEquipment(EquipmentType.Armor);
+    //public bool CanUseArmor()
+    //{
+    //    ItemData_Equipment _Armor = GetEquipedEquipment(EquipmentType.Armor);
 
-        lastTimeUsedArmor = -Mathf.Infinity;
+    //    lastTimeUsedArmor = -Mathf.Infinity;
 
-        if (Time.time > _Armor.ArmorCoolDown + lastTimeUsedArmor)
-        {
-            lastTimeUsedArmor = Time.time;
-            return true;
-        }
-        else return false;
-    }
+    //    if (Time.time > _Armor.ArmorCoolDown + lastTimeUsedArmor)
+    //    {
+    //        lastTimeUsedArmor = Time.time;
+    //        return true;
+    //    }
+    //    else return false;
+    //}
 }

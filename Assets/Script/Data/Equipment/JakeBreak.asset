@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4594657448217c146851cbb28c8f4fac, type: 3}
+  m_Name: JakeBreak
+  m_EditorClassIdentifier: 
+  type: 1
+  itemName: JakeBreak
+  icon: {fileID: -965925972, guid: be55291aae08d434db3da3b59db3ab4a, type: 3}
+  dropChance: 0
+  equipmentType: 1
+  dynamicEffects: []
+  passvieEffects:
+  - {fileID: 11400000, guid: 1913426acbbb86741a29bb934dbc175a, type: 2}
+  FlaskCoolDown: 0
+  CoolDownTime: 4
+  strength: 0
+  agility: 0
+  intelligence: 0
+  vitality: 0
+  dealDamage: 0
+  critChance: 0
+  critPower: 0
+  health: 0
+  armor: 0
+  evasion: 0
+  magicResistance: 0
+  fireDamage: 0
+  iceDamage: 0
+  lightningDamage: 0
+  craftingMaterials: []
