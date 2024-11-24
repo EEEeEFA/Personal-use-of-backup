@@ -129,7 +129,7 @@ public class Inventory : MonoBehaviour
     {
         if (stashDictionaryList.TryGetValue(_item, out InventoryItem value))
         {
-            value.AddStack(_amountToAdd);
+            value.AddStack(_amountToAdd);//AddStack是InventoryItem中自己创建的增加数量的函数
         }
         else
         {
