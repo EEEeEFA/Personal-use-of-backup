@@ -164,6 +164,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: UI_White_Transperent_1
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 721
+        width: 108
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 14, y: 14, z: 15, w: 14}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8286c364a0313a549acc56ba9d807486
+      internalID: -189856434
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -176,6 +197,7 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       UI_White_Transperent_0: -1667867848
+      UI_White_Transperent_1: -189856434
       UIartdeco_PIPO_pack2_white_0: 1968567152
       UIartdeco_PIPO_pack2_white_1: 2145175254
   mipmapLimitGroupName: 
