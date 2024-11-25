@@ -1,5 +1,26 @@
+using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+public enum StatType
+{
+    strength,
+    agility,
+    intelligence,
+    vitality,
+    damage,
+    critChance,
+    critPower,
+    health,
+    armor,
+    evasion,
+    magicRes,
+    fireDamage,
+    iceDamage,
+    lightingDamage
+}
+
+
 
 public class CharacterStats : MonoBehaviour
 {
@@ -71,12 +92,32 @@ public class CharacterStats : MonoBehaviour
 
     private EntityFX fx;
 
+    private Dictionary<StatType, Func<Stats>> statLookup;
+
     protected virtual void Start()
     {
         critPower.SetDefaultValue(150);
         currentHP = GetMaxHealthValue();
 
         fx = GetComponent<EntityFX>();
+
+        statLookup = new Dictionary<StatType, Func<Stats>>
+        {
+            { StatType.strength, () => strength },
+            { StatType.agility, () => agility },
+            { StatType.intelligence, () => intelligence },
+            { StatType.vitality, () => vitality },
+            { StatType.damage, () => dealDamage },
+            { StatType.critChance, () => critChance },
+            { StatType.critPower, () => critPower },
+            { StatType.health, () => maxHP },
+            { StatType.armor, () => armor },
+            { StatType.evasion, () => evasion },
+            { StatType.magicRes, () => magicResistance },
+            { StatType.fireDamage, () => fireDamage },
+            { StatType.iceDamage, () => iceDamage },
+            { StatType.lightingDamage, () => lightningDamage }
+        };
     }
 
     protected virtual void Update()
@@ -177,7 +218,7 @@ public class CharacterStats : MonoBehaviour
         while (!canApplyIgnite && !canApplyChill && !canApplyShock)
         {
             //三个if同时判断大小，可以完成一个随机属性伤害的boss
-            if (Random.value < .33f && _fireDamage > 0)//Random.value用于生成一个介于 0.0 和 1.0 之间的随机浮点数
+            if (UnityEngine.Random.value < .33f && _fireDamage > 0)//Random.value用于生成一个介于 0.0 和 1.0 之间的随机浮点数
             {
                 canApplyIgnite = true;
                 _targetStats.ApplyAilments(canApplyIgnite, canApplyChill, canApplyShock);
@@ -185,7 +226,7 @@ public class CharacterStats : MonoBehaviour
                 return;
             }
 
-            if (Random.value < .5f && _lightningDamage > 0)
+            if (UnityEngine.Random.value < .5f && _lightningDamage > 0)
             {
                 canApplyShock = true;
                 _targetStats.ApplyAilments(canApplyIgnite, canApplyChill, canApplyShock);
@@ -193,7 +234,7 @@ public class CharacterStats : MonoBehaviour
                 return;
             }
 
-            if (Random.value < .99f && _iceDamage > 0)
+            if (UnityEngine.Random.value < .99f && _iceDamage > 0)
             {
                 canApplyChill = true;
                 _targetStats.ApplyAilments(canApplyIgnite, canApplyChill, canApplyShock);
@@ -379,7 +420,7 @@ public class CharacterStats : MonoBehaviour
         if (isShocked)
             totalEvasion += 20;
 
-        if (Random.Range(0, 100) < totalEvasion)
+        if (UnityEngine.Random.Range(0, 100) < totalEvasion)
         {
             return true;
         }
@@ -401,7 +442,7 @@ public class CharacterStats : MonoBehaviour
     private bool CirtCheck()//暴击判定
     {
         int totalCirticalChance = critChance.GetValue() + agility.GetValue();
-        if (Random.Range(0, 100) <= totalCirticalChance)
+        if (UnityEngine.Random.Range(0, 100) <= totalCirticalChance)
         {
             return true;
         }
@@ -437,4 +478,14 @@ public class CharacterStats : MonoBehaviour
 
     //}
     #endregion
+
+    public Stats GetStat(StatType _StatType)
+    {
+        if (statLookup.TryGetValue(_StatType, out var statFunc))
+        {
+            return statFunc(); // 调用 Lambda 表达式，返回属性值
+        }
+
+        throw new ArgumentException($"没这个Stat啊: {_StatType}");
+    }
 }

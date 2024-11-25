@@ -21,12 +21,16 @@ public class Inventory : MonoBehaviour
     [SerializeField] private Transform inventorySlotParent;
     [SerializeField] private Transform stashSlotParent;
     [SerializeField] private Transform equipmentSlotParent;
+    [SerializeField] private Transform statSlotParent;
 
-    [SerializeField] private List<InventoryItem> StartEquipmentList;
+
+[SerializeField] private List<InventoryItem> StartEquipmentList;
+
 
     private UI_ItemSlot[] itemSlot;
     private UI_ItemSlot[] stashSlot;
     private UI_EquipmentSlot[] equipmentSlot;
+    private UI_StatSlot[] statSlot;
 
     [Header("Equipment Counter")]
     private float lastTimeUsedFlask; 
@@ -60,6 +64,7 @@ public class Inventory : MonoBehaviour
         itemSlot = inventorySlotParent.GetComponentsInChildren<UI_ItemSlot>();
         stashSlot = stashSlotParent.GetComponentsInChildren<UI_ItemSlot>();
         equipmentSlot = equipmentSlotParent.GetComponentsInChildren<UI_EquipmentSlot>();
+        statSlot = statSlotParent.GetComponentsInChildren<UI_StatSlot>();
 
         for (int i = 0; i < StartEquipmentList.Count; i++)
         {
@@ -218,6 +223,12 @@ public class Inventory : MonoBehaviour
                 }
             }
         }
+
+        for (int i = 0; i < statSlot.Length; i++) // update info of stats in character UI
+        {
+            statSlot[i].UpdateStatValueUI();
+        }
+
     }
 
     public bool CanCraft(ItemData_Equipment itemToCreate  , List<InventoryItem> _MaterialNeeded )
