@@ -27,6 +27,8 @@ public class ItemObject : MonoBehaviour
     }
     public void PickupItem(Collider2D collision)//子项中的boxcollider碰撞检测后 调用这个函数
     {
+        if (!Inventory.instance.CanAddItem())
+            return;
         if (collision.GetComponent<Player>() != null)
         {
             Inventory.instance.AddItem(itemData, 1);//往仓库添加 1 个这个物品，并删除物品

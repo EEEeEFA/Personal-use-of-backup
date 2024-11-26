@@ -129,7 +129,7 @@ public class Inventory : MonoBehaviour
 
     public void AddItem(ItemData _item, int _amountToAdd)//往仓库添加物品 ItemData为物品类型， amountToAdd为添加的数量
     {
-        if (_item.type == ItemType.Equipment)//判断属于哪种物品
+        if (_item.type == ItemType.Equipment && CanAddItem())//判断属于哪种物品
             AddEquipment(_item, _amountToAdd);
         if (_item.type == ItemType.Material)
             AddMaterial(_item, _amountToAdd);
@@ -168,6 +168,14 @@ public class Inventory : MonoBehaviour
             inventoryItemsList.Add(newItem);
             inventoryDictionaryList.Add(_item, newItem);
         }
+    }
+
+    public bool CanAddItem()
+    {
+        if(itemSlot.Length <= inventoryItemsList.Count)
+            return false;
+        else
+            return true;
     }
 
     public void RemoveItem(ItemData _item, int _amountToRemove)//调用一次删_amountToRemove个
