@@ -24,8 +24,7 @@ public class Inventory : MonoBehaviour
     [SerializeField] private Transform equipmentSlotParent;
     [SerializeField] private Transform statSlotParent;
 
-
-[SerializeField] private List<InventoryItem> StartEquipmentList;
+    [SerializeField] private List<InventoryItem> StartEquipmentList;
 
 
     private UI_ItemSlot[] itemSlot;
@@ -222,7 +221,7 @@ public class Inventory : MonoBehaviour
             stashSlot[i].UpdataSlot(stashItemsList[i]);
         }
 
-        for(int i = 0;i < equipmentSlot.Length; i++)
+        for(int i = 0; i < equipmentSlot.Length; i++)
         {
             foreach (KeyValuePair<ItemData_Equipment, InventoryItem> item in equipmentDictionaryList)
             {
@@ -233,7 +232,7 @@ public class Inventory : MonoBehaviour
             }
         }
 
-        for (int i = 0; i < statSlot.Length; i++) // update info of stats in character UI
+        for (int i = 0; i < statSlot.Length; i++)
         {
             statSlot[i].UpdateStatValueUI();
         }
