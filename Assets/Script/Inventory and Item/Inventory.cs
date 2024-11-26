@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using TMPro.Examples;
 using UnityEngine;
 using static UnityEditor.Progress;
 using static UnityEditor.Timeline.Actions.MenuPriority;
@@ -66,8 +67,16 @@ public class Inventory : MonoBehaviour
         equipmentSlot = equipmentSlotParent.GetComponentsInChildren<UI_EquipmentSlot>();
         statSlot = statSlotParent.GetComponentsInChildren<UI_StatSlot>();
 
+        AddStartingItems();//获取初始装备
+
+    }
+
+    private void AddStartingItems()
+    {
         for (int i = 0; i < StartEquipmentList.Count; i++)
         {
+            Debug.Log("i=" + i);
+            Debug.Log(StartEquipmentList.Count);
             AddItem(StartEquipmentList[i].itemData, StartEquipmentList[i].stackSize);
         }
     }

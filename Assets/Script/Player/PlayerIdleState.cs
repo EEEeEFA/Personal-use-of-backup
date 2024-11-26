@@ -12,7 +12,6 @@ public PlayerIdleState(Player _player, PlayerStateMachine _stateMachine, string 
     public override void Enter()
     {
         base.Enter();
-        player.SetVelocity(0,0); Debug.Log("SetVelocityIdle");
     }
 
     public override void Exit()

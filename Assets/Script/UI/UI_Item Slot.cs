@@ -8,9 +8,12 @@ public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler
     public InventoryItem item;
     [SerializeField] private Image itemImage;
     [SerializeField] private TextMeshProUGUI itemText;
-    public virtual void OnPointerDown(PointerEventData eventData)
+    public virtual void OnPointerDown(PointerEventData eventData)//点击装备物品
     {
         Inventory inventory = Inventory.instance;
+
+        if (item == null )
+            return;
 
         if (Input.GetKey(KeyCode.LeftControl))//按住leftControl，点左键，点一次扣一个
         {
@@ -22,7 +25,7 @@ public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler
             inventory.Equip(item.itemData);
     }
 
-    public void UpdataSlot(InventoryItem _newItem)
+    public void UpdataSlot(InventoryItem _newItem)//更新UI图标
     {   
         itemImage.color = Color.white;
 
