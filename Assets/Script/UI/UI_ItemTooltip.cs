@@ -11,18 +11,12 @@ public class UI_ItemTooltip : MonoBehaviour
 
     public void ShowToolTip(ItemData_Equipment item)
     {
-        if (item = null) 
+        if (item == null) 
             return;
-        Debug.Log(item.itemName);
-        //itemNameText.text = item.name;
-        //itemTypeText.text = item.equipmentType.ToString();
-        //itemDescription.text = item.GetDescription();
 
-        //修改字体大小，防止字体过长
-        //if(itemDescription.text.Length > 12)
-        //    itemNameText.fontSize = itemNameText.fontSize * .7f;
-        //else
-        //    itemNameText.fontSize = defaultFontSize;
+        itemNameText.text = item.name;
+        itemTypeText.text = item.equipmentType.ToString();
+        //itemDescription.text = item.GetDescription();
 
         gameObject.SetActive(true);
 

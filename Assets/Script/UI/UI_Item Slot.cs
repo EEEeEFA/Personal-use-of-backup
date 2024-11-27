@@ -9,7 +9,7 @@ public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler, IPointerEnterHand
     [SerializeField] private Image itemImage;
     [SerializeField] private TextMeshProUGUI itemText;
 
-    public UI_Page Page;
+    public UI Page;
 
     public virtual void OnPointerDown(PointerEventData eventData)//点击装备物品
     {
@@ -32,7 +32,6 @@ public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler, IPointerEnterHand
     {
         if(item == null)
             return;
-
         Page.itemToolTip.ShowToolTip(item.itemData as ItemData_Equipment);
     }
     public void OnPointerExit(PointerEventData eventData)
