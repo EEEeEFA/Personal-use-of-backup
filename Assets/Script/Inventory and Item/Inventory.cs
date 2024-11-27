@@ -74,8 +74,6 @@ public class Inventory : MonoBehaviour
     {
         for (int i = 0; i < StartEquipmentList.Count; i++)
         {
-            Debug.Log("i=" + i);
-            Debug.Log(StartEquipmentList.Count);
             AddItem(StartEquipmentList[i].itemData, StartEquipmentList[i].stackSize);
         }
     }
