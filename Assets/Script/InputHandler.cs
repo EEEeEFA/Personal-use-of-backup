@@ -6,6 +6,5 @@ using UnityEngine.InputSystem;
 public class InputHandler : MonoBehaviour
 {
     [SerializeField]private PlayerInput playerInput;
-    [SerializeField] private DefaultInputActions inputActions;
-
+    [SerializeField]private PlayerInputActions inputActions;
 }

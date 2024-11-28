@@ -29,27 +29,27 @@ public class UI_InGame : MonoBehaviour
         }
 
 
-        void Update()
-        {
-            currentSouls.text = PlayerManager.instance.CurrentCurrencyAmount().ToString("#,#");
+        //void Update()
+        //{
+        //  //currentSouls.text = PlayerManager.instance.CurrentCurrencyAmount().ToString("#,#");  TODO：转到一个事件，货币发生变化了才更改值
 
 
-            if (Input.GetKeyDown(KeyCode.LeftShift)) //&& skills.dash.dashUnlocked解锁技能检索
-                SetCooldownOf(dashImage);
+        //    if (Input.GetKeyDown(KeyCode.LeftShift)) //&& skills.dash.dashUnlocked解锁技能检索
+        //        SetCooldownOf(dashImage);
 
-            if (Input.GetKeyDown(KeyCode.R))
-                SetCooldownOf(blackholeImage);
+        //    if (Input.GetKeyDown(KeyCode.R))
+        //        SetCooldownOf(blackholeImage);
 
-            if (Input.GetKeyDown(KeyCode.Alpha1) && Inventory.instance.GetEquipedEquipment(EquipmentType.Flask) != null)//必须获取药水
-                SetCooldownOf(flaskImage);
-
-
-
-            CheckCoolDownOf(dashImage, skills.dash.cooldownTime);
+        //    if (Input.GetKeyDown(KeyCode.Alpha1) && Inventory.instance.GetEquipedEquipment(EquipmentType.Flask) != null)//必须获取药水
+        //        SetCooldownOf(flaskImage);
 
 
-            CheckCoolDownOf(flaskImage, Inventory.instance.GetEquipedEquipment(EquipmentType.Flask).CoolDownTime);
-        }
+
+        //    CheckCoolDownOf(dashImage, skills.dash.cooldownTime);
+
+
+        //    CheckCoolDownOf(flaskImage, Inventory.instance.GetEquipedEquipment(EquipmentType.Flask).CoolDownTime);
+        //}
 
 
         private void UpdateHealthUI()//更新血条值
