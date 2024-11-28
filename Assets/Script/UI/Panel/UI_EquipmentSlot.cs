@@ -17,4 +17,13 @@ public class UI_EquipmentSlot : UI_ItemSlot
         CleanUpSlot();
     }
 
+    public override void OnPointerEnter(PointerEventData eventData)
+    {
+        base.OnPointerEnter(eventData);
+    }
+
+    public override void OnPointerExit(PointerEventData eventData)
+    {
+        base.OnPointerExit(eventData);
+    }
 }

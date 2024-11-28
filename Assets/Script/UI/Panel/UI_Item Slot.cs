@@ -28,13 +28,13 @@ public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler, IPointerEnterHand
             inventory.Equip(item.itemData);
     }
 
-    public void OnPointerEnter(PointerEventData eventData)//指针放在物品上显示物品信息
+    public virtual void OnPointerEnter(PointerEventData eventData)//指针放在物品上显示物品信息
     {
         if(item == null)
             return;
         Page.itemToolTip.ShowToolTip(item.itemData as ItemData_Equipment);
     }
-    public void OnPointerExit(PointerEventData eventData)
+    public virtual void OnPointerExit(PointerEventData eventData)
     {
         if (item == null)
             return;
