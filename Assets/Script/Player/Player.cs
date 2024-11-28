@@ -30,7 +30,7 @@ public class Player : Entity
     [Header("Busy info")]
     [SerializeField] public bool isBusy;
 
-    public PlayerSkillManager skill;
+    public PlayerSkillManager skillManager;
     public GameObject sword {  get; private set; }
 
     #region States
@@ -86,7 +86,7 @@ public class Player : Entity
     protected override void Start()
     {
         base.Start();
-        skill = PlayerSkillManager.instance;
+        skillManager = PlayerSkillManager.instance;
         stateMachine.Initialize(idleState);
 
         defaultMoveSpeed = moveSpeed;
@@ -103,6 +103,7 @@ public class Player : Entity
         CheckDash();
         BHSkill();
         UseFlask();
+        TSSkill();
     }
 
     public IEnumerator BusyFor(float _seconds)
@@ -120,21 +121,40 @@ public class Player : Entity
         if (IsWallDetected()) 
             return;
 
-        if (Input.GetKeyDown(KeyCode.LeftShift)&& PlayerSkillManager.instance.dash.CanUseSkill())
+        if (Input.GetKeyDown(KeyCode.LeftShift)&& skillManager.dash.CanUseSkill())
         {
             dashDir = Input.GetAxisRaw("Horizontal");
             if (dashDir == 0)
                 dashDir = facingDir;
             stateMachine.ChangeState(dashState);
 
-            skill.clone.CreateClone(transform, Vector3.zero);
+            skillManager.clone.CreateClone(transform, Vector3.zero);
         }
 
     }
 
+    private void TSSkill()//丢剑技能
+    {
+        if (Input.GetKeyDown(KeyCode.A) && CheckSword() && skillManager.TS.CanUseSkill())
+        {
+            stateMachine.ChangeState(aimSwordState);
+        }
+    }
+    private bool CheckSword()
+    {
+        if (!sword)
+        {
+            Debug.Log("2");
+            return true;
+        }
+
+        sword.GetComponent<TS_Skill_Controller>().ReturnSword();
+        return false;
+    }
+
     private void BHSkill()//放黑洞技能
     {
-        if (Input.GetKeyDown(KeyCode.H) && !blackHoleState.activeBH && skill.BH.OnlyTime())
+        if (Input.GetKeyDown(KeyCode.H) && !blackHoleState.activeBH && skillManager.BH.OnlyTime())
         {
             stateMachine.ChangeState(blackHoleState);
           

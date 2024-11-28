@@ -22,7 +22,6 @@ using UnityEngine;
 
         public override void UseSkill()
         {
-            base.UseSkill();
 
        // Debug.Log("BlackHoleSkill处使用黑洞成功");
 

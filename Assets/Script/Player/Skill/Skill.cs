@@ -29,7 +29,7 @@ public class Skill : MonoBehaviour
     public virtual bool CanUseSkill()//冷却时间到了则释放技能
     {
         if(OnlyTime())
-        {
+        {  
             UseSkill();
             timeCounter = cooldownTime;
             return true;

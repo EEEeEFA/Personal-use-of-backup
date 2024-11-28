@@ -44,6 +44,7 @@ public class ThrowSwordSkill : Skill
     }
     protected override void Update()
     {
+        base.Update();
         if (Input.GetKey(KeyCode.A))
         {
             for (int i = 0; i < dots.Length; i++)
@@ -152,6 +153,11 @@ public class ThrowSwordSkill : Skill
                              //+ (0.5f * (Physics2D.gravity * swordGravity) * (t * t));
 
         return position;
+    }
+
+    public override bool CanUseSkill()
+    {
+        return base.CanUseSkill();
     }
     #endregion
 

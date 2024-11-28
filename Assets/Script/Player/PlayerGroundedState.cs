@@ -44,22 +44,6 @@ public PlayerGroundedState(Player _player, PlayerStateMachine _stateMachine, str
             stateMachine.ChangeState(player.defendState);
             Debug.Log("ground to Defend works");
         }
-
-        if(Input.GetKeyDown(KeyCode.A) && CheckSword())
-        { 
-            stateMachine.ChangeState(player.aimSwordState); 
-        }
-
     }
 
-    private bool CheckSword()
-    {
-        if(!player.sword)
-        {
-            return true;
-        }
-
-        player.sword.GetComponent<TS_Skill_Controller>().ReturnSword();
-        return false;
-    }
 }

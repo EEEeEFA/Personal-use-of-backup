@@ -57,14 +57,14 @@ public class PlayerBlackHoleState : PlayerState
 
             if (!skillUsed)
             {
-                if (player.skill.BH.CanUseSkill())
+                if (player.skillManager.BH.CanUseSkill())
                 {
                     Debug.Log("状态机处使用黑洞成功");
                 skillUsed = true;
                 }
 
             }
-                if (player.skill.BH.BlackHoleFinish())
+                if (player.skillManager.BH.BlackHoleFinish())
                 {
                 Debug.Log("状态机处退出黑洞");
                 stateMachine.ChangeState(player.airState);
