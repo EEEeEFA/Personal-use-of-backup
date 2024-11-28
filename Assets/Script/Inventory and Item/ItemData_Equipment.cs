@@ -20,9 +20,7 @@ public class ItemData_Equipment : ItemData
 
     //装备冷却时间
     [Header("Equipment Counter")]
-    private float lastTimeUsedFlask;
     static float lastTimeUsed = -Mathf.Infinity;
-    [SerializeField] public float FlaskCoolDown;
     [SerializeField] public float CoolDownTime;
 
     [Header("Major stats")]
