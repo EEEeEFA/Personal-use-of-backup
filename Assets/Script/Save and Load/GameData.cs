@@ -1,18 +1,17 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameData : MonoBehaviour
+//2024.11.25
+[System.Serializable]
+public class GameData
 {
-    // Start is called before the first frame update
-    void Start()
+    public int currency;
+
+    public GameData()
     {
-        
+        this.currency = 0;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
