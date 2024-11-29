@@ -28,15 +28,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             ""id"": ""e25320ba-4449-4a75-9d76-13ecf20694e7"",
             ""actions"": [
                 {
-                    ""name"": ""OpenC"",
-                    ""type"": ""Button"",
-                    ""id"": ""a0572c0e-5872-4ff5-8ed7-a4a346c6400e"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""SkillUseH"",
                     ""type"": ""Button"",
                     ""id"": ""11ab4f9f-c6e6-4405-b30c-0089f73edc63"",
@@ -89,20 +80,45 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""OpenC"",
+                    ""type"": ""Button"",
+                    ""id"": ""a0572c0e-5872-4ff5-8ed7-a4a346c6400e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CloseV"",
+                    ""type"": ""Button"",
+                    ""id"": ""f55a8141-0a1d-4702-916a-c0839f376af8"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CloseB"",
+                    ""type"": ""Button"",
+                    ""id"": ""6e94ed1b-a432-491e-9291-109363ac6df6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CloseN"",
+                    ""type"": ""Button"",
+                    ""id"": ""05ef2c63-e880-44a7-a6ff-481b7d65a533"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""583f6495-8b13-4423-812c-cebf2b0d727f"",
-                    ""path"": ""<Keyboard>/c"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""OpenC"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
                 {
                     ""name"": """",
                     ""id"": ""28be18f9-4af3-44af-a16a-bd4f97469a74"",
@@ -201,6 +217,50 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""11fc798a-50be-4920-9acd-cea2b0cbcdbb"",
+                    ""path"": ""<Keyboard>/v"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CloseV"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4cbbad41-3870-42a2-903c-3e4c54fd677a"",
+                    ""path"": ""<Keyboard>/b"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CloseB"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cebfb368-7902-4bcb-8ee9-44f26215e465"",
+                    ""path"": ""<Keyboard>/n"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CloseN"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""583f6495-8b13-4423-812c-cebf2b0d727f"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""OpenC"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -212,6 +272,33 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""name"": ""CloseC"",
                     ""type"": ""Button"",
                     ""id"": ""386a4723-9d83-4b51-89c2-677ec03cdc40"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CloseV"",
+                    ""type"": ""Button"",
+                    ""id"": ""1e3afb83-fb3b-4090-b287-94866001fce4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CloseB"",
+                    ""type"": ""Button"",
+                    ""id"": ""5ae8bfb1-ab79-44b6-a8ba-6001db9291d6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CloseN"",
+                    ""type"": ""Button"",
+                    ""id"": ""ea9061b1-a7c5-42e2-9e05-84f5400bb9f5"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -229,6 +316,39 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""CloseC"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d44cece9-017a-460e-8e3a-9a3fb03b478f"",
+                    ""path"": ""<Keyboard>/v"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CloseV"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e96b93a7-63ae-4164-b49b-12391ebce04b"",
+                    ""path"": ""<Keyboard>/b"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CloseB"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""119d89ef-ff33-48bf-b2be-bb2a114f829f"",
+                    ""path"": ""<Keyboard>/n"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CloseN"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -237,16 +357,22 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
 }");
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
-        m_Player_OpenC = m_Player.FindAction("OpenC", throwIfNotFound: true);
         m_Player_SkillUseH = m_Player.FindAction("SkillUseH", throwIfNotFound: true);
         m_Player_SkillUseD = m_Player.FindAction("SkillUseD", throwIfNotFound: true);
         m_Player_SkillUseS = m_Player.FindAction("SkillUseS", throwIfNotFound: true);
         m_Player_SkillUseA = m_Player.FindAction("SkillUseA", throwIfNotFound: true);
         m_Player_SkillUseShift = m_Player.FindAction("SkillUseShift", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
+        m_Player_OpenC = m_Player.FindAction("OpenC", throwIfNotFound: true);
+        m_Player_CloseV = m_Player.FindAction("CloseV", throwIfNotFound: true);
+        m_Player_CloseB = m_Player.FindAction("CloseB", throwIfNotFound: true);
+        m_Player_CloseN = m_Player.FindAction("CloseN", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_CloseC = m_UI.FindAction("CloseC", throwIfNotFound: true);
+        m_UI_CloseV = m_UI.FindAction("CloseV", throwIfNotFound: true);
+        m_UI_CloseB = m_UI.FindAction("CloseB", throwIfNotFound: true);
+        m_UI_CloseN = m_UI.FindAction("CloseN", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -308,24 +434,30 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     // Player
     private readonly InputActionMap m_Player;
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
-    private readonly InputAction m_Player_OpenC;
     private readonly InputAction m_Player_SkillUseH;
     private readonly InputAction m_Player_SkillUseD;
     private readonly InputAction m_Player_SkillUseS;
     private readonly InputAction m_Player_SkillUseA;
     private readonly InputAction m_Player_SkillUseShift;
     private readonly InputAction m_Player_Move;
+    private readonly InputAction m_Player_OpenC;
+    private readonly InputAction m_Player_CloseV;
+    private readonly InputAction m_Player_CloseB;
+    private readonly InputAction m_Player_CloseN;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
         public PlayerActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
-        public InputAction @OpenC => m_Wrapper.m_Player_OpenC;
         public InputAction @SkillUseH => m_Wrapper.m_Player_SkillUseH;
         public InputAction @SkillUseD => m_Wrapper.m_Player_SkillUseD;
         public InputAction @SkillUseS => m_Wrapper.m_Player_SkillUseS;
         public InputAction @SkillUseA => m_Wrapper.m_Player_SkillUseA;
         public InputAction @SkillUseShift => m_Wrapper.m_Player_SkillUseShift;
         public InputAction @Move => m_Wrapper.m_Player_Move;
+        public InputAction @OpenC => m_Wrapper.m_Player_OpenC;
+        public InputAction @CloseV => m_Wrapper.m_Player_CloseV;
+        public InputAction @CloseB => m_Wrapper.m_Player_CloseB;
+        public InputAction @CloseN => m_Wrapper.m_Player_CloseN;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -335,9 +467,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_PlayerActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_PlayerActionsCallbackInterfaces.Add(instance);
-            @OpenC.started += instance.OnOpenC;
-            @OpenC.performed += instance.OnOpenC;
-            @OpenC.canceled += instance.OnOpenC;
             @SkillUseH.started += instance.OnSkillUseH;
             @SkillUseH.performed += instance.OnSkillUseH;
             @SkillUseH.canceled += instance.OnSkillUseH;
@@ -356,13 +485,22 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Move.started += instance.OnMove;
             @Move.performed += instance.OnMove;
             @Move.canceled += instance.OnMove;
+            @OpenC.started += instance.OnOpenC;
+            @OpenC.performed += instance.OnOpenC;
+            @OpenC.canceled += instance.OnOpenC;
+            @CloseV.started += instance.OnCloseV;
+            @CloseV.performed += instance.OnCloseV;
+            @CloseV.canceled += instance.OnCloseV;
+            @CloseB.started += instance.OnCloseB;
+            @CloseB.performed += instance.OnCloseB;
+            @CloseB.canceled += instance.OnCloseB;
+            @CloseN.started += instance.OnCloseN;
+            @CloseN.performed += instance.OnCloseN;
+            @CloseN.canceled += instance.OnCloseN;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
         {
-            @OpenC.started -= instance.OnOpenC;
-            @OpenC.performed -= instance.OnOpenC;
-            @OpenC.canceled -= instance.OnOpenC;
             @SkillUseH.started -= instance.OnSkillUseH;
             @SkillUseH.performed -= instance.OnSkillUseH;
             @SkillUseH.canceled -= instance.OnSkillUseH;
@@ -381,6 +519,18 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Move.started -= instance.OnMove;
             @Move.performed -= instance.OnMove;
             @Move.canceled -= instance.OnMove;
+            @OpenC.started -= instance.OnOpenC;
+            @OpenC.performed -= instance.OnOpenC;
+            @OpenC.canceled -= instance.OnOpenC;
+            @CloseV.started -= instance.OnCloseV;
+            @CloseV.performed -= instance.OnCloseV;
+            @CloseV.canceled -= instance.OnCloseV;
+            @CloseB.started -= instance.OnCloseB;
+            @CloseB.performed -= instance.OnCloseB;
+            @CloseB.canceled -= instance.OnCloseB;
+            @CloseN.started -= instance.OnCloseN;
+            @CloseN.performed -= instance.OnCloseN;
+            @CloseN.canceled -= instance.OnCloseN;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -403,11 +553,17 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_UI;
     private List<IUIActions> m_UIActionsCallbackInterfaces = new List<IUIActions>();
     private readonly InputAction m_UI_CloseC;
+    private readonly InputAction m_UI_CloseV;
+    private readonly InputAction m_UI_CloseB;
+    private readonly InputAction m_UI_CloseN;
     public struct UIActions
     {
         private @PlayerInputActions m_Wrapper;
         public UIActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @CloseC => m_Wrapper.m_UI_CloseC;
+        public InputAction @CloseV => m_Wrapper.m_UI_CloseV;
+        public InputAction @CloseB => m_Wrapper.m_UI_CloseB;
+        public InputAction @CloseN => m_Wrapper.m_UI_CloseN;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -420,6 +576,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @CloseC.started += instance.OnCloseC;
             @CloseC.performed += instance.OnCloseC;
             @CloseC.canceled += instance.OnCloseC;
+            @CloseV.started += instance.OnCloseV;
+            @CloseV.performed += instance.OnCloseV;
+            @CloseV.canceled += instance.OnCloseV;
+            @CloseB.started += instance.OnCloseB;
+            @CloseB.performed += instance.OnCloseB;
+            @CloseB.canceled += instance.OnCloseB;
+            @CloseN.started += instance.OnCloseN;
+            @CloseN.performed += instance.OnCloseN;
+            @CloseN.canceled += instance.OnCloseN;
         }
 
         private void UnregisterCallbacks(IUIActions instance)
@@ -427,6 +592,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @CloseC.started -= instance.OnCloseC;
             @CloseC.performed -= instance.OnCloseC;
             @CloseC.canceled -= instance.OnCloseC;
+            @CloseV.started -= instance.OnCloseV;
+            @CloseV.performed -= instance.OnCloseV;
+            @CloseV.canceled -= instance.OnCloseV;
+            @CloseB.started -= instance.OnCloseB;
+            @CloseB.performed -= instance.OnCloseB;
+            @CloseB.canceled -= instance.OnCloseB;
+            @CloseN.started -= instance.OnCloseN;
+            @CloseN.performed -= instance.OnCloseN;
+            @CloseN.canceled -= instance.OnCloseN;
         }
 
         public void RemoveCallbacks(IUIActions instance)
@@ -446,16 +620,22 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     public UIActions @UI => new UIActions(this);
     public interface IPlayerActions
     {
-        void OnOpenC(InputAction.CallbackContext context);
         void OnSkillUseH(InputAction.CallbackContext context);
         void OnSkillUseD(InputAction.CallbackContext context);
         void OnSkillUseS(InputAction.CallbackContext context);
         void OnSkillUseA(InputAction.CallbackContext context);
         void OnSkillUseShift(InputAction.CallbackContext context);
         void OnMove(InputAction.CallbackContext context);
+        void OnOpenC(InputAction.CallbackContext context);
+        void OnCloseV(InputAction.CallbackContext context);
+        void OnCloseB(InputAction.CallbackContext context);
+        void OnCloseN(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
         void OnCloseC(InputAction.CallbackContext context);
+        void OnCloseV(InputAction.CallbackContext context);
+        void OnCloseB(InputAction.CallbackContext context);
+        void OnCloseN(InputAction.CallbackContext context);
     }
 }

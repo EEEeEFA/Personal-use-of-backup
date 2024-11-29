@@ -6,15 +6,6 @@
             "id": "e25320ba-4449-4a75-9d76-13ecf20694e7",
             "actions": [
                 {
-                    "name": "OpenC",
-                    "type": "Button",
-                    "id": "a0572c0e-5872-4ff5-8ed7-a4a346c6400e",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "SkillUseH",
                     "type": "Button",
                     "id": "11ab4f9f-c6e6-4405-b30c-0089f73edc63",
@@ -67,20 +58,45 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "OpenC",
+                    "type": "Button",
+                    "id": "a0572c0e-5872-4ff5-8ed7-a4a346c6400e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "CloseV",
+                    "type": "Button",
+                    "id": "f55a8141-0a1d-4702-916a-c0839f376af8",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "CloseB",
+                    "type": "Button",
+                    "id": "6e94ed1b-a432-491e-9291-109363ac6df6",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "CloseN",
+                    "type": "Button",
+                    "id": "05ef2c63-e880-44a7-a6ff-481b7d65a533",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
-                {
-                    "name": "",
-                    "id": "583f6495-8b13-4423-812c-cebf2b0d727f",
-                    "path": "<Keyboard>/c",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "OpenC",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
                 {
                     "name": "",
                     "id": "28be18f9-4af3-44af-a16a-bd4f97469a74",
@@ -179,6 +195,50 @@
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "11fc798a-50be-4920-9acd-cea2b0cbcdbb",
+                    "path": "<Keyboard>/v",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CloseV",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4cbbad41-3870-42a2-903c-3e4c54fd677a",
+                    "path": "<Keyboard>/b",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CloseB",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cebfb368-7902-4bcb-8ee9-44f26215e465",
+                    "path": "<Keyboard>/n",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CloseN",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "583f6495-8b13-4423-812c-cebf2b0d727f",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "OpenC",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -194,6 +254,33 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "CloseV",
+                    "type": "Button",
+                    "id": "1e3afb83-fb3b-4090-b287-94866001fce4",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "CloseB",
+                    "type": "Button",
+                    "id": "5ae8bfb1-ab79-44b6-a8ba-6001db9291d6",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "CloseN",
+                    "type": "Button",
+                    "id": "ea9061b1-a7c5-42e2-9e05-84f5400bb9f5",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -205,6 +292,39 @@
                     "processors": "",
                     "groups": "",
                     "action": "CloseC",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d44cece9-017a-460e-8e3a-9a3fb03b478f",
+                    "path": "<Keyboard>/v",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CloseV",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e96b93a7-63ae-4164-b49b-12391ebce04b",
+                    "path": "<Keyboard>/b",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CloseB",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "119d89ef-ff33-48bf-b2be-bb2a114f829f",
+                    "path": "<Keyboard>/n",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CloseN",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
