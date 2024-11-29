@@ -35,6 +35,7 @@ public class UI : MonoBehaviour
     {
         if (_menu != null && _menu.activeSelf)// UI界面已经显示，隐藏, 如果目标UI界面未显示，调用 SwitchTo 显示。
         {
+            Debug.Log("UI已开启，故关闭");
             _menu.SetActive(false);
             CheckForInGameUI(playerInput);
             return;
