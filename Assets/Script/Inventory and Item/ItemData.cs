@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public enum ItemType
@@ -15,6 +16,7 @@ public class ItemData : ScriptableObject
     public ItemType type;
     public string itemName;
     public Sprite icon;
+    public string itemId;
 
     [Range(0, 100)]
     public float dropChance;
@@ -22,5 +24,10 @@ public class ItemData : ScriptableObject
     {
         // 同步 itemName 和对象名称
          itemName = this.name;
+        //分配物品ID
+#if UNITY_EDITOR
+        string path = AssetDatabase.GetAssetPath(this);
+        itemId = AssetDatabase.AssetPathToGUID(path);
+#endif
     }
 }

@@ -6,7 +6,7 @@ using UnityEngine;
 using static UnityEditor.Progress;
 using static UnityEditor.Timeline.Actions.MenuPriority;
 
-public class Inventory : MonoBehaviour
+public class Inventory : MonoBehaviour,ISaveManager
 {
     public static Inventory instance;
 
@@ -290,6 +290,16 @@ public class Inventory : MonoBehaviour
             }
         }
         return equipedItem;
+    }
+
+    public void LoadData(GameData _data)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void SaveData(ref GameData _data)
+    {
+        throw new System.NotImplementedException();
     }
 
     //public void UseFlask()//检测Flask的CD，CD转好了就用
