@@ -340,12 +340,17 @@ public class Inventory : MonoBehaviour,ISaveManager
         {
             _data.inventory.Add(pair.Key.itemId, pair.Value.stackSize);
         }
+
+        foreach (KeyValuePair<ItemData, InventoryItem> pair in stashDictionary)
+        {
+            _data.inventory.Add(pair.Key.itemId, pair.Value.stackSize);
+        }
     }
 
     private List<ItemData> GetItemDataBase()//获取物品数据库
     {
         List<ItemData> itemDatabase = new List<ItemData>();
-        string[] assetNames = AssetDatabase.FindAssets("", new[] { "Assets/Data/Equipment" });
+        string[] assetNames = AssetDatabase.FindAssets("", new[] { "Assets/Data/Item" });
 
         foreach (string SOName in assetNames)
         {
