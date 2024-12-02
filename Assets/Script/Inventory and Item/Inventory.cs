@@ -78,9 +78,10 @@ public class Inventory : MonoBehaviour,ISaveManager
 
     private void AddStartingItems()
     {
-        if(loadedItems.Count > 0)
+        //TODO,BUG:加入判断loadedItems是否存在这段逻辑，就会无法添加初始物品中的材料
+        if (loadedItems.Count > 0)
         {
-            foreach(InventoryItem item in loadedItems)
+            foreach (InventoryItem item in loadedItems)
             {
                 AddItem(item.itemData, item.stackSize);
             }
@@ -143,15 +144,15 @@ public class Inventory : MonoBehaviour,ISaveManager
 
     public void AddItem(ItemData _item, int _amountToAdd)//往仓库添加物品 ItemData为物品类型， amountToAdd为添加的数量
     {
+        if (_item.type == ItemType.Material)
+        {
+            Debug.Log("添加材料"+ _item.name);  
+            AddMaterial(_item, _amountToAdd);
+        }
         if (_item.type == ItemType.Equipment && CanAddItem())//判断属于哪种物品
         {
             Debug.Log("添加装备" + _item.name);
             AddEquipment(_item, _amountToAdd);
-        }
-        if (_item.type == ItemType.Material)
-        {
-            Debug.Log("添加材料"+ _item.name);
-            AddMaterial(_item, _amountToAdd);
         }
 
         UpdateSlotUI();
