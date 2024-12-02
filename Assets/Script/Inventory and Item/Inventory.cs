@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using TMPro.Examples;
+using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using static UnityEditor.Progress;
 using static UnityEditor.Timeline.Actions.MenuPriority;
@@ -11,13 +13,13 @@ public class Inventory : MonoBehaviour,ISaveManager
     public static Inventory instance;
 
     public List<InventoryItem> inventoryItemsList;
-    public Dictionary<ItemData, InventoryItem> inventoryDictionaryList;
+    public Dictionary<ItemData, InventoryItem> inventoryDictionary;
 
     public List<InventoryItem> stashItemsList;
-    public Dictionary<ItemData, InventoryItem> stashDictionaryList;
+    public Dictionary<ItemData, InventoryItem> stashDictionary;
 
     public List<InventoryItem> equipmentList;
-    public Dictionary<ItemData_Equipment, InventoryItem> equipmentDictionaryList;
+    public Dictionary<ItemData_Equipment, InventoryItem> equipmentDictionary;
 
     [SerializeField] private Transform inventorySlotParent;
     [SerializeField] private Transform stashSlotParent;
@@ -36,6 +38,10 @@ public class Inventory : MonoBehaviour,ISaveManager
     private float lastTimeUsedFlask; 
     private float lastTimeUsedArmor;
 
+    [Header("Data Base")]
+    private string[] assetNames;
+    private List<InventoryItem> loadedItems = new List<InventoryItem>();
+
     
     private void Awake()
     {
@@ -53,13 +59,13 @@ public class Inventory : MonoBehaviour,ISaveManager
     private void Start()
     {
         inventoryItemsList = new List<InventoryItem>();
-        inventoryDictionaryList = new Dictionary<ItemData, InventoryItem>();
+        inventoryDictionary = new Dictionary<ItemData, InventoryItem>();
 
         stashItemsList = new List<InventoryItem>();
-        stashDictionaryList = new Dictionary<ItemData, InventoryItem>();
+        stashDictionary = new Dictionary<ItemData, InventoryItem>();
 
         equipmentList = new List<InventoryItem>();
-        equipmentDictionaryList = new Dictionary<ItemData_Equipment, InventoryItem>();
+        equipmentDictionary = new Dictionary<ItemData_Equipment, InventoryItem>();
 
         itemSlot = inventorySlotParent.GetComponentsInChildren<UI_ItemSlot>();
         stashSlot = stashSlotParent.GetComponentsInChildren<UI_ItemSlot>();
@@ -72,6 +78,16 @@ public class Inventory : MonoBehaviour,ISaveManager
 
     private void AddStartingItems()
     {
+        if(loadedItems.Count > 0)
+        {
+            foreach(InventoryItem item in loadedItems)
+            {
+                AddItem(item.itemData, item.stackSize);
+            }
+
+            return;
+        }
+
         for (int i = 0; i < StartEquipmentList.Count; i++)
         {
             AddItem(StartEquipmentList[i].itemData, StartEquipmentList[i].stackSize);
@@ -88,7 +104,7 @@ public class Inventory : MonoBehaviour,ISaveManager
         ItemData_Equipment oldEquipment = null;
 
         //检测是否有相同类型的物品
-        foreach ( KeyValuePair<ItemData_Equipment, InventoryItem> item in equipmentDictionaryList)
+        foreach ( KeyValuePair<ItemData_Equipment, InventoryItem> item in equipmentDictionary)
         {
             if(item.Key.equipmentType == newEquipment.equipmentType)//把item in equipmentDictionaryList一个一个和newEquipment对比
             {
@@ -103,7 +119,7 @@ public class Inventory : MonoBehaviour,ISaveManager
         }
         //添加物品
         equipmentList.Add(newItem);
-        equipmentDictionaryList.Add(newEquipment, newItem);
+        equipmentDictionary.Add(newEquipment, newItem);
         RemoveItem(newItem.itemData, 1);
 
         newEquipment.AddModifiers();
@@ -114,10 +130,10 @@ public class Inventory : MonoBehaviour,ISaveManager
 
     public void UnEquip(ItemData_Equipment oldEquipment)
     {
-        if (equipmentDictionaryList.TryGetValue(oldEquipment, out InventoryItem value))
+        if (equipmentDictionary.TryGetValue(oldEquipment, out InventoryItem value))
         {
             equipmentList.Remove(value);
-            equipmentDictionaryList.Remove(oldEquipment);
+            equipmentDictionary.Remove(oldEquipment);
             oldEquipment.RemoveModifiers();
             
         }
@@ -128,9 +144,15 @@ public class Inventory : MonoBehaviour,ISaveManager
     public void AddItem(ItemData _item, int _amountToAdd)//往仓库添加物品 ItemData为物品类型， amountToAdd为添加的数量
     {
         if (_item.type == ItemType.Equipment && CanAddItem())//判断属于哪种物品
+        {
+            Debug.Log("添加装备" + _item.name);
             AddEquipment(_item, _amountToAdd);
+        }
         if (_item.type == ItemType.Material)
+        {
+            Debug.Log("添加材料"+ _item.name);
             AddMaterial(_item, _amountToAdd);
+        }
 
         UpdateSlotUI();
 
@@ -138,7 +160,7 @@ public class Inventory : MonoBehaviour,ISaveManager
 
     private void AddMaterial(ItemData _item, int _amountToAdd)
     {
-        if (stashDictionaryList.TryGetValue(_item, out InventoryItem value))
+        if (stashDictionary.TryGetValue(_item, out InventoryItem value))
         {
             value.AddStack(_amountToAdd);//AddStack是InventoryItem中自己创建的增加数量的函数
         }
@@ -148,13 +170,13 @@ public class Inventory : MonoBehaviour,ISaveManager
             newItem.stackSize = _amountToAdd;
 
             stashItemsList.Add(newItem);
-            stashDictionaryList.Add(_item, newItem);
+            stashDictionary.Add(_item, newItem);
         }
     }
 
     private void AddEquipment(ItemData _item, int _amountToAdd)
     {
-        if (inventoryDictionaryList.TryGetValue(_item, out InventoryItem value))
+        if (inventoryDictionary.TryGetValue(_item, out InventoryItem value))
         {
             value.AddStack(_amountToAdd);
         }
@@ -164,7 +186,7 @@ public class Inventory : MonoBehaviour,ISaveManager
             newItem.stackSize = _amountToAdd;
 
             inventoryItemsList.Add(newItem);
-            inventoryDictionaryList.Add(_item, newItem);
+            inventoryDictionary.Add(_item, newItem);
         }
     }
 
@@ -178,12 +200,12 @@ public class Inventory : MonoBehaviour,ISaveManager
 
     public void RemoveItem(ItemData _item, int _amountToRemove)//调用一次删_amountToRemove个
     {
-        if (inventoryDictionaryList.TryGetValue(_item, out InventoryItem value))
+        if (inventoryDictionary.TryGetValue(_item, out InventoryItem value))
         {
             if (value.stackSize <= _amountToRemove)
             {
                 inventoryItemsList.Remove(value);
-                inventoryDictionaryList.Remove(_item);
+                inventoryDictionary.Remove(_item);
             }
             else
             {
@@ -191,12 +213,12 @@ public class Inventory : MonoBehaviour,ISaveManager
             }
         }
 
-        if (stashDictionaryList.TryGetValue(_item, out InventoryItem stashvalue))
+        if (stashDictionary.TryGetValue(_item, out InventoryItem stashvalue))
         {
             if (stashvalue.stackSize <= _amountToRemove)
             {
                 stashItemsList.Remove(stashvalue);
-                stashDictionaryList.Remove(_item);
+                stashDictionary.Remove(_item);
             }
             else
             {
@@ -229,7 +251,7 @@ public class Inventory : MonoBehaviour,ISaveManager
 
         for(int i = 0; i < equipmentSlot.Length; i++)
         {
-            foreach (KeyValuePair<ItemData_Equipment, InventoryItem> item in equipmentDictionaryList)
+            foreach (KeyValuePair<ItemData_Equipment, InventoryItem> item in equipmentDictionary)
             {
                 if (item.Key.equipmentType == equipmentSlot[i].slotType)
                 {
@@ -251,7 +273,7 @@ public class Inventory : MonoBehaviour,ISaveManager
 
         for (int i = 0; i < _MaterialNeeded.Count; i++)//在stashDictionaryList中检索 材料是否足够 
         {
-            if(stashDictionaryList.TryGetValue(_MaterialNeeded[i].itemData, out InventoryItem value))
+            if(stashDictionary.TryGetValue(_MaterialNeeded[i].itemData, out InventoryItem value))
             {
                 if (value.stackSize >= _MaterialNeeded[i].stackSize)//材料足够则将材料加入ItemToRemove中
                 {
@@ -282,7 +304,7 @@ public class Inventory : MonoBehaviour,ISaveManager
     {
         ItemData_Equipment equipedItem = null;      //自己写的： 相比P115把equipedItem改成了List方便后续多个装备触发 删掉了，很多地方其实都只需要调用一个 后续要加多装备系统再改
 
-        foreach (KeyValuePair<ItemData_Equipment, InventoryItem> item in equipmentDictionaryList)
+        foreach (KeyValuePair<ItemData_Equipment, InventoryItem> item in equipmentDictionary)
         {
             if (item.Key.equipmentType == _typeOfEquipment)
             {
@@ -292,14 +314,47 @@ public class Inventory : MonoBehaviour,ISaveManager
         return equipedItem;
     }
 
-    public void LoadData(GameData _data)
+    public void LoadData(GameData _data)//加载数据
     {
-        throw new System.NotImplementedException();
+        foreach (KeyValuePair<string, int> pair in _data.inventory)
+        {
+            foreach (var item in GetItemDataBase())
+            {
+                if (item != null && item.itemId == pair.Key)
+                {
+                    InventoryItem itemToLoad = new InventoryItem(item);
+                    itemToLoad.stackSize = pair.Value;
+
+                    loadedItems.Add(itemToLoad);
+                }
+            }
+        }
     }
 
     public void SaveData(ref GameData _data)
     {
-        throw new System.NotImplementedException();
+        _data.inventory.Clear();
+
+        foreach (KeyValuePair<ItemData, InventoryItem> pair in inventoryDictionary)
+        {
+            _data.inventory.Add(pair.Key.itemId, pair.Value.stackSize);
+        }
+    }
+
+    private List<ItemData> GetItemDataBase()//获取物品数据库
+    {
+        List<ItemData> itemDatabase = new List<ItemData>();
+        string[] assetNames = AssetDatabase.FindAssets("", new[] { "Assets/Data/Equipment" });
+
+        foreach (string SOName in assetNames)
+        {
+            var SOpath = AssetDatabase.GUIDToAssetPath(SOName);
+            var itemData = AssetDatabase.LoadAssetAtPath<ItemData>(SOpath);
+            itemDatabase.Add(itemData);
+        }
+
+        return itemDatabase;
+
     }
 
     //public void UseFlask()//检测Flask的CD，CD转好了就用

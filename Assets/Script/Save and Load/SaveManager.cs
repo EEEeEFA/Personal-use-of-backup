@@ -25,6 +25,8 @@ public class SaveManager : MonoBehaviour
         else
             instance = this;
             DontDestroyOnLoad(gameObject); // 保持实例在场景切换时不被销毁
+
+
     }
 
     private void Start()

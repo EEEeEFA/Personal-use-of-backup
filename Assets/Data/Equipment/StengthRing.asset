@@ -15,8 +15,12 @@ MonoBehaviour:
   type: 1
   itemName: StengthRing
   icon: {fileID: -1195787455, guid: 9c7355b0cb8a5024bba44738f70d9e74, type: 3}
+  itemId: 0e9ec1fc1d7e4ef4398a376a9907ac80
   dropChance: 0
   equipmentType: 2
+  dynamicEffects: []
+  passvieEffects: []
+  CoolDownTime: 0
   strength: 3
   agility: 0
   intelligence: 0
@@ -33,6 +37,6 @@ MonoBehaviour:
   lightningDamage: 0
   craftingMaterials:
   - itemData: {fileID: 11400000, guid: 8d4aac103c57084499f10dd6fc9a9bf8, type: 2}
-    stackSize: 1
+    stackSize: 0
   - itemData: {fileID: 11400000, guid: 142d70bcdc7cc67439868b87bbcae221, type: 2}
-    stackSize: 3
+    stackSize: 0
