@@ -151,12 +151,10 @@ public class Inventory : MonoBehaviour,ISaveManager
     {
         if (_item.type == ItemType.Material)
         {
-            Debug.Log("添加材料"+ _item.name);  
             AddMaterial(_item, _amountToAdd);
         }
         if (_item.type == ItemType.Equipment && CanAddItem())//判断属于哪种物品
         {
-            Debug.Log("添加装备" + _item.name);
             AddEquipment(_item, _amountToAdd);
         }
 

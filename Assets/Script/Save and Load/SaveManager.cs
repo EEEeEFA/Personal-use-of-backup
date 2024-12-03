@@ -11,12 +11,18 @@ public class SaveManager : MonoBehaviour
     public static SaveManager instance;
 
     [SerializeField] private string fileName;
+    //[SerializeField] private bool encryptData;
 
     private GameData gameData;
     private List<ISaveManager> saveManagers = new List<ISaveManager>();
     private FileDataHandler dataHandler;
 
-
+    [ContextMenu("Delete save file")]
+    private void DeleteSaveData()
+    {
+        dataHandler = new FileDataHandler(Application.persistentDataPath, fileName);
+        dataHandler.Delete();
+    }
 
     private void Awake()
     {

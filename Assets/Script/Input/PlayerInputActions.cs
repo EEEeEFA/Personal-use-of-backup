@@ -303,6 +303,24 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Point"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""63afc5d9-78a2-467b-8e2c-e73261cb6c08"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Left Click"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""95726407-eadf-48f5-9ec7-5002297b404e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -349,6 +367,28 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""CloseN"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8fe196ca-ef80-4459-9aee-21d062507c4c"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Point"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""001cb5f8-a350-4a66-ab91-999b3f387cb0"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Left Click"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -373,6 +413,8 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_UI_CloseV = m_UI.FindAction("CloseV", throwIfNotFound: true);
         m_UI_CloseB = m_UI.FindAction("CloseB", throwIfNotFound: true);
         m_UI_CloseN = m_UI.FindAction("CloseN", throwIfNotFound: true);
+        m_UI_Point = m_UI.FindAction("Point", throwIfNotFound: true);
+        m_UI_LeftClick = m_UI.FindAction("Left Click", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -556,6 +598,8 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_UI_CloseV;
     private readonly InputAction m_UI_CloseB;
     private readonly InputAction m_UI_CloseN;
+    private readonly InputAction m_UI_Point;
+    private readonly InputAction m_UI_LeftClick;
     public struct UIActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -564,6 +608,8 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @CloseV => m_Wrapper.m_UI_CloseV;
         public InputAction @CloseB => m_Wrapper.m_UI_CloseB;
         public InputAction @CloseN => m_Wrapper.m_UI_CloseN;
+        public InputAction @Point => m_Wrapper.m_UI_Point;
+        public InputAction @LeftClick => m_Wrapper.m_UI_LeftClick;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -585,6 +631,12 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @CloseN.started += instance.OnCloseN;
             @CloseN.performed += instance.OnCloseN;
             @CloseN.canceled += instance.OnCloseN;
+            @Point.started += instance.OnPoint;
+            @Point.performed += instance.OnPoint;
+            @Point.canceled += instance.OnPoint;
+            @LeftClick.started += instance.OnLeftClick;
+            @LeftClick.performed += instance.OnLeftClick;
+            @LeftClick.canceled += instance.OnLeftClick;
         }
 
         private void UnregisterCallbacks(IUIActions instance)
@@ -601,6 +653,12 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @CloseN.started -= instance.OnCloseN;
             @CloseN.performed -= instance.OnCloseN;
             @CloseN.canceled -= instance.OnCloseN;
+            @Point.started -= instance.OnPoint;
+            @Point.performed -= instance.OnPoint;
+            @Point.canceled -= instance.OnPoint;
+            @LeftClick.started -= instance.OnLeftClick;
+            @LeftClick.performed -= instance.OnLeftClick;
+            @LeftClick.canceled -= instance.OnLeftClick;
         }
 
         public void RemoveCallbacks(IUIActions instance)
@@ -637,5 +695,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnCloseV(InputAction.CallbackContext context);
         void OnCloseB(InputAction.CallbackContext context);
         void OnCloseN(InputAction.CallbackContext context);
+        void OnPoint(InputAction.CallbackContext context);
+        void OnLeftClick(InputAction.CallbackContext context);
     }
 }
