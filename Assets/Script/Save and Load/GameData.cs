@@ -14,6 +14,7 @@ public class GameData
     public List<string> equipmentId;
 
     public SerializableDictionary<string, bool> chekcpoints;
+    public string closestCheckPointID;
 
     public GameData()
     {
@@ -22,6 +23,7 @@ public class GameData
         equipmentId = new List<string>();
 
         chekcpoints = new SerializableDictionary<string, bool>();
+        closestCheckPointID = string.Empty;
     }
 
 }

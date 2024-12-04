@@ -48,13 +48,15 @@ public class GameManager : MonoBehaviour,ISaveManager
     {
         _data.chekcpoints.Clear();
 
-        foreach(CheckPoint checkPoint in checkPoints)
+
+        _data.closestCheckPointID = FindCloestCheckPoint().checkpointId;
+        foreach (CheckPoint checkPoint in checkPoints)
         {
             _data.chekcpoints.Add(checkPoint.checkpointId, checkPoint.activated);
         }
     }
 
-    private CheckPoint FindCloestCheckPoint()
+    private CheckPoint FindCloestCheckPoint()//找到最近的存档点
     {
         float closestDistance = Mathf.Infinity;
         CheckPoint closestPoint = null; 
