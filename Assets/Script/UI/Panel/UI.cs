@@ -32,7 +32,6 @@ public class UI : MonoBehaviour
                 bool fadeScreen = transform.GetChild(i).GetComponent<UI_FadeScreen>() != null;//检查UI界面是否有FadeScreens
                 if (fadeScreen == false)
                     transform.GetChild(i).gameObject.SetActive(false);//遍历并隐藏所有子元素,确保了在显示新的UI界面时，所有其他的UI界面都会被隐藏
-                    Debug.Log("隐藏"+transform.GetChild(i).gameObject);
             }
 
             _menu.SetActive(true);//显示
