@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
-//2024.11.27到冬天了
+//2024.11.27有点小冷今天
 public class UI_MainMenu : MonoBehaviour
 {
     [SerializeField] private string sceneName = "SampleScene";

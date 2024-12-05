@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour,ISaveManager
         else
         {
             instance = this;
-            DontDestroyOnLoad(gameObject); // 保持实例在场景切换时不被销毁
+            //DontDestroyOnLoad(gameObject); // 保持实例在场景切换时不被销毁
         }
     }
 
@@ -71,7 +71,7 @@ public class GameManager : MonoBehaviour,ISaveManager
         _data.chekcpoints.Clear();
 
 
-        _data.closestCheckPointID = FindCloestCheckPoint().checkpointId;
+        _data.closestCheckPointID = FindCloestCheckPoint()?.checkpointId;
         foreach (CheckPoint checkPoint in checkPoints)
         {
             _data.chekcpoints.Add(checkPoint.checkpointId, checkPoint.activated);

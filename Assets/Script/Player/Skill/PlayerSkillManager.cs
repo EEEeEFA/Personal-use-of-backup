@@ -21,7 +21,7 @@ public class PlayerSkillManager : MonoBehaviour
         else
         {
             instance = this;
-            DontDestroyOnLoad(gameObject); // 保持实例在场景切换时不被销毁
+            //DontDestroyOnLoad(gameObject); // 保持实例在场景切换时不被销毁
         }
     }
 
