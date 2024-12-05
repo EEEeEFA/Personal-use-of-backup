@@ -26,7 +26,6 @@ public PlayerGroundedState(Player _player, PlayerStateMachine _stateMachine, str
         if(!player.IsGroundDetected())
         {
             stateMachine.ChangeState(player.airState);
-            Debug.Log("ground to air works");
 
         }
 

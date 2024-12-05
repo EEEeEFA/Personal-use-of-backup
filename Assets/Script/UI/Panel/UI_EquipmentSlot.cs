@@ -19,11 +19,15 @@ public class UI_EquipmentSlot : UI_ItemSlot
 
     public override void OnPointerEnter(PointerEventData eventData)
     {
+
+
         base.OnPointerEnter(eventData);
     }
 
     public override void OnPointerExit(PointerEventData eventData)
     {
+
+
         base.OnPointerExit(eventData);
     }
 }
