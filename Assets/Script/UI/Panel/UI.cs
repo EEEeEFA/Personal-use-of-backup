@@ -21,6 +21,7 @@ public class UI : MonoBehaviour
     private void Start()
     {
         SwitchTo(ui_inGame);
+        fadeScreen.gameObject.SetActive(true);
     }   
 
     public void SwitchTo(GameObject _menu)

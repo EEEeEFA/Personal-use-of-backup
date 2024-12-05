@@ -24,21 +24,6 @@ public enum StatType
 
 public class CharacterStats : MonoBehaviour
 {
-    //[Header("Major stats")]
-    //public Stats strength;     // 1 point increases damage by 1 and crit.power by 1%
-    //public Stats agility;      // 1 point increases evasion by 1% and crit.chance by 1%
-    //public Stats intelligence; // 1 point increases magic damage by 1 and magic resistance by 3
-    //public Stats vitality;     // 1 point increases health by 3 or 5 points
-
-    //[Header("Attack stats")]
-    //public Stats dealDamage;
-    //public Stats critChance;
-    //public Stats critPower;
-
-    //[Header("Defensive stats")]
-    //public Stats maxHP;
-    //public Stats armor;
-    //public Stats evasion;
 
     [Header("主属性")]
     public Stats strength;//力量，1点增加1攻击力和%1爆伤
