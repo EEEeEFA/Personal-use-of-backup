@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour,ISaveManager
 {
     public static GameManager instance;
     [SerializeField] private CheckPoint[] checkPoints;
+    private string closestCheckpointId;
+
     private void Awake()
     {
         if (instance != null && instance != this)//存在且不是这个
@@ -24,18 +26,18 @@ public class GameManager : MonoBehaviour,ISaveManager
 
     public void ReStart()//重新加载本场景
     {
+        SaveManager.instance.SaveGame();
         Scene scene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(scene.name);
-        Debug.Log("ReStart");
     }
 
     public void LoadData(GameData _data)
     {
-        foreach (CheckPoint checkPoint in checkPoints)//通过checkpointId一一对应存档与场景中的checkpoint,并激活被激活的checkpoint
+        foreach (CheckPoint checkPoint in checkPoints)//通过存档点Id一一对应存档与场景中的存档点,并激活已经点过的存档点
         {
-            foreach(KeyValuePair<string, bool>savedCheckPoint in _data.chekcpoints)
+            foreach (KeyValuePair<string, bool> savedCheckPoint in _data.chekcpoints)
             {
-               if(checkPoint.checkpointId == savedCheckPoint.Key && savedCheckPoint.Value == true)
+                if (checkPoint.checkpointId == savedCheckPoint.Key && savedCheckPoint.Value == true)
                 {
                     checkPoint.ActivateCheckpoint();
                 }
@@ -43,9 +45,15 @@ public class GameManager : MonoBehaviour,ISaveManager
             }
         }
 
-        foreach(CheckPoint checkPoint in checkPoints)
+        closestCheckpointId = _data.closestCheckPointID;//将玩家位置设置在最近的存档点
+        Invoke("SetPlayerPosition", .4f);
+    }
+
+    private void SetPlayerPosition()
+    {
+        foreach (CheckPoint checkPoint in checkPoints)
         {
-            if(checkPoint.checkpointId == _data.closestCheckPointID)
+            if (checkPoint.checkpointId == closestCheckpointId)
             {
                 PlayerManager.instance.player.transform.position = checkPoint.transform.position;
             }

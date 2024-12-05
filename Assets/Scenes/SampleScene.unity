@@ -5790,7 +5790,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2696601049169254141, guid: 3161ea6650c9f264caa832d6df911239, type: 3}
       propertyPath: m_Name
-      value: candelabrum_tall_nofire (1)
+      value: CheckPoint2
       objectReference: {fileID: 0}
     - target: {fileID: 6783825449413077697, guid: 3161ea6650c9f264caa832d6df911239, type: 3}
       propertyPath: m_LocalPosition.x
@@ -18594,7 +18594,7 @@ MonoBehaviour:
   dotsParent: {fileID: 811198389}
   bouncingSpeed: 30
   isBouncing: 1
-  amountOfBounce: 5
+  amountOfBounce: 3
 --- !u!114 &1668047591
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24693,7 +24693,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2696601049169254141, guid: 3161ea6650c9f264caa832d6df911239, type: 3}
       propertyPath: m_Name
-      value: candelabrum_tall_nofire
+      value: CheckPoint1
       objectReference: {fileID: 0}
     - target: {fileID: 6783825449413077697, guid: 3161ea6650c9f264caa832d6df911239, type: 3}
       propertyPath: m_LocalPosition.x
