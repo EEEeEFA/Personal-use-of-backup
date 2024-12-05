@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviour,ISaveManager
         }
 
         closestCheckpointId = _data.closestCheckPointID;//将玩家位置设置在最近的存档点
-        Invoke("SetPlayerPosition", .4f);
+        Invoke("SetPlayerPosition", .1f);
     }
 
     private void SetPlayerPosition()
@@ -91,4 +91,13 @@ public class GameManager : MonoBehaviour,ISaveManager
         }
         return closestPoint;
     }
+
+    public void PauseGame(bool _pause)//暂停
+    {
+        if (_pause)
+            Time.timeScale = 0;
+        else
+            Time.timeScale = 1;
+    }
+
 }

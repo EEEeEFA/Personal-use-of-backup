@@ -29,12 +29,20 @@ public class UI : MonoBehaviour
         {
             for (int i = 0; i < transform.childCount; i++)//遍历当前UI对象的所有子物体
             {
-                bool fadeScreen = transform.GetChild(i).GetComponent<UI_FadeScreen>() != null;//检查UI界面是否有FadeScreens
+                bool fadeScreen = transform.GetChild(i).GetComponent<UI_FadeScreen>() != null;
                 if (fadeScreen == false)
-                    transform.GetChild(i).gameObject.SetActive(false);//遍历并隐藏所有子元素,确保了在显示新的UI界面时，所有其他的UI界面都会被隐藏
+                    transform.GetChild(i).gameObject.SetActive(false);//遍历并隐藏除了黑幕之外的所有Object,确保了在显示新的UI界面时，所有其他的UI界面都会被隐藏
             }
 
             _menu.SetActive(true);//显示
+
+            if (GameManager.instance != null)//打开UI时暂停游戏
+            {
+                if (_menu == ui_inGame)
+                    GameManager.instance.PauseGame(false);
+                else
+                    GameManager.instance.PauseGame(true);
+            }
 
         }
     }
@@ -58,7 +66,7 @@ public class UI : MonoBehaviour
     {
         for (int i = 0; i < transform.childCount; i++)
         {
-            if (transform.GetChild(i).gameObject.activeSelf)
+            if (transform.GetChild(i).gameObject.activeSelf && transform.GetChild(i).GetComponent<UI_FadeScreen>() == null)
             {
                 Debug.Log(transform.GetChild(i).gameObject);
                 return;
@@ -73,7 +81,6 @@ public class UI : MonoBehaviour
     }
     public void SwitchOnEndScreen()
     {
-        SwitchTo(null);
         fadeScreen.FadeOut();
         StartCoroutine(EndScreenCoroutine());
     }
