@@ -109,7 +109,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""CloseN"",
+                    ""name"": ""CloseESC"",
                     ""type"": ""Button"",
                     ""id"": ""05ef2c63-e880-44a7-a6ff-481b7d65a533"",
                     ""expectedControlType"": ""Button"",
@@ -243,11 +243,11 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""cebfb368-7902-4bcb-8ee9-44f26215e465"",
-                    ""path"": ""<Keyboard>/n"",
+                    ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""CloseN"",
+                    ""action"": ""CloseESC"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -296,7 +296,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""CloseN"",
+                    ""name"": ""CloseESC"",
                     ""type"": ""Button"",
                     ""id"": ""ea9061b1-a7c5-42e2-9e05-84f5400bb9f5"",
                     ""expectedControlType"": ""Button"",
@@ -360,11 +360,11 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""119d89ef-ff33-48bf-b2be-bb2a114f829f"",
-                    ""path"": ""<Keyboard>/n"",
+                    ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""CloseN"",
+                    ""action"": ""CloseESC"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -406,13 +406,13 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Player_OpenC = m_Player.FindAction("OpenC", throwIfNotFound: true);
         m_Player_CloseV = m_Player.FindAction("CloseV", throwIfNotFound: true);
         m_Player_CloseB = m_Player.FindAction("CloseB", throwIfNotFound: true);
-        m_Player_CloseN = m_Player.FindAction("CloseN", throwIfNotFound: true);
+        m_Player_CloseESC = m_Player.FindAction("CloseESC", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_CloseC = m_UI.FindAction("CloseC", throwIfNotFound: true);
         m_UI_CloseV = m_UI.FindAction("CloseV", throwIfNotFound: true);
         m_UI_CloseB = m_UI.FindAction("CloseB", throwIfNotFound: true);
-        m_UI_CloseN = m_UI.FindAction("CloseN", throwIfNotFound: true);
+        m_UI_CloseESC = m_UI.FindAction("CloseESC", throwIfNotFound: true);
         m_UI_Point = m_UI.FindAction("Point", throwIfNotFound: true);
         m_UI_LeftClick = m_UI.FindAction("Left Click", throwIfNotFound: true);
     }
@@ -485,7 +485,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_OpenC;
     private readonly InputAction m_Player_CloseV;
     private readonly InputAction m_Player_CloseB;
-    private readonly InputAction m_Player_CloseN;
+    private readonly InputAction m_Player_CloseESC;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -499,7 +499,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @OpenC => m_Wrapper.m_Player_OpenC;
         public InputAction @CloseV => m_Wrapper.m_Player_CloseV;
         public InputAction @CloseB => m_Wrapper.m_Player_CloseB;
-        public InputAction @CloseN => m_Wrapper.m_Player_CloseN;
+        public InputAction @CloseESC => m_Wrapper.m_Player_CloseESC;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -536,9 +536,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @CloseB.started += instance.OnCloseB;
             @CloseB.performed += instance.OnCloseB;
             @CloseB.canceled += instance.OnCloseB;
-            @CloseN.started += instance.OnCloseN;
-            @CloseN.performed += instance.OnCloseN;
-            @CloseN.canceled += instance.OnCloseN;
+            @CloseESC.started += instance.OnCloseESC;
+            @CloseESC.performed += instance.OnCloseESC;
+            @CloseESC.canceled += instance.OnCloseESC;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -570,9 +570,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @CloseB.started -= instance.OnCloseB;
             @CloseB.performed -= instance.OnCloseB;
             @CloseB.canceled -= instance.OnCloseB;
-            @CloseN.started -= instance.OnCloseN;
-            @CloseN.performed -= instance.OnCloseN;
-            @CloseN.canceled -= instance.OnCloseN;
+            @CloseESC.started -= instance.OnCloseESC;
+            @CloseESC.performed -= instance.OnCloseESC;
+            @CloseESC.canceled -= instance.OnCloseESC;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -597,7 +597,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_UI_CloseC;
     private readonly InputAction m_UI_CloseV;
     private readonly InputAction m_UI_CloseB;
-    private readonly InputAction m_UI_CloseN;
+    private readonly InputAction m_UI_CloseESC;
     private readonly InputAction m_UI_Point;
     private readonly InputAction m_UI_LeftClick;
     public struct UIActions
@@ -607,7 +607,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @CloseC => m_Wrapper.m_UI_CloseC;
         public InputAction @CloseV => m_Wrapper.m_UI_CloseV;
         public InputAction @CloseB => m_Wrapper.m_UI_CloseB;
-        public InputAction @CloseN => m_Wrapper.m_UI_CloseN;
+        public InputAction @CloseESC => m_Wrapper.m_UI_CloseESC;
         public InputAction @Point => m_Wrapper.m_UI_Point;
         public InputAction @LeftClick => m_Wrapper.m_UI_LeftClick;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
@@ -628,9 +628,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @CloseB.started += instance.OnCloseB;
             @CloseB.performed += instance.OnCloseB;
             @CloseB.canceled += instance.OnCloseB;
-            @CloseN.started += instance.OnCloseN;
-            @CloseN.performed += instance.OnCloseN;
-            @CloseN.canceled += instance.OnCloseN;
+            @CloseESC.started += instance.OnCloseESC;
+            @CloseESC.performed += instance.OnCloseESC;
+            @CloseESC.canceled += instance.OnCloseESC;
             @Point.started += instance.OnPoint;
             @Point.performed += instance.OnPoint;
             @Point.canceled += instance.OnPoint;
@@ -650,9 +650,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @CloseB.started -= instance.OnCloseB;
             @CloseB.performed -= instance.OnCloseB;
             @CloseB.canceled -= instance.OnCloseB;
-            @CloseN.started -= instance.OnCloseN;
-            @CloseN.performed -= instance.OnCloseN;
-            @CloseN.canceled -= instance.OnCloseN;
+            @CloseESC.started -= instance.OnCloseESC;
+            @CloseESC.performed -= instance.OnCloseESC;
+            @CloseESC.canceled -= instance.OnCloseESC;
             @Point.started -= instance.OnPoint;
             @Point.performed -= instance.OnPoint;
             @Point.canceled -= instance.OnPoint;
@@ -687,14 +687,14 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnOpenC(InputAction.CallbackContext context);
         void OnCloseV(InputAction.CallbackContext context);
         void OnCloseB(InputAction.CallbackContext context);
-        void OnCloseN(InputAction.CallbackContext context);
+        void OnCloseESC(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
         void OnCloseC(InputAction.CallbackContext context);
         void OnCloseV(InputAction.CallbackContext context);
         void OnCloseB(InputAction.CallbackContext context);
-        void OnCloseN(InputAction.CallbackContext context);
+        void OnCloseESC(InputAction.CallbackContext context);
         void OnPoint(InputAction.CallbackContext context);
         void OnLeftClick(InputAction.CallbackContext context);
     }

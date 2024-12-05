@@ -31,6 +31,12 @@ public class GameManager : MonoBehaviour,ISaveManager
         SceneManager.LoadScene(scene.name);
     }
 
+    public void SaveAndExit()
+    {
+        SaveManager.instance.SaveGame();
+        SceneManager.LoadScene("MainMenu");
+    }
+
     public void LoadData(GameData _data)
     {
         foreach (CheckPoint checkPoint in checkPoints)//通过存档点Id一一对应存档与场景中的存档点,并激活已经点过的存档点

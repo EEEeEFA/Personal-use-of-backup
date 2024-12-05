@@ -87,7 +87,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "CloseN",
+                    "name": "CloseESC",
                     "type": "Button",
                     "id": "05ef2c63-e880-44a7-a6ff-481b7d65a533",
                     "expectedControlType": "Button",
@@ -221,11 +221,11 @@
                 {
                     "name": "",
                     "id": "cebfb368-7902-4bcb-8ee9-44f26215e465",
-                    "path": "<Keyboard>/n",
+                    "path": "<Keyboard>/escape",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "CloseN",
+                    "action": "CloseESC",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -274,7 +274,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "CloseN",
+                    "name": "CloseESC",
                     "type": "Button",
                     "id": "ea9061b1-a7c5-42e2-9e05-84f5400bb9f5",
                     "expectedControlType": "Button",
@@ -338,11 +338,11 @@
                 {
                     "name": "",
                     "id": "119d89ef-ff33-48bf-b2be-bb2a114f829f",
-                    "path": "<Keyboard>/n",
+                    "path": "<Keyboard>/escape",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "CloseN",
+                    "action": "CloseESC",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

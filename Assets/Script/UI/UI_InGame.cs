@@ -10,8 +10,8 @@ public class UI_InGame : MonoBehaviour
         [SerializeField] private Slider slider;
 
         [SerializeField] private Image dashImage;
-        [SerializeField] private Image parryImage;
-        [SerializeField] private Image crystalImage;
+        [SerializeField] private Image cloneImage;
+        //[SerializeField] private Image crystalImage;
         [SerializeField] private Image swordImage;
         [SerializeField] private Image blackholeImage;
         [SerializeField] private Image flaskImage;
@@ -28,28 +28,46 @@ public class UI_InGame : MonoBehaviour
             skills = PlayerSkillManager.instance;
         }
 
+    void Update()
+    {
+        //currentSouls.text = PlayerManager.instance.GetCurrency().ToString("#,#");
 
-        //void Update()
-        //{
-        //  //currentSouls.text = PlayerManager.instance.CurrentCurrencyAmount().ToString("#,#");  TODO：转到一个事件，货币发生变化了才更改值
+        //释放技能 更新技能CD UI
+        if (Input.GetKeyDown(KeyCode.LeftShift) )//&& skills.dash.dashUnlocked)
+            SetCooldownOf(dashImage);
+
+        if (Input.GetKeyDown(KeyCode.LeftShift) && cloneImage.fillAmount <= 0)// && skills.parry.parryUnlocked)
+            SetCooldownOf(cloneImage);
+
+        //if (Input.GetKeyDown(KeyCode.F))// && skills.crystal.crystalUnlocked)
+        //    SetCooldownOf(crystalImage);
+
+        if (Input.GetKeyDown(KeyCode.A))// && skills.sword.swordUnlocked)
+            SetCooldownOf(swordImage);
+
+        if (Input.GetKeyDown(KeyCode.H))// && skills.blackhole.blackHoleUnlocked)
+            SetCooldownOf(blackholeImage);
+
+        //更新技能CD UI
+        CheckCoolDownOf(dashImage, skills.dash.cooldownTime);
+        CheckCoolDownOf(cloneImage, skills.clone.cooldownTime);
+        //CheckCoolDownOf(crystalImage, skills.clone.cooldownTime);
+        CheckCoolDownOf(swordImage, skills.TS.cooldownTime);
+        CheckCoolDownOf(blackholeImage, skills.BH.cooldownTime);
 
 
-        //    if (Input.GetKeyDown(KeyCode.LeftShift)) //&& skills.dash.dashUnlocked解锁技能检索
-        //        SetCooldownOf(dashImage);
 
-        //    if (Input.GetKeyDown(KeyCode.R))
-        //        SetCooldownOf(blackholeImage);
+        if(Inventory.instance.GetEquipedEquipment(EquipmentType.Flask) != null)//检测是否装备了药水
+        {
+            ItemData_Equipment flask = Inventory.instance.GetEquipedEquipment(EquipmentType.Flask);
 
-        //    if (Input.GetKeyDown(KeyCode.Alpha1) && Inventory.instance.GetEquipedEquipment(EquipmentType.Flask) != null)//必须获取药水
-        //        SetCooldownOf(flaskImage);
+            if (Input.GetKeyDown(KeyCode.R))
+                SetCooldownOf(flaskImage);
 
-
-
-        //    CheckCoolDownOf(dashImage, skills.dash.cooldownTime);
-
-
-        //    CheckCoolDownOf(flaskImage, Inventory.instance.GetEquipedEquipment(EquipmentType.Flask).CoolDownTime);
-        //}
+            CheckCoolDownOf(flaskImage, flask.CoolDownTime);
+        }
+        
+    }
 
 
         private void UpdateHealthUI()//更新血条值
