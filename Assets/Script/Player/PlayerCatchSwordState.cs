@@ -39,6 +39,7 @@ public class PlayerCatchSwordState : PlayerState
     {
         base.Exit();
         player.StartCoroutine("BusyFor", .1f);
+        player.rb.velocity = Vector2.zero;  
 
     }
 
