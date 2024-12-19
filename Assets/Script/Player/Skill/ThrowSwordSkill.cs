@@ -95,7 +95,7 @@ public class ThrowSwordSkill : Skill
             dots[i] = Instantiate(dotPrefab, player.transform.position, Quaternion.identity, dotsParent);
             dots[i].SetActive(false);
         }
-    }
+    }//生成点
 
     public void DotsActive(bool _isActive)//点可视化开关，状态机aim里打开，CreateSword里面关闭
     {

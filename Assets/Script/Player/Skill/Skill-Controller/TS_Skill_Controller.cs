@@ -118,7 +118,7 @@ public class TS_Skill_Controller : MonoBehaviour
         {
             enemy.DamageEffect(player);
             player.stats.DoDamage(enemy.GetComponent<CharacterStats>(), enemy);
-            enemy.StartCoroutine("FreezeTimerFor", freezeTimeDuration);
+            enemy.StartCoroutine("FreezeTimeFor", freezeTimeDuration);
         }
 
     private void SetupBounceTarget(Collider2D collision)
