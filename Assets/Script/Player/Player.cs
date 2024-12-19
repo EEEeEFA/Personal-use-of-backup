@@ -144,7 +144,6 @@ public class Player : Entity
     {
         if (!sword)
         {
-            Debug.Log("2");
             return true;
         }
 
@@ -169,7 +168,7 @@ public class Player : Entity
 
             ItemData_Equipment _flask = Inventory.instance.GetEquipedEquipment(EquipmentType.Flask);
 
-           if(_flask.CoolDownCounter())
+           if(_flask.CoolDownCounter() && _flask != null)
             {
                 _flask.UseDynamicItemEffect(null);
             }

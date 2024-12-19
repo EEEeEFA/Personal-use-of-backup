@@ -41,6 +41,7 @@ public class Inventory : MonoBehaviour,ISaveManager
     [Header("Data Base")]
     private string[] assetNames;
     private List<InventoryItem> loadedItems = new List<InventoryItem>();
+    private List<ItemData_Equipment> loadedEquipment = new List<ItemData_Equipment>();
 
     
     private void Awake()
@@ -52,7 +53,7 @@ public class Inventory : MonoBehaviour,ISaveManager
         else
         {
             instance = this;
-            DontDestroyOnLoad(gameObject); // 保持实例在场景切换时不被销毁
+//      DontDestroyOnLoad(gameObject); // 保持实例在场景切换时不被销毁
         }
     }
 
@@ -78,7 +79,11 @@ public class Inventory : MonoBehaviour,ISaveManager
 
     private void AddStartingItems()
     {
-        //TODO,BUG:加入判断loadedItems是否存在这段逻辑，就会无法添加初始物品中的材料
+        foreach(ItemData_Equipment loadedEquipment in loadedEquipment)
+        {
+            Equip(loadedEquipment);
+        }
+        
         if (loadedItems.Count > 0)
         {
             foreach (InventoryItem item in loadedItems)
@@ -146,12 +151,10 @@ public class Inventory : MonoBehaviour,ISaveManager
     {
         if (_item.type == ItemType.Material)
         {
-            Debug.Log("添加材料"+ _item.name);  
             AddMaterial(_item, _amountToAdd);
         }
         if (_item.type == ItemType.Equipment && CanAddItem())//判断属于哪种物品
         {
-            Debug.Log("添加装备" + _item.name);
             AddEquipment(_item, _amountToAdd);
         }
 
@@ -330,11 +333,23 @@ public class Inventory : MonoBehaviour,ISaveManager
                 }
             }
         }
+
+        foreach(string loadedEquipmentId in _data.equipmentId)
+        {
+            foreach(var item in GetItemDataBase())
+            {
+                if(item != null && item.itemId == loadedEquipmentId)
+                {
+                    loadedEquipment.Add(item as ItemData_Equipment);
+                }
+            }
+        }
     }
 
     public void SaveData(ref GameData _data)
     {
         _data.inventory.Clear();
+        _data.equipmentId.Clear();
 
         foreach (KeyValuePair<ItemData, InventoryItem> pair in inventoryDictionary)
         {
@@ -344,6 +359,11 @@ public class Inventory : MonoBehaviour,ISaveManager
         foreach (KeyValuePair<ItemData, InventoryItem> pair in stashDictionary)
         {
             _data.inventory.Add(pair.Key.itemId, pair.Value.stackSize);
+        }
+
+        foreach(KeyValuePair<ItemData_Equipment, InventoryItem>pair in equipmentDictionary)
+        {
+            _data.equipmentId.Add(pair.Key.itemId);
         }
     }
 

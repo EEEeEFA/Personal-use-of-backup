@@ -26,7 +26,6 @@ public class PlayerAirState : PlayerState
         if (player.IsWallDetected())
         {
             stateMachine.ChangeState(player.slideState);
-            Debug.Log("air to slide works");
 
         }
 

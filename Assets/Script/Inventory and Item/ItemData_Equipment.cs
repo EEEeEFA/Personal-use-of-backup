@@ -111,9 +111,9 @@ public class ItemData_Equipment : ItemData
 
     public bool CoolDownCounter()
     {
-        Debug.Log(Time.time);
-        Debug.Log(CoolDownTime);
-        Debug.Log(lastTimeUsed);
+        //Debug.Log(Time.time);
+        //Debug.Log(CoolDownTime);
+        //Debug.Log(lastTimeUsed);
         if (Time.time > CoolDownTime + lastTimeUsed)
         {
             lastTimeUsed = Time.time;

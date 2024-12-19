@@ -72,8 +72,11 @@ public class BH_Skill_Controller : MonoBehaviour
 
     private void ReleaseCloneAttack()
     {
-        if(enemyTargets.Count <= 0) 
+        if(enemyTargets.Count <= 0)
+        {
+            FinishBlackHole();
             return;
+        }
 
         DestoryHotKey();//消除怪物头上的字母
 

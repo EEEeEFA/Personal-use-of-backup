@@ -9,13 +9,20 @@ using UnityEngine.InputSystem;
 
 public class UI : MonoBehaviour
 {
+    [Header("End screens")]
+    public UI_FadeScreen fadeScreen;
+    [SerializeField] private GameObject endText;
+    [SerializeField] private GameObject ReSpawnBotton;
+    [Space]
+
     [SerializeField] public UI_ItemTooltip itemToolTip;
     [SerializeField] private PlayerInput playerInput;
     [SerializeField] private GameObject ui_inGame;
     private void Start()
     {
-        //Close(playerInput);
-    }
+        SwitchTo(ui_inGame);
+        fadeScreen.gameObject.SetActive(true);
+    }   
 
     public void SwitchTo(GameObject _menu)
     {
@@ -23,10 +30,20 @@ public class UI : MonoBehaviour
         {
             for (int i = 0; i < transform.childCount; i++)//遍历当前UI对象的所有子物体
             {
-                transform.GetChild(i).gameObject.SetActive(false);//遍历并隐藏所有子元素,确保了在显示新的UI界面时，所有其他的UI界面都会被隐藏
+                bool fadeScreen = transform.GetChild(i).GetComponent<UI_FadeScreen>() != null;
+                if (fadeScreen == false)
+                    transform.GetChild(i).gameObject.SetActive(false);//遍历并隐藏除了黑幕之外的所有Object,确保了在显示新的UI界面时，所有其他的UI界面都会被隐藏
             }
 
             _menu.SetActive(true);//显示
+
+            if (GameManager.instance != null)//打开UI时暂停游戏
+            {
+                if (_menu == ui_inGame)
+                    GameManager.instance.PauseGame(false);
+                else
+                    GameManager.instance.PauseGame(true);
+            }
 
         }
     }
@@ -37,6 +54,8 @@ public class UI : MonoBehaviour
         {
             _menu.SetActive(false);
             CheckForInGameUI(playerInput);
+            Debug.Log("InGameUI");
+            Debug.Log(_menu);
             return;
         }
         playerInput.SwitchCurrentActionMap("UI");
@@ -48,8 +67,12 @@ public class UI : MonoBehaviour
     {
         for (int i = 0; i < transform.childCount; i++)
         {
-            if (transform.GetChild(i).gameObject.activeSelf)
+            if (transform.GetChild(i).gameObject.activeSelf && transform.GetChild(i).GetComponent<UI_FadeScreen>() == null)
+            {
+                Debug.Log(transform.GetChild(i).gameObject);
                 return;
+            }
+
 
         }
         _playerInput.SwitchCurrentActionMap("Player");
@@ -57,5 +80,21 @@ public class UI : MonoBehaviour
 
 
     }
+    public void SwitchOnEndScreen()
+    {
+        fadeScreen.FadeOut();
+        StartCoroutine(EndScreenCoroutine());
+    }
+
+    IEnumerator EndScreenCoroutine()
+    {
+        yield return new WaitForSeconds(1);
+        endText.SetActive(true);
+        yield return new WaitForSeconds(.5f);
+        ReSpawnBotton.SetActive(true);
+
+    }
+
+    public void RestartGame() => GameManager.instance.ReStart();
 }
 

@@ -11,12 +11,18 @@ public class SaveManager : MonoBehaviour
     public static SaveManager instance;
 
     [SerializeField] private string fileName;
+    //[SerializeField] private bool encryptData;
 
     private GameData gameData;
     private List<ISaveManager> saveManagers = new List<ISaveManager>();
     private FileDataHandler dataHandler;
 
-
+    [ContextMenu("Delete save file")]
+    public void DeleteSaveData()//删除存档
+    {
+        dataHandler = new FileDataHandler(Application.persistentDataPath, fileName);
+        dataHandler.Delete();
+    }
 
     private void Awake()
     {
@@ -24,7 +30,7 @@ public class SaveManager : MonoBehaviour
             Destroy(instance.gameObject);
         else
             instance = this;
-            DontDestroyOnLoad(gameObject); // 保持实例在场景切换时不被销毁
+            //DontDestroyOnLoad(gameObject); // 保持实例在场景切换时不被销毁
 
 
     }
@@ -85,6 +91,16 @@ public class SaveManager : MonoBehaviour
 
         return new List<ISaveManager>(saveManagers);
 
+    }
+
+    public bool HasSavedData()
+    {
+        if (dataHandler.Load() != null)
+        {
+            return true;
+        }
+
+        return false;
     }
 }
 

@@ -36,7 +36,7 @@ public class TS_Skill_Controller : MonoBehaviour
         if (canRotate)
             transform.right = rb.velocity;
 
-        if (isReturning)
+        if (isReturning)//剑返回
         {
             transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
 
@@ -139,7 +139,7 @@ public class TS_Skill_Controller : MonoBehaviour
         }
     }
 
-    private void StuckInto(Collider2D collision)
+    private void StuckInto(Collider2D collision)//碰到墙体卡住
     {
         canRotate = false;
         cd.enabled = false;

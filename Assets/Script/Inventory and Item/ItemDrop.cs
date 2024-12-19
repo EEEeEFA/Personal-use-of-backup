@@ -25,9 +25,8 @@ public class ItemDrop : MonoBehaviour
             DropItem(randomItem);//将掉落物信息传给实例化对象,并随机生成速度弹出实例
         }
     }
-    public void DropItem(ItemData randomItem)    
+    public void DropItem(ItemData randomItem)//生成凋落物    
     {
-        Debug.Log("DropItem");
         GameObject newDrop = Instantiate(dropPrefab, transform.position, Quaternion.identity);
         Vector2 randomVelocity = new Vector2(Random.Range(-5, 5), Random.Range(15, 20));
         newDrop.GetComponent<ItemObject>().SetupItem(randomItem, randomVelocity);

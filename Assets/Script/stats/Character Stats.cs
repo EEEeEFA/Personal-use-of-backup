@@ -24,21 +24,6 @@ public enum StatType
 
 public class CharacterStats : MonoBehaviour
 {
-    //[Header("Major stats")]
-    //public Stats strength;     // 1 point increases damage by 1 and crit.power by 1%
-    //public Stats agility;      // 1 point increases evasion by 1% and crit.chance by 1%
-    //public Stats intelligence; // 1 point increases magic damage by 1 and magic resistance by 3
-    //public Stats vitality;     // 1 point increases health by 3 or 5 points
-
-    //[Header("Attack stats")]
-    //public Stats dealDamage;
-    //public Stats critChance;
-    //public Stats critPower;
-
-    //[Header("Defensive stats")]
-    //public Stats maxHP;
-    //public Stats armor;
-    //public Stats evasion;
 
     [Header("主属性")]
     public Stats strength;//力量，1点增加1攻击力和%1爆伤
@@ -377,7 +362,6 @@ public class CharacterStats : MonoBehaviour
     {
         DecreaseHealthBy(_takeDamage);//血量计算
                                       //受击效果 因为要传入接口，单独放在各个伤害的trigger那了
-        Debug.Log("受伤害对象"+gameObject.name +"对应伤害"+_takeDamage);
 
 
         if (currentHP <= 0 && !Dead)
