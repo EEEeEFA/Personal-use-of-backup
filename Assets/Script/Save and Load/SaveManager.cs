@@ -17,10 +17,18 @@ public class SaveManager : MonoBehaviour
     private List<ISaveManager> saveManagers = new List<ISaveManager>();
     private FileDataHandler dataHandler;
 
-    [ContextMenu("Delete save file")]
-    public void DeleteSaveData()//É¾³ý´æµµ
+    private void InitializeDataHandler()
     {
-        dataHandler = new FileDataHandler(Application.persistentDataPath, fileName);
+        if (dataHandler == null)
+        {
+            dataHandler = new FileDataHandler(Application.persistentDataPath, fileName);
+        }
+    }
+
+    [ContextMenu("Delete save file")]
+    public void DeleteSaveData()//É¾æµµ
+    {
+        InitializeDataHandler();
         dataHandler.Delete();
     }
 
@@ -30,16 +38,15 @@ public class SaveManager : MonoBehaviour
             Destroy(instance.gameObject);
         else
             instance = this;
-            //DontDestroyOnLoad(gameObject); // ±£³ÖÊµÀýÔÚ³¡¾°ÇÐ»»Ê±²»±»Ïú»Ù
+            //DontDestroyOnLoad(gameObject); // ÊµÚ³Ð»Ê±
 
 
     }
 
     private void Start()
     {
-        dataHandler = new FileDataHandler(Application.persistentDataPath, fileName);
+        InitializeDataHandler();
         saveManagers = FindAllSaveManagers();
-
         LoadGame();
     }
 
@@ -56,7 +63,7 @@ public class SaveManager : MonoBehaviour
 
         if (this.gameData == null)
         {
-            Debug.Log("Ã»ÓÐÕÒµ½´æµµ");
+            Debug.Log("Ã»Òµæµµ");
             NewGame();
         }
 

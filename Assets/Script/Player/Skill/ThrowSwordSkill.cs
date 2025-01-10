@@ -28,6 +28,8 @@ public class ThrowSwordSkill : Skill
     [SerializeField] private GameObject dotPrefab;
     [SerializeField] private Transform dotsParent;
     private GameObject[] dots;
+    private Vector2 cachedAimDirection;
+    private bool hasPressedUp;
 
     [Header("Bounce info")]
     [SerializeField] public float bouncingSpeed;
@@ -35,7 +37,8 @@ public class ThrowSwordSkill : Skill
     [SerializeField] public int amountOfBounce;
 
 
-   // private Vector2 cachedAimDirection;
+
+    // private Vector2 cachedAimDirection;
     //private bool hasPressedUp = false;
     protected override void Start()
     {
@@ -45,27 +48,33 @@ public class ThrowSwordSkill : Skill
     protected override void Update()
     {
         base.Update();
-        if (Input.GetKey(KeyCode.A))
+
+        ////                   直线调用这个                         //
+        //if (Input.GetKey(KeyCode.A))
+        //{
+        //    for (int i = 0; i < dots.Length; i++)
+        //        dots[i].transform.position = DotsPosition(i * spaceBeetwenDots);
+        //}
+
+        ///                   抛物线轨迹调用这个                  //
+        if (Input.GetKeyDown(KeyCode.UpArrow) && !hasPressedUp && Input.GetKey(KeyCode.A))
         {
+            cachedAimDirection = CalculateAimDirection(player.facingDir); // 更新缓存的 AimDirection 值
+            hasPressedUp = true;
+
             for (int i = 0; i < dots.Length; i++)
-                dots[i].transform.position = DotsPosition(i * spaceBeetwenDots);
+                dots[i].transform.position = DotsPosition(i * spaceBeetwenDots, cachedAimDirection);
+
         }
 
-        /////                   抛物线轨迹调用这个                   //////////
-        //if (Input.GetKeyDown(KeyCode.UpArrow) && !hasPressedUp)
-        //{
-        //    cachedAimDirection = CalculateAimDirection(player.facingDir); // 更新缓存的 AimDirection 值
-        //    hasPressedUp = true;
-        //}
-
-        //if (Input.GetKeyUp(KeyCode.UpArrow))
-        //{
-        //    hasPressedUp = false; // 松开↑键时重置
-        //}
+        if (Input.GetKeyUp(KeyCode.UpArrow))
+        {
+            hasPressedUp = false; // 松开↑键时重置
+        }
     }
     public void CreateSword()//实例化prefabs,并且把小参数传给 TS_SKILL_CONTROLLER设置prefabs
     {
-        launchForce = AimDirectionTemp(player.facingDir) * launchForce.magnitude;
+        launchForce = cachedAimDirection * launchForce.magnitude;
 
 
         GameObject newSword = Instantiate(swordPrefab, player.transform.position, transform.rotation);
@@ -129,7 +138,7 @@ public class ThrowSwordSkill : Skill
 
     }
 
-    public Vector2 AimDirectionTemp(int playerFacingR)//临时用的
+    public Vector2 AimDirectionTemp(int playerFacingR)//生成左右直线丢剑角度
     {
 
         if (Input.GetAxisRaw("Horizontal") > 0 && playerFacingR < 0)
@@ -146,7 +155,7 @@ public class ThrowSwordSkill : Skill
 
         return new Vector2(playerFacingR, 0);
     }
-    private Vector2 DotsPosition(float t)//在本脚本的Update里实现
+    private Vector2 DotsPosition(float t)//(直线版本)在本脚本的Update里实现
     {
         Vector2 position = (Vector2)player.transform.position
                              +  (AimDirectionTemp(player.facingDir) * launchForce.magnitude) * t;
@@ -154,6 +163,16 @@ public class ThrowSwordSkill : Skill
 
         return position;
     }
+
+    private Vector2 DotsPosition(float t, Vector2 aimDirection)
+    {
+        Vector2 position = (Vector2)player.transform.position
+                            + (aimDirection * launchForce.magnitude) * t
+                            + (0.5f * (Physics2D.gravity * swordGravity) * (t * t));
+
+        return position;
+    }
+
 
     public override bool CanUseSkill()
     {

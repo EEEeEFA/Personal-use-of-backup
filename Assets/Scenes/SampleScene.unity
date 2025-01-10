@@ -20052,7 +20052,7 @@ MonoBehaviour:
   timeCounter: 0
   swordType: 1
   launchForce: {x: 20, y: 1}
-  swordGravity: 0
+  swordGravity: 3
   swordPrefab: {fileID: 9203315307366413, guid: 938f1909b2f947e4cb88e27f02a5b20b, type: 3}
   returnSpeed: 15
   freezeTimeDuration: 0.3
