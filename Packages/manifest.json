@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.boxqkrtm.ide.cursor": "file:C:/Users/salyb/Desktop/com.unity.ide.cursor-master",
     "com.unity.feature.2d": "2.0.0",
     "com.unity.feature.cinematic": "1.0.0",
     "com.unity.ide.visualstudio": "2.0.22",
