@@ -22,9 +22,7 @@ public class ItemData : ScriptableObject
     public float dropChance;
     protected void OnValidate()
     {
-        // 同步 itemName 和对象名称
          itemName = this.name;
-        //分配物品ID
 #if UNITY_EDITOR
         string path = AssetDatabase.GetAssetPath(this);
         itemId = AssetDatabase.AssetPathToGUID(path);

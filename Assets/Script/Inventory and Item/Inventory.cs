@@ -42,7 +42,7 @@ public class Inventory : MonoBehaviour,ISaveManager
     private string[] assetNames;
     private List<InventoryItem> loadedItems = new List<InventoryItem>();
     private List<ItemData_Equipment> loadedEquipment = new List<ItemData_Equipment>();
-
+    private List<ItemData> itemDataBase;
     
     private void Awake()
     {
@@ -367,12 +367,16 @@ public class Inventory : MonoBehaviour,ISaveManager
         }
     }
 
-    private List<ItemData> GetItemDataBase()//��ȡ��Ʒ���ݿ�
+        [ContextMenu("Fill up item data base")]
+        private void FillUpItemDataBase() => itemDataBase = new List<ItemData>(GetItemDataBase());
+
+#if UNITY_EDITOR
+    private List<ItemData> GetItemDataBase()
     {
         List<ItemData> itemDatabase = new List<ItemData>();
         string[] assetNames = AssetDatabase.FindAssets("", new[] { "Assets/Data/Item" });
 
-        foreach (string SOName in assetNames)
+            foreach (string SOName in assetNames)
         {
             var SOpath = AssetDatabase.GUIDToAssetPath(SOName);
             var itemData = AssetDatabase.LoadAssetAtPath<ItemData>(SOpath);
@@ -382,6 +386,8 @@ public class Inventory : MonoBehaviour,ISaveManager
         return itemDatabase;
 
     }
+
+#endif
 
     //public void UseFlask()//���Flask��CD��CDת���˾���
     //{
