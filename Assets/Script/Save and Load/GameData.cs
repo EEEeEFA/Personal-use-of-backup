@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//2024.11.25 ´æµµÊý¾Ý´æ·Å½Å±¾
+//2024.11.25 ï¿½æµµï¿½ï¿½ï¿½Ý´ï¿½Å½Å±ï¿½
 [System.Serializable]
 public class GameData
 {

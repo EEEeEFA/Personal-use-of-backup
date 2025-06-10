@@ -53,7 +53,7 @@ public class Inventory : MonoBehaviour,ISaveManager
         else
         {
             instance = this;
-//      DontDestroyOnLoad(gameObject); // ±£³ÖÊµÀýÔÚ³¡¾°ÇÐ»»Ê±²»±»Ïú»Ù
+//      DontDestroyOnLoad(gameObject); // ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½ï¿½Ú³ï¿½ï¿½ï¿½ï¿½Ð»ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         }
     }
 
@@ -73,7 +73,7 @@ public class Inventory : MonoBehaviour,ISaveManager
         equipmentSlot = equipmentSlotParent.GetComponentsInChildren<UI_EquipmentSlot>();
         statSlot = statSlotParent.GetComponentsInChildren<UI_StatSlot>();
 
-        AddStartingItems();//»ñÈ¡³õÊ¼×°±¸
+        AddStartingItems();//ï¿½ï¿½È¡ï¿½ï¿½Ê¼×°ï¿½ï¿½
 
     }
 
@@ -109,21 +109,21 @@ public class Inventory : MonoBehaviour,ISaveManager
 
         ItemData_Equipment oldEquipment = null;
 
-        //¼ì²âÊÇ·ñÓÐÏàÍ¬ÀàÐÍµÄÎïÆ·
+        //ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½Í?ï¿½ï¿½ï¿½Íµï¿½ï¿½ï¿½Æ·
         foreach ( KeyValuePair<ItemData_Equipment, InventoryItem> item in equipmentDictionary)
         {
-            if(item.Key.equipmentType == newEquipment.equipmentType)//°Ñitem in equipmentDictionaryListÒ»¸öÒ»¸öºÍnewEquipment¶Ô±È
+            if(item.Key.equipmentType == newEquipment.equipmentType)//ï¿½ï¿½item in equipmentDictionaryListÒ»ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½newEquipmentï¿½Ô±ï¿½
             {
                 oldEquipment = item.Key;
             }
         }
-        //ÒÆ³ý¾ÉÎïÆ·
+        //ï¿½Æ³ï¿½ï¿½ï¿½ï¿½ï¿½Æ·
         if (oldEquipment != null)
         {
             UnEquip(oldEquipment);
             AddItem(oldEquipment, 1);
         }
-        //Ìí¼ÓÎïÆ·
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·
         equipmentList.Add(newItem);
         equipmentDictionary.Add(newEquipment, newItem);
         RemoveItem(newItem.itemData, 1);
@@ -147,13 +147,13 @@ public class Inventory : MonoBehaviour,ISaveManager
         UpdateSlotUI();
     }
 
-    public void AddItem(ItemData _item, int _amountToAdd)//Íù²Ö¿âÌí¼ÓÎïÆ· ItemDataÎªÎïÆ·ÀàÐÍ£¬ amountToAddÎªÌí¼ÓµÄÊýÁ¿
+    public void AddItem(ItemData _item, int _amountToAdd)//ï¿½ï¿½ï¿½Ö¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ· ItemDataÎªï¿½ï¿½Æ·ï¿½ï¿½ï¿½Í£ï¿½ amountToAddÎªï¿½ï¿½ï¿½Óµï¿½ï¿½ï¿½ï¿½ï¿½
     {
         if (_item.type == ItemType.Material)
         {
             AddMaterial(_item, _amountToAdd);
         }
-        if (_item.type == ItemType.Equipment && CanAddItem())//ÅÐ¶ÏÊôÓÚÄÄÖÖÎïÆ·
+        if (_item.type == ItemType.Equipment && CanAddItem())//ï¿½Ð¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·
         {
             AddEquipment(_item, _amountToAdd);
         }
@@ -166,7 +166,7 @@ public class Inventory : MonoBehaviour,ISaveManager
     {
         if (stashDictionary.TryGetValue(_item, out InventoryItem value))
         {
-            value.AddStack(_amountToAdd);//AddStackÊÇInventoryItemÖÐ×Ô¼º´´½¨µÄÔö¼ÓÊýÁ¿µÄº¯Êý
+            value.AddStack(_amountToAdd);//AddStackï¿½ï¿½InventoryItemï¿½ï¿½ï¿½Ô¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Äºï¿½ï¿½ï¿½
         }
         else
         {
@@ -202,7 +202,7 @@ public class Inventory : MonoBehaviour,ISaveManager
             return true;
     }
 
-    public void RemoveItem(ItemData _item, int _amountToRemove)//µ÷ÓÃÒ»´ÎÉ¾_amountToRemove¸ö
+    public void RemoveItem(ItemData _item, int _amountToRemove)//ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½É¾_amountToRemoveï¿½ï¿½
     {
         if (inventoryDictionary.TryGetValue(_item, out InventoryItem value))
         {
@@ -275,13 +275,13 @@ public class Inventory : MonoBehaviour,ISaveManager
     {
         List<InventoryItem> ItemToRemove = new List<InventoryItem>();
 
-        for (int i = 0; i < _MaterialNeeded.Count; i++)//ÔÚstashDictionaryListÖÐ¼ìË÷ ²ÄÁÏÊÇ·ñ×ã¹» 
+        for (int i = 0; i < _MaterialNeeded.Count; i++)//ï¿½ï¿½stashDictionaryListï¿½Ð¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ã¹» 
         {
             if(stashDictionary.TryGetValue(_MaterialNeeded[i].itemData, out InventoryItem value))
             {
-                if (value.stackSize >= _MaterialNeeded[i].stackSize)//²ÄÁÏ×ã¹»Ôò½«²ÄÁÏ¼ÓÈëItemToRemoveÖÐ
+                if (value.stackSize >= _MaterialNeeded[i].stackSize)//ï¿½ï¿½ï¿½ï¿½ï¿½ã¹»ï¿½ò½«²ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½ItemToRemoveï¿½ï¿½
                 {
-                    ItemToRemove.Add(value);                        //ÍòÒ»Ò»¸ö¹»ÁËÁíÒ»¸ö²»¹»£¿
+                    ItemToRemove.Add(value);                        //ï¿½ï¿½Ò»Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
                 }
                 else
                 {
@@ -297,16 +297,16 @@ public class Inventory : MonoBehaviour,ISaveManager
             Debug.Log("item:" + ItemToRemove[i].itemData + "stackSize:"+ _MaterialNeeded[i].stackSize);
         }
 
-        AddItem(itemToCreate, 1);//ÒòÎªÕâÀïÊÇ°´Ò»ÏÂ´¥·¢Ò»´Î£¬ºóÐø1¿ÉÄÜ»á±ä
+        AddItem(itemToCreate, 1);//ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½Ç°ï¿½Ò»ï¿½Â´ï¿½ï¿½ï¿½Ò»ï¿½Î£ï¿½ï¿½ï¿½ï¿½ï¿½1ï¿½ï¿½ï¿½Ü»ï¿½ï¿?
         Debug.Log("itemDone"+ itemToCreate.name);   
         return true;
     }
 
     public List<InventoryItem> GetEquipmentList() => equipmentList;
 
-    public ItemData_Equipment GetEquipedEquipment(EquipmentType _typeOfEquipment)//»ñÈ¡±»×°±¸µÄ×°±¸
+    public ItemData_Equipment GetEquipedEquipment(EquipmentType _typeOfEquipment)//ï¿½ï¿½È¡ï¿½ï¿½×°ï¿½ï¿½ï¿½ï¿½×°ï¿½ï¿½
     {
-        ItemData_Equipment equipedItem = null;      //×Ô¼ºÐ´µÄ£º Ïà±ÈP115°ÑequipedItem¸Ä³ÉÁËList·½±ãºóÐø¶à¸ö×°±¸´¥·¢ É¾µôÁË£¬ºÜ¶àµØ·½ÆäÊµ¶¼Ö»ÐèÒªµ÷ÓÃÒ»¸ö ºóÐøÒª¼Ó¶à×°±¸ÏµÍ³ÔÙ¸Ä
+        ItemData_Equipment equipedItem = null;      //ï¿½Ô¼ï¿½Ð´ï¿½Ä£ï¿½ ï¿½ï¿½ï¿½P115ï¿½ï¿½equipedItemï¿½Ä³ï¿½ï¿½ï¿½Listï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ É¾ï¿½ï¿½ï¿½Ë£ï¿½ï¿½Ü¶ï¿½Ø·ï¿½ï¿½ï¿½Êµï¿½ï¿½Ö»ï¿½ï¿½Ò?ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Òªï¿½Ó¶ï¿½×°ï¿½ï¿½ÏµÍ³ï¿½Ù¸ï¿½
 
         foreach (KeyValuePair<ItemData_Equipment, InventoryItem> item in equipmentDictionary)
         {
@@ -318,7 +318,7 @@ public class Inventory : MonoBehaviour,ISaveManager
         return equipedItem;
     }
 
-    public void LoadData(GameData _data)//¼ÓÔØÊý¾Ý
+    public void LoadData(GameData _data)//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     {
         foreach (KeyValuePair<string, int> pair in _data.inventory)
         {
@@ -367,7 +367,7 @@ public class Inventory : MonoBehaviour,ISaveManager
         }
     }
 
-    private List<ItemData> GetItemDataBase()//»ñÈ¡ÎïÆ·Êý¾Ý¿â
+    private List<ItemData> GetItemDataBase()//ï¿½ï¿½È¡ï¿½ï¿½Æ·ï¿½ï¿½ï¿½Ý¿ï¿½
     {
         List<ItemData> itemDatabase = new List<ItemData>();
         string[] assetNames = AssetDatabase.FindAssets("", new[] { "Assets/Data/Item" });
@@ -383,11 +383,11 @@ public class Inventory : MonoBehaviour,ISaveManager
 
     }
 
-    //public void UseFlask()//¼ì²âFlaskµÄCD£¬CD×ªºÃÁË¾ÍÓÃ
+    //public void UseFlask()//ï¿½ï¿½ï¿½Flaskï¿½ï¿½CDï¿½ï¿½CD×ªï¿½ï¿½ï¿½Ë¾ï¿½ï¿½ï¿½
     //{
     //    ItemData_Equipment _flask = GetEquipedEquipment(EquipmentType.Flask);
 
-    //    lastTimeUsedFlask = -Mathf.Infinity;//·ÀÖ¹ÓÎÏ·Ò»¿ªÊ¼ÓÃ²»ÁË
+    //    lastTimeUsedFlask = -Mathf.Infinity;//ï¿½ï¿½Ö¹ï¿½ï¿½Ï·Ò»ï¿½ï¿½Ê¼ï¿½Ã²ï¿½ï¿½ï¿½
 
     //    bool CanUseFlask = Time.time > _flask.FlaskCoolDown + lastTimeUsedFlask;
 
