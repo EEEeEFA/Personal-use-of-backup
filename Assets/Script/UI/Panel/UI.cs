@@ -7,6 +7,17 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[System.Serializable]
+public class UIPanelBinding
+{
+    public GameObject panel;
+    public InputActionReference openAction;
+    public InputActionReference closeAction;
+    
+    [Tooltip("在Inspector中显示该绑定的说明")]
+    public string description;  // 可选，帮助在Inspector中识别每个绑定
+}
+
 public class UI : MonoBehaviour
 {
     [Header("End screens")]
@@ -16,8 +27,63 @@ public class UI : MonoBehaviour
     [Space]
 
     [SerializeField] public UI_ItemTooltip itemToolTip;
-    [SerializeField] private PlayerInput playerInput;
     [SerializeField] private GameObject ui_inGame;
+    [SerializeField] private GameObject ui_fadeScreen;
+
+    [Header("UI Panel Bindings")]
+    [Tooltip("配置每个UI面板的打开和关闭动作")]
+    public List<UIPanelBinding> panelBindings;
+
+    private PlayerInput playerInput;
+    private Dictionary<InputAction, System.Action<InputAction.CallbackContext>> _registeredActions 
+        = new Dictionary<InputAction, System.Action<InputAction.CallbackContext>>();
+
+    private void Awake()
+    {
+        playerInput = GetComponent<PlayerInput>();
+    }
+
+    private void OnEnable()
+    {
+        foreach (var binding in panelBindings)
+        {
+            if (binding.panel == null || binding.openAction == null || binding.closeAction == null)
+            {
+                Debug.LogWarning($"UI绑定配置不完整: {binding.description ?? "未知绑定"}");
+                continue;
+            }
+
+            // 注册打开动作
+            var openCallback = (InputAction.CallbackContext ctx) => SwitchWithKeyTo(binding.panel);
+            binding.openAction.action.performed += openCallback;
+            _registeredActions[binding.openAction.action] = openCallback;
+
+            // 注册关闭动作
+            var closeCallback = (InputAction.CallbackContext ctx) => SwitchWithKeyTo(binding.panel);
+            binding.closeAction.action.performed += closeCallback;
+            _registeredActions[binding.closeAction.action] = closeCallback;
+        }
+    }
+
+    private void OnDisable()
+    {
+        foreach (var binding in panelBindings)
+        {
+            if (binding.openAction != null && 
+                _registeredActions.TryGetValue(binding.openAction.action, out var openCallback))
+            {
+                binding.openAction.action.performed -= openCallback;
+            }
+            
+            if (binding.closeAction != null && 
+                _registeredActions.TryGetValue(binding.closeAction.action, out var closeCallback))
+            {
+                binding.closeAction.action.performed -= closeCallback;
+            }
+        }
+        _registeredActions.Clear();
+    }
+
     private void Start()
     {
         SwitchTo(ui_inGame);
@@ -96,5 +162,7 @@ public class UI : MonoBehaviour
     }
 
     public void RestartGame() => GameManager.instance.ReStart();
+
+    public void SwithToFade() => SwitchTo(ui_fadeScreen);
 }
 

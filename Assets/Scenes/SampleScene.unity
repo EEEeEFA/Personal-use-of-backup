@@ -1140,19 +1140,7 @@ MonoBehaviour:
     m_ActionId: 6c847355-3768-4f7a-8ef7-fb825d27f508
     m_ActionName: Player/1
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2038520344}
-        m_TargetAssemblyTypeName: UI, Assembly-CSharp
-        m_MethodName: SwitchWithKeyTo
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 2063007654}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: 386a4723-9d83-4b51-89c2-677ec03cdc40
     m_ActionName: UI/New action
   - m_PersistentCalls:
@@ -1172,19 +1160,7 @@ MonoBehaviour:
     m_ActionId: fd3c4991-8028-47fb-8832-b701d7a24048
     m_ActionName: Player/Move[/Keyboard/rightArrow]
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2038520344}
-        m_TargetAssemblyTypeName: UI, Assembly-CSharp
-        m_MethodName: SwitchWithKeyTo
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 1446272881}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: 1e3afb83-fb3b-4090-b287-94866001fce4
     m_ActionName: UI/New action
   - m_PersistentCalls:
@@ -1236,35 +1212,11 @@ MonoBehaviour:
     m_ActionId: 05ef2c63-e880-44a7-a6ff-481b7d65a533
     m_ActionName: Player/CloseN[/Keyboard/n]
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2038520344}
-        m_TargetAssemblyTypeName: UI, Assembly-CSharp
-        m_MethodName: SwitchWithKeyTo
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 1670808836}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: 5ae8bfb1-ab79-44b6-a8ba-6001db9291d6
     m_ActionName: UI/CloseB[/Keyboard/b]
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2038520344}
-        m_TargetAssemblyTypeName: UI, Assembly-CSharp
-        m_MethodName: SwitchWithKeyTo
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 20366332}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: ea9061b1-a7c5-42e2-9e05-84f5400bb9f5
     m_ActionName: UI/CloseN[/Keyboard/n]
   - m_PersistentCalls:
@@ -18755,7 +18707,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 0
-      m_TileSpriteIndex: 0
+      m_TileSpriteIndex: 7
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -18835,7 +18787,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 0
-      m_TileSpriteIndex: 3
+      m_TileSpriteIndex: 6
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -18854,22 +18806,22 @@ Tilemap:
   - m_RefCount: 0
     m_Data: {fileID: 0}
   m_TileSpriteArray:
-  - m_RefCount: 1
-    m_Data: {fileID: 21300000, guid: 67ef20fa1b2819940a8aa379817f475b, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 3
     m_Data: {fileID: 21300000, guid: 8264cbb342b60cc4487e86479494a5f7, type: 3}
   - m_RefCount: 4
     m_Data: {fileID: 21300000, guid: 47984579255a14f4187499e8cd718346, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 1
     m_Data: {fileID: 21300000, guid: 3f2c973f5a4eeab4a922450edf0e4fa7, type: 3}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: 21300000, guid: 67ef20fa1b2819940a8aa379817f475b, type: 3}
   m_TileMatrixArray:
   - m_RefCount: 9
     m_Data:
@@ -22489,8 +22441,17 @@ MonoBehaviour:
   endText: {fileID: 345258007}
   ReSpawnBotton: {fileID: 1896409496}
   itemToolTip: {fileID: 395050807}
-  playerInput: {fileID: 83294343}
   ui_inGame: {fileID: 316955278}
+  ui_fadeScreen: {fileID: 0}
+  panelBindings:
+  - action: {fileID: 0}
+    panel: {fileID: 0}
+  - action: {fileID: 0}
+    panel: {fileID: 0}
+  - action: {fileID: 0}
+    panel: {fileID: 0}
+  - action: {fileID: 0}
+    panel: {fileID: 0}
 --- !u!1 &2063007654
 GameObject:
   m_ObjectHideFlags: 0
