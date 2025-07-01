@@ -22444,7 +22444,7 @@ MonoBehaviour:
   ui_inGame: {fileID: 316955278}
   ui_fadeScreen: {fileID: 0}
   panelBindings:
-  - action: {fileID: 0}
+  - action: {fileID: 624830518941754350, guid: 5dcfddab2bd3c544f816b53e5fc3f5c7, type: 3}
     panel: {fileID: 0}
   - action: {fileID: 0}
     panel: {fileID: 0}
