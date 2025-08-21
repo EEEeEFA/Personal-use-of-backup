@@ -14,8 +14,8 @@ public class UIPanelBinding
     public InputActionReference openAction;
     public InputActionReference closeAction;
     
-    [Tooltip("在Inspector中显示该绑定的说明")]
-    public string description;  // 可选，帮助在Inspector中识别每个绑定
+    [Tooltip("锟斤拷Inspector锟斤拷锟斤拷示锟矫绑定碉拷说锟斤拷")]
+    public string description;  
 }
 
 public class UI : MonoBehaviour
@@ -31,17 +31,17 @@ public class UI : MonoBehaviour
     [SerializeField] private GameObject ui_fadeScreen;
 
     [Header("UI Panel Bindings")]
-    [Tooltip("配置每个UI面板的打开和关闭动作")]
+    [Tooltip("锟斤拷锟斤拷每锟斤拷UI锟斤拷锟侥打开和关闭讹拷锟斤拷")]
     public List<UIPanelBinding> panelBindings;
 
-    private PlayerInput playerInput;
-    private Dictionary<InputAction, System.Action<InputAction.CallbackContext>> _registeredActions 
+    [SerializeField] private PlayerInput playerInput;
+    [SerializeField] private Dictionary<InputAction, System.Action<InputAction.CallbackContext>> _registeredActions 
         = new Dictionary<InputAction, System.Action<InputAction.CallbackContext>>();
 
-    private void Awake()
-    {
-        playerInput = GetComponent<PlayerInput>();
-    }
+    // private void Awake()
+    // {
+    //     playerInput = GetComponent<PlayerInput>();
+    // }
 
     private void OnEnable()
     {
@@ -49,17 +49,15 @@ public class UI : MonoBehaviour
         {
             if (binding.panel == null || binding.openAction == null || binding.closeAction == null)
             {
-                Debug.LogWarning($"UI绑定配置不完整: {binding.description ?? "未知绑定"}");
+                Debug.LogWarning($"UI锟斤拷锟斤拷锟矫诧拷锟斤拷锟斤拷: {binding.description ?? "未知锟斤拷"}");
                 continue;
             }
 
-            // 注册打开动作
-            var openCallback = (InputAction.CallbackContext ctx) => SwitchWithKeyTo(binding.panel);
+            System.Action<InputAction.CallbackContext> openCallback = ctx => SwitchWithKeyTo(binding.panel);
             binding.openAction.action.performed += openCallback;
             _registeredActions[binding.openAction.action] = openCallback;
 
-            // 注册关闭动作
-            var closeCallback = (InputAction.CallbackContext ctx) => SwitchWithKeyTo(binding.panel);
+            System.Action<InputAction.CallbackContext> closeCallback = ctx => SwitchWithKeyTo(binding.panel);
             binding.closeAction.action.performed += closeCallback;
             _registeredActions[binding.closeAction.action] = closeCallback;
         }
@@ -92,18 +90,18 @@ public class UI : MonoBehaviour
 
     public void SwitchTo(GameObject _menu)
     {
-        if (_menu != null)//传入的菜单不为空
+        if (_menu != null)
         {
-            for (int i = 0; i < transform.childCount; i++)//遍历当前UI对象的所有子物体
+            for (int i = 0; i < transform.childCount; i++)
             {
                 bool fadeScreen = transform.GetChild(i).GetComponent<UI_FadeScreen>() != null;
                 if (fadeScreen == false)
-                    transform.GetChild(i).gameObject.SetActive(false);//遍历并隐藏除了黑幕之外的所有Object,确保了在显示新的UI界面时，所有其他的UI界面都会被隐藏
+                    transform.GetChild(i).gameObject.SetActive(false);
             }
 
-            _menu.SetActive(true);//显示
+            _menu.SetActive(true);
 
-            if (GameManager.instance != null)//打开UI时暂停游戏
+            if (GameManager.instance != null)
             {
                 if (_menu == ui_inGame)
                     GameManager.instance.PauseGame(false);
@@ -114,9 +112,9 @@ public class UI : MonoBehaviour
         }
     }
 
-    public void SwitchWithKeyTo(GameObject _menu)//处理切换UI的逻辑
+    public void SwitchWithKeyTo(GameObject _menu)
     {
-        if (_menu != null && _menu.activeSelf)// UI界面已经显示，隐藏, 如果目标UI界面未显示，调用 SwitchTo 显示。
+        if (_menu != null && _menu.activeSelf)
         {
             _menu.SetActive(false);
             CheckForInGameUI(playerInput);
@@ -129,7 +127,7 @@ public class UI : MonoBehaviour
     }
 
 
-    private void CheckForInGameUI(PlayerInput _playerInput)//关闭其他UI都会回到InGameUI
+    private void CheckForInGameUI(PlayerInput _playerInput)
     {
         for (int i = 0; i < transform.childCount; i++)
         {
