@@ -15,6 +15,13 @@
         "com.unity.test-framework": "1.1.9"
       }
     },
+    "com.code-philosophy.hybridclr": {
+      "version": "https://github.com/focus-creative-games/hybridclr_unity.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "d505624c78e6d1d2d53efd716abe7349b611681e"
+    },
     "com.unity.2d.animation": {
       "version": "9.0.3",
       "depth": 1,
