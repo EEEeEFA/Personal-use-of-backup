@@ -1,12 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
-using TMPro.Examples;
 using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
-using static UnityEditor.Progress;
-using static UnityEditor.Timeline.Actions.MenuPriority;
+using UnityEditor;
 
 public class Inventory : MonoBehaviour,ISaveManager
 {
@@ -73,6 +70,13 @@ public class Inventory : MonoBehaviour,ISaveManager
         equipmentSlot = equipmentSlotParent.GetComponentsInChildren<UI_EquipmentSlot>();
         statSlot = statSlotParent.GetComponentsInChildren<UI_StatSlot>();
 
+        // ȷ��itemDataBase�ѳ�ʼ��
+        if (itemDataBase == null || itemDataBase.Count == 0)
+        {
+            Debug.LogWarning("itemDataBaseδ��ʼ�������Դ�Resources������Ʒ����...");
+            LoadItemDataFromResources();
+        }
+
         AddStartingItems();//��ȡ��ʼװ��
 
     }
@@ -109,7 +113,7 @@ public class Inventory : MonoBehaviour,ISaveManager
 
         ItemData_Equipment oldEquipment = null;
 
-        //����Ƿ������?���͵���Ʒ
+        //����Ƿ������?���͵���Ʒ
         foreach ( KeyValuePair<ItemData_Equipment, InventoryItem> item in equipmentDictionary)
         {
             if(item.Key.equipmentType == newEquipment.equipmentType)//��item in equipmentDictionaryListһ��һ����newEquipment�Ա�
@@ -297,7 +301,7 @@ public class Inventory : MonoBehaviour,ISaveManager
             Debug.Log("item:" + ItemToRemove[i].itemData + "stackSize:"+ _MaterialNeeded[i].stackSize);
         }
 
-        AddItem(itemToCreate, 1);//��Ϊ�����ǰ�һ�´���һ�Σ�����1���ܻ��?
+        AddItem(itemToCreate, 1);//��Ϊ�����ǰ�һ�´���һ�Σ�����1���ܻ��?
         Debug.Log("itemDone"+ itemToCreate.name);   
         return true;
     }
@@ -306,7 +310,7 @@ public class Inventory : MonoBehaviour,ISaveManager
 
     public ItemData_Equipment GetEquipedEquipment(EquipmentType _typeOfEquipment)//��ȡ��װ����װ��
     {
-        ItemData_Equipment equipedItem = null;      //�Լ�д�ģ� ���P115��equipedItem�ĳ���List����������װ������ ɾ���ˣ��ܶ�ط���ʵ��ֻ���?����һ�� ����Ҫ�Ӷ�װ��ϵͳ�ٸ�
+        ItemData_Equipment equipedItem = null;      //�Լ�д�ģ� ���P115��equipedItem�ĳ���List����������װ������ ɾ���ˣ��ܶ�ط���ʵ��ֻ���?����һ�� ����Ҫ�Ӷ�װ��ϵͳ�ٸ�
 
         foreach (KeyValuePair<ItemData_Equipment, InventoryItem> item in equipmentDictionary)
         {
@@ -320,9 +324,16 @@ public class Inventory : MonoBehaviour,ISaveManager
 
     public void LoadData(GameData _data)//��������
     {
+        // ȷ��itemDataBase�Ѿ���ʼ��
+        if (itemDataBase == null || itemDataBase.Count == 0)
+        {
+            Debug.LogError("itemDataBaseδ��ʼ������ȷ���ڱ༭��������FillUpItemDataBase����");
+            return;
+        }
+
         foreach (KeyValuePair<string, int> pair in _data.inventory)
         {
-            foreach (var item in GetItemDataBase())
+            foreach (var item in itemDataBase)
             {
                 if (item != null && item.itemId == pair.Key)
                 {
@@ -336,7 +347,7 @@ public class Inventory : MonoBehaviour,ISaveManager
 
         foreach(string loadedEquipmentId in _data.equipmentId)
         {
-            foreach(var item in GetItemDataBase())
+            foreach(var item in itemDataBase)
             {
                 if(item != null && item.itemId == loadedEquipmentId)
                 {
@@ -368,7 +379,17 @@ public class Inventory : MonoBehaviour,ISaveManager
     }
 
         [ContextMenu("Fill up item data base")]
-        private void FillUpItemDataBase() => itemDataBase = new List<ItemData>(GetItemDataBase());
+        private void FillUpItemDataBase()
+        {
+#if UNITY_EDITOR
+            // �ڱ༭��������ʹ��AssetDatabase����
+            itemDataBase = new List<ItemData>(GetItemDataBase());
+            Debug.Log($"�ڱ༭���м����� {itemDataBase.Count} ����Ʒ����");
+#else
+            // ������ʱʹ��Resources����
+            LoadItemDataFromResources();
+#endif
+        }
 
 #if UNITY_EDITOR
     private List<ItemData> GetItemDataBase()
@@ -388,6 +409,22 @@ public class Inventory : MonoBehaviour,ISaveManager
     }
 
 #endif
+
+    private void LoadItemDataFromResources()
+    {
+        itemDataBase = new List<ItemData>();
+        ItemData[] items = Resources.LoadAll<ItemData>("Data/Item");
+        
+        foreach (var item in items)
+        {
+            if (item != null)
+            {
+                itemDataBase.Add(item);
+            }
+        }
+        
+        Debug.Log($"��Resources������ {itemDataBase.Count} ����Ʒ����");
+    }
 
     //public void UseFlask()//���Flask��CD��CDת���˾���
     //{

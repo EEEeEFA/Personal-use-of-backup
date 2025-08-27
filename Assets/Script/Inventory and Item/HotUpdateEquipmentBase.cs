@@ -1,26 +1,18 @@
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public enum EquipmentType
+/// <summary>
+/// 热更新装备基类，所有热更新装备都应该继承此类
+/// </summary>
+public abstract class HotUpdateEquipmentBase : ItemData, IEquipment
 {
-    Weapon,
-    Armor,
-    Amulet,
-    Flask
-}
-
-[CreateAssetMenu(fileName = "New Item Data", menuName = "Data/Equipment")]
-public class ItemData_Equipment : ItemData, IEquipment
-{
+    [Header("Equipment Properties")]
     public EquipmentType equipmentType;
     public itemEffect[] dynamicEffects;
-    public itemEffect[] passvieEffects;
-
-    //װ����ȴʱ��
+    public itemEffect[] passiveEffects;
+    
     [Header("Equipment Counter")]
-    static float lastTimeUsed = -Mathf.Infinity;
+    protected static float lastTimeUsed = -Mathf.Infinity;
     [SerializeField] public float CoolDownTime;
 
     [Header("Major stats")]
@@ -48,8 +40,14 @@ public class ItemData_Equipment : ItemData, IEquipment
     [Header("Craft Material")]
     public List<InventoryItem> craftingMaterials;
 
+    // 接口实现
+    public virtual string GetEquipmentName() => itemName;
+    public virtual Sprite GetEquipmentIcon() => icon;
+    public virtual string GetEquipmentId() => itemId;
+    public virtual EquipmentType GetEquipmentType() => equipmentType;
+    public virtual float GetCoolDownTime() => CoolDownTime;
 
-    public void AddModifiers()
+    public virtual void AddModifiers()
     {
         PlayerStats playerStats = PlayerManager.instance.player.GetComponent<PlayerStats>();
         playerStats.strength.AddModifier(strength);
@@ -71,7 +69,7 @@ public class ItemData_Equipment : ItemData, IEquipment
         playerStats.lightningDamage.AddModifier(lightningDamage);
     }
 
-    public void RemoveModifiers()
+    public virtual void RemoveModifiers()
     {
         PlayerStats playerStats = PlayerManager.instance.player.GetComponent<PlayerStats>();
         playerStats.strength.RemoveModifier(strength);
@@ -86,34 +84,39 @@ public class ItemData_Equipment : ItemData, IEquipment
         playerStats.maxHP.RemoveModifier(health);
         playerStats.armor.RemoveModifier(armor);
         playerStats.evasion.RemoveModifier(evasion);
-        //playerStats.magicResistance.RemoveModifier(magicResistance);
+        playerStats.magicResistance.RemoveModifier(magicResistance);
 
-        //playerStats.fireDamage.RemoveModifier(fireDamage);
-        //playerStats.iceDamage.RemoveModifier(iceDamage);
-        //playerStats.lightningDamage.RemoveModifier(lightningDamage);
+        playerStats.fireDamage.RemoveModifier(fireDamage);
+        playerStats.iceDamage.RemoveModifier(iceDamage);
+        playerStats.lightningDamage.RemoveModifier(lightningDamage);
     }
 
-    public void UseDynamicItemEffect(Transform _Target)
+    public virtual void UseDynamicItemEffect(Transform _Target)
     {
-        for (int i = 0;i < dynamicEffects.Length; i++)
+        if (dynamicEffects != null)
         {
-            dynamicEffects[i].UseEffect(_Target);
+            for (int i = 0; i < dynamicEffects.Length; i++)
+            {
+                if (dynamicEffects[i] != null)
+                    dynamicEffects[i].UseEffect(_Target);
+            }
         }
     }
 
-    public void UsePassiveItemEffect(Transform _Target)//ʹ��װ�� passvieEffects�� �е�Ч��
+    public virtual void UsePassiveItemEffect(Transform _Target)
     {
-        for (int i = 0; i < passvieEffects.Length; i++)
+        if (passiveEffects != null)
         {
-            passvieEffects[i].UseEffect(_Target);
+            for (int i = 0; i < passiveEffects.Length; i++)
+            {
+                if (passiveEffects[i] != null)
+                    passiveEffects[i].UseEffect(_Target);
+            }
         }
     }
 
-    public bool CoolDownCounter()
+    public virtual bool CoolDownCounter()
     {
-        //Debug.Log(Time.time);
-        //Debug.Log(CoolDownTime);
-        //Debug.Log(lastTimeUsed);
         if (Time.time > CoolDownTime + lastTimeUsed)
         {
             lastTimeUsed = Time.time;
@@ -123,10 +126,8 @@ public class ItemData_Equipment : ItemData, IEquipment
             return false;
     }
 
-    // IEquipment接口实现
-    public string GetEquipmentName() => itemName;
-    public Sprite GetEquipmentIcon() => icon;
-    public string GetEquipmentId() => itemId;
-    public EquipmentType GetEquipmentType() => equipmentType;
-    public float GetCoolDownTime() => CoolDownTime;
-}
+    // 抽象方法，子类必须实现
+    public abstract void OnEquip();
+    public abstract void OnUnequip();
+    public abstract void OnUse();
+} 
