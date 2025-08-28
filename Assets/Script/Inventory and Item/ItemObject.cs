@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.Timeline.Actions.MenuPriority;
+
 
 public class ItemObject : MonoBehaviour
 {
@@ -25,13 +25,13 @@ public class ItemObject : MonoBehaviour
         rb.velocity = velocity;
         SetupItemVisual();
     }
-    public void PickupItem(Collider2D collision)//×ÓÏîÖÐµÄboxcolliderÅö×²¼ì²âºó µ÷ÓÃÕâ¸öº¯Êý
+    public void PickupItem(Collider2D collision)//ï¿½ï¿½ï¿½ï¿½ï¿½Ðµï¿½boxcolliderï¿½ï¿½×²ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     {
         if (!Inventory.instance.CanAddItem())
             return;
         if (collision.GetComponent<Player>() != null)
         {
-            Inventory.instance.AddItem(itemData, 1);//Íù²Ö¿âÌí¼Ó 1 ¸öÕâ¸öÎïÆ·£¬²¢É¾³ýÎïÆ·
+            Inventory.instance.AddItem(itemData, 1);//ï¿½ï¿½ï¿½Ö¿ï¿½ï¿½ï¿½ï¿½ï¿½ 1 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½É¾ï¿½ï¿½ï¿½ï¿½Æ·
             Destroy(gameObject);
         }
     }

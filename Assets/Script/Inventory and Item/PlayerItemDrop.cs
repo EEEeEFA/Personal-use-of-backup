@@ -1,7 +1,6 @@
 
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.Progress;
 
 public class PlayerItemDrop : ItemDrop
 {
@@ -20,7 +19,7 @@ public class PlayerItemDrop : ItemDrop
             if (Random.Range(0, 100) <= chanceToLooseItems)
             {
                 DropItem(item.itemData);
-                Debug.Log("Ëæ»ú³éµ½ÎïÌåÁË");
+                Debug.Log("ï¿½ï¿½ï¿½ï¿½éµ½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
                 ItemToRemove.Add(item);
 
             }
