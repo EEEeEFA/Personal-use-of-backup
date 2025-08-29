@@ -1,6 +1,6 @@
 ## 项目结构总览
 
-- **引擎与平台**: Unity（含 Addressables 配置、HybridCLR 热更新能力）
+- **引擎与平台**: Unity
 - **主要目录**
   - `Assets/`
     - `Script/`
