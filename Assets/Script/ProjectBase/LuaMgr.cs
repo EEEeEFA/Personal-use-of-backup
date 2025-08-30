@@ -16,8 +16,17 @@ public class LuaMgr : SingletonAutoMono<LuaMgr>
         //唯一的解析器
         luaEnv = new LuaEnv();
         //添加重定向委托函数
-        //luaEnv.AddLoader(MyCustomLoader);
-        luaEnv.AddLoader(MyCustomLoaderFormAB);
+        //根据运行模式选择不同的加载器
+        if (Application.isEditor)
+        {
+            //编辑器模式下从本地文件系统读取Lua文件
+            luaEnv.AddLoader(MyCustomLoader);
+        }
+        else
+        {
+            //打包模式下从AssetBundle读取Lua文件
+            luaEnv.AddLoader(MyCustomLoaderFormAB);
+        }
     }
 
     //Lua总表
@@ -51,7 +60,7 @@ public class LuaMgr : SingletonAutoMono<LuaMgr>
     private byte[] MyCustomLoaderFormAB(ref string filepath)
     {
         //改为我们的AB包管理器加载
-        TextAsset file2 = ABMgr.GetInstance().LoadRes<TextAsset>("lua", filepath + ".lua");
+        TextAsset file2 = ABLoadMgr.GetInstance().LoadRes<TextAsset>("lua", filepath + ".lua");
         if (file2 != null)
             return file2.bytes;
         else

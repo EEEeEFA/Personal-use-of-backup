@@ -8,22 +8,9 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Networking;
 
-public class ABUpdateMgr : MonoBehaviour
+public class ABUpdateMgr : SingletonAutoMono<ABUpdateMgr>
 {
-    private static ABUpdateMgr instance;
 
-    public static ABUpdateMgr Instance
-    {
-        get
-        {
-            if(instance == null)
-            {
-                GameObject obj = new GameObject("ABUpdateMgr");
-                instance = obj.AddComponent<ABUpdateMgr>();
-            }
-            return instance;
-        }
-    }
 
     //用于存储远端AB包信息的字典 之后 和本地进行对比即可完成 更新 下载相关逻辑
     private Dictionary<string, ABInfo> remoteABInfo = new Dictionary<string, ABInfo>();
@@ -34,8 +21,35 @@ public class ABUpdateMgr : MonoBehaviour
     //这个是待下载的AB包列表文件 存储AB包的名字
     private List<string> downLoadList = new List<string>();
 
+    //这个是已下载的AB包列表 长期保持 用于快速判断AB包是否已下载
+    private HashSet<string> downloadedABList = new HashSet<string>();
+
     //资源服务器IP
     private string serverIP = "ftp://192.168.31.178";
+
+    /// <summary>
+    /// 初始化已下载的AB包列表
+    /// </summary>
+    private void InitializeDownloadedABList()
+    {
+        downloadedABList.Clear();
+        
+        // 扫描persistentDataPath目录，找出所有已下载的AB包
+        string persistentPath = Application.persistentDataPath;
+        if (Directory.Exists(persistentPath))
+        {
+            string[] files = Directory.GetFiles(persistentPath, "*", SearchOption.TopDirectoryOnly);
+            foreach (string file in files)
+            {
+                string fileName = Path.GetFileName(file);
+                // 只添加AB包文件，排除其他文件（如对比文件）
+                if (!fileName.EndsWith(".txt") && !fileName.EndsWith(".json"))
+                {
+                    downloadedABList.Add(fileName);
+                }
+            }
+        }
+    }
 
     /// <summary>
     /// 用于检测热更新的函数
@@ -48,6 +62,10 @@ public class ABUpdateMgr : MonoBehaviour
         remoteABInfo.Clear();
         localABInfo.Clear();
         downLoadList.Clear();
+        downloadedABList.Clear();
+
+        //初始化已下载AB包列表
+        InitializeDownloadedABList();
 
         //1.加载远端资源对比文件
         DownLoadABCompareFile((isOver) =>
@@ -74,6 +92,7 @@ public class ABUpdateMgr : MonoBehaviour
                             //这由于本地对比信息中没有叫这个名字的AB包 所以我们记录下载它
                             if (!localABInfo.ContainsKey(abName))
                                 downLoadList.Add(abName);
+                                
                             //发现本地有同名AB包 然后继续处理
                             else
                             {
@@ -256,6 +275,8 @@ public class ABUpdateMgr : MonoBehaviour
                     //2.要知道现在下载了多少 结束与否
                     updatePro(++downLoadOverNum + "/" +downLoadMaxNum);
                     tempList.Add(downLoadList[i]);//下载成功记录下来
+                    // 将下载成功的AB包添加到已下载列表中
+                    downloadedABList.Add(downLoadList[i]);
                 }
             }
             //把下载成功的文件名 从待下载列表中移除
@@ -335,12 +356,91 @@ public class ABUpdateMgr : MonoBehaviour
         }
 
     }
-
-
-    private void OnDestroy()
+#region 已下载的AB包
+    /// <summary>
+    /// 检查AB包是否需要从下载路径加载
+    /// </summary>
+    /// <param name="abName">AB包名称</param>
+    /// <returns>true表示需要从下载路径加载，false表示从本地路径加载</returns>
+    public bool IsABNeedDownload(string abName)
     {
-        instance = null;
+        // 如果AB包在已下载列表中，说明已经下载过，应该从下载路径加载
+        // 注意：downLoadList存储的是待下载的AB包，downloadedABList存储的是已下载的AB包
+        // 这两个列表是互斥的，所以只需要判断downloadedABList即可
+        return downloadedABList.Contains(abName);  // O(1) HashSet查找，非常快
     }
+
+    /// <summary>
+    /// 获取AB包的实际加载路径
+    /// </summary>
+    /// <param name="abName">AB包名称</param>
+    /// <returns>AB包的完整路径</returns>
+    public string GetABLoadPath(string abName)
+    {
+        // 优先从persistentDataPath加载（下载的AB包）
+        // 使用HashSet检查，效率更高
+        if (downloadedABList.Contains(abName))
+        {
+            return Application.persistentDataPath + "/" + abName;
+        }
+        
+        // 如果persistentDataPath不存在，则从streamingAssetsPath加载（本地AB包）
+        return Application.streamingAssetsPath + "/" + abName;
+    }
+
+    /// <summary>
+    /// 检查AB包是否存在（无论是本地还是下载的）
+    /// </summary>
+    /// <param name="abName">AB包名称</param>
+    /// <returns>true表示AB包存在，false表示不存在</returns>
+    public bool IsABExists(string abName)
+    {
+        // 使用HashSet检查下载的AB包，效率更高
+        if (downloadedABList.Contains(abName))
+            return true;
+            
+        // 检查本地AB包
+        return File.Exists(Application.streamingAssetsPath + "/" + abName);
+    }
+
+    /// <summary>
+    /// 添加AB包到已下载列表
+    /// </summary>
+    /// <param name="abName">AB包名称</param>
+    public void AddToDownloadedList(string abName)
+    {
+        downloadedABList.Add(abName);
+    }
+
+    /// <summary>
+    /// 从已下载列表中移除AB包
+    /// </summary>
+    /// <param name="abName">AB包名称</param>
+    public void RemoveFromDownloadedList(string abName)
+    {
+        downloadedABList.Remove(abName);
+    }
+
+    /// <summary>
+    /// 获取已下载的AB包数量
+    /// </summary>
+    /// <returns>已下载的AB包数量</returns>
+    public int GetDownloadedABCount()
+    {
+        return downloadedABList.Count;
+    }
+
+    /// <summary>
+    /// 获取所有已下载的AB包名称
+    /// </summary>
+    /// <returns>已下载的AB包名称列表</returns>
+    public string[] GetDownloadedABNames()
+    {
+        string[] names = new string[downloadedABList.Count];
+        downloadedABList.CopyTo(names);
+        return names;
+    }
+#endregion
 
     /// <summary>
     /// AB包信息类
