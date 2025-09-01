@@ -41,14 +41,15 @@ function update()---刷新时间 - 跟随鼠标
 end
 
 function show()
-    self:BaseShow()--efatodo:这个是谁给他的
+    self:BaseShow()--efatodo:这个是谁给他的 详情请看RuaUI.cs
     SoundManager:PlayMusic(clip, false, function ()
         SoundManager:PlayMusic(loop_clip, true);
     end)
     self.canvasGroup.alpha = 0
     self.canvasGroup:DOFade(1, 0.5)
     
-    data = PlayerManager:Get()
+    data = PlayerManager:Get()--和获取PlayState来设置ItemData有何不同
+
 end
 
 function hide(destroy)

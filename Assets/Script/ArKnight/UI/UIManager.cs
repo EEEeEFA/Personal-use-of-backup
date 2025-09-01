@@ -41,7 +41,7 @@ namespace UI {
             ui.Show();
             ui.UpdateView();
             if (ui.state != UIState.Hide) return ui;
-            ui.state = UIState.Show;
+            ui.state = UIState.Show;//efatodo:这个UISTATE用来干嘛的
             return ui;
         }
 

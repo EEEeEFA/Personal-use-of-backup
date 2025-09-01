@@ -31,7 +31,7 @@ namespace UI {
                 scriptEnv.Set(injection.name, injection.value);
             }
             LuaEnv.DoString(LuaEnvManager.LoadLuaText("UI." + Name), "chunk", scriptEnv);
-            //TODO name指明了这个ui的类型也就是lua文件，Name的声明处的internal是什么意思
+
             scriptEnv.Get("update", out luaUpdate);
             scriptEnv.Get("updateView", out luaUpdateView);
             scriptEnv.Get("show", out luaShow);
