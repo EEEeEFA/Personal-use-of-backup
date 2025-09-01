@@ -1,0 +1,68 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+#Read the scripts in the referenced folder, summarize the overall architecture, and create memory-bank/ARCHITECTURE/xxx_architecture.md (replace xxx with the referenced folder's name). The created "xxx_architecture.md" file must strictly follow the template below.
+
+
+#template:
+ {模块名} Architecture
+
+## 1. 模块简介
+- **位置**: `Assets/.../{模块文件夹}/`
+- **主要职责**: （说明用途，例如：管理玩家移动和输入）
+
+---
+
+## 2. 脚本结构
+{模块文件夹}/
+- ScriptA.cs   # 脚本作用简述
+- ScriptB.cs   # 脚本作用简述
+- ScriptC.cs   # 脚本作用简述
+
+---
+
+## 3. 核心类与组件
+
+### 3.1 主要 MonoBehaviour
+- **ClassA : MonoBehaviour (ScriptA.cs)**
+  - 功能: …  
+  - 生命周期方法: Awake(), Update() …  
+  - 调用关系: （例如调用 ScriptB 的方法）
+
+### 3.2 ScriptableObject / Data
+- **ConfigData : ScriptableObject (ScriptC.cs)**
+  - 功能: 存储配置数据  
+  - 用途: 被 ClassA 加载
+
+### 3.3 工具类 / 辅助类
+- **HelperUtils (ScriptB.cs)**
+  - 功能: 提供静态方法，简化常用操作
+
+---
+
+## 4. 工作流程
+1. ClassA 在 Awake() 初始化数据  
+2. HelperUtils 提供工具方法完成 …  
+3. ConfigData 提供参数 / 配置  
+4. ClassA 在 Update() 循环中执行核心逻辑  
+
+---
+
+## 5. 依赖关系
+- 内部依赖: ScriptA → ScriptB, ScriptC  
+- 外部依赖: UnityEngine API（Input, Transform 等）  
+
+---
+
+## 6. 示例用法
+```csharp
+// 典型的模块调用示例
+public class GameEntry : MonoBehaviour {
+    void Start() {
+        var player = FindObjectOfType<ClassA>();
+        player.Init();
+    }
+}
+
