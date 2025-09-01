@@ -41,7 +41,7 @@ function update()---刷新时间 - 跟随鼠标
 end
 
 function show()
-    self:BaseShow()
+    self:BaseShow()--efatodo:这个是谁给他的
     SoundManager:PlayMusic(clip, false, function ()
         SoundManager:PlayMusic(loop_clip, true);
     end)
