@@ -3,10 +3,25 @@ description:
 globs: 
 alwaysApply: false
 ---
-#Read the scripts in the referenced folder, summarize the overall architecture, and create memory-bank/ARCHITECTURE/xxx_architecture.md (replace xxx with the referenced folder's name). The created "xxx_architecture.md" file must strictly follow the template below.
+# Architecture Summary Task
 
+## Objective
+Analyze all scripts in the referenced folder to summarize the overall architecture and generate a corresponding Markdown file that strictly follows the specified template.
 
-#template:
+## Steps
+
+1. **Analyze Scripts**
+   - Traverse all scripts in the referenced folder.
+   - Analyze and summarize the overall architecture.
+
+2. **Create File**
+   - In `memory-bank/ARCHITECTURE/`, run the command(Replace xxx with the referenced folder's name.):
+   ```bash
+   touch memory-bank/ARCHITECTURE/xxx_architecture.md
+   
+3. **Write Content**
+    - Write the summarized architecture into the newly created Markdown file.
+    - Ensure the content strictly follows the specified template:
  {模块名} Architecture
 
 ## 1. 模块简介
