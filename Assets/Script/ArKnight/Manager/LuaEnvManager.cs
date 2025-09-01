@@ -41,7 +41,7 @@ namespace Manager {
             return textAsset == null ? null : textAsset.text;
         }
 
-        // 从AB包中加载lua文件
+        // 从AB包中加载lua文件 TODO 这看起来不像从AB包中加载啊
         private static byte[] AssetLoader(ref string filepath) {
             //从AB包中获取文件
             filepath = luaScriptsFolder + filepath.Replace(".", "/") + ".lua";
