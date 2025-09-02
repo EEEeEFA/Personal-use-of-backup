@@ -1,12 +1,12 @@
 using Data;
-using Spine.Unity;
+//using Spine.Unity;
 using UnityEngine;
 
 namespace Scripts.Game {
     public abstract class Entity {
         internal Transform transform;
         internal Transform model;
-        internal SkeletonAnimation sa;
+        //internal SkeletonAnimation sa;
         internal StateManager state;
         internal Attribute attribute;
         internal float health;
@@ -17,7 +17,7 @@ namespace Scripts.Game {
             this.attribute = attribute;
             health = attribute.GetMaxHealth();
             model = transform.Find("Model");
-            sa = model.GetComponent<SkeletonAnimation>("Skeleton");
+            //sa = model.GetComponent<SkeletonAnimation>("Skeleton");
             state = new StateManager();
         }
 

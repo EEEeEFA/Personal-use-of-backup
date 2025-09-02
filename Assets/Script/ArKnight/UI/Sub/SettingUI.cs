@@ -66,7 +66,7 @@ namespace UI.Sub {
 
             game_exit.onClick.AddListener(() => {
                 CommonDialogUI.Message(CommonDialogUI.GroundType.WHITE,"即将返回登陆界面，是否继续？",() => {
-                    PlayerManager.Inst().Exit();
+                    //PlayerManager.Inst().Exit();
                     UIManager.Inst().Hide("HomeUI",true);
                     UIManager.Inst().Hide("SettingUI",true);
                     UIManager.Inst().Hide("HouseUI",true);

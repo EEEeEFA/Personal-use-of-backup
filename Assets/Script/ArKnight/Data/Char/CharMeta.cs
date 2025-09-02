@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using Spine;
-using Spine.Unity;
+//using Spine;
+//using Spine.Unity;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -60,8 +60,8 @@ namespace Data.Char {
         [Header("头像"),SerializeField]
         private Sprite image3;
 
-        [Header("骨骼"), SerializeField]
-        private SkeletonDataAsset skeleton;
+        //[Header("骨骼"), SerializeField]
+        //private SkeletonDataAsset skeleton;
 
         
         public string GetId() => id;
@@ -80,7 +80,7 @@ namespace Data.Char {
         public Sprite GetImage() => image1;
         public Sprite GetCharImage() => image2;
         public Sprite GetAvatar() => image3;
-        public SkeletonDataAsset GetSkeleton() => skeleton;
+        //public SkeletonDataAsset GetSkeleton() => skeleton;
         
         internal string SetId(string value) => id = value;
         
