@@ -28165,6 +28165,7 @@ GameObject:
   - component: {fileID: 2063007655}
   - component: {fileID: 2063007657}
   - component: {fileID: 2063007656}
+  - component: {fileID: 2063007658}
   m_Layer: 5
   m_Name: (Menu)Character
   m_TagString: Untagged
@@ -28234,6 +28235,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2063007654}
   m_CullTransparentMesh: 1
+--- !u!225 &2063007658
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2063007654}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!224 &2067946608 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 9146073723699464985, guid: 054a29706dbcf1d449baadd7ca34b4be, type: 3}

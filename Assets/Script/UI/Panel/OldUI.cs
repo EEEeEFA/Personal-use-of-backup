@@ -17,7 +17,7 @@ public class UIPanelBinding
     public string description;  
 }
 
-public class UI : MonoBehaviour
+public class OldUI : MonoBehaviour
 {
     [Header("End screens")]
     public UI_FadeScreen fadeScreen;

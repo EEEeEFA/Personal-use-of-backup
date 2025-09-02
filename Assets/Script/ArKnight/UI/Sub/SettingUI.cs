@@ -2,6 +2,7 @@
 using DG.Tweening;
 using Settings;
 using Manager;
+using UI.Components;
 using UnityEngine;
 using UnityEngine.UI;
 
